@@ -25,7 +25,7 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
+  <a href="#how-to-fork">How To Fork</a> •
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
   <a href="#related">Related</a> •
@@ -54,27 +54,60 @@
 * Cross platform
   - Windows, macOS and Linux ready.
 
-## How To Use
+## How To Fork
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+1. **Fork the Repository:**
+   - Click the "Fork" button in the top right corner of the page. This will create a copy (a fork) of the repository under your GitHub account.
+   
 
-```bash
-# Clone this repository
-$ git clone https://github.com/amitmerchant1990/electron-markdownify
+2. **Clone the Forked Repository:**
+   - On your forked repository, click the "Code" button and copy the repository URL (e.g., `https://github.com/yourusername/repository.git`).
+   - Open your terminal or command prompt and navigate to the directory where you want to clone the repository.
+   - Run the following command to clone the repository to your local machine( Replace URL with your ):
+     ```
+     git clone https://github.com/yourusername/repository.git
+     ```
 
-# Go into the repository
-$ cd electron-markdownify
+3. **Create a New Branch:**
+   - Change to the repository directory:
+     ```
+     cd repository
+     ```
+   - Create a new branch with your github username for your contribution:
+     ```
+     git checkout -b your-username
+     ```
+    #### Merge will not be accepted unless branch name is your username.
 
-# Install dependencies
-$ npm install
+4. **Make Changes:**
+   - Make the necessary changes to the code, documentation, or any other files in your local repository.
 
-# Run the app
-$ npm start
-```
+5. **Commit Changes:**
+   - Add the changes to the staging area:
+     ```
+     git add .
+     ```
+   - Commit the changes with a descriptive message:
+     ```
+     git commit -m "Your descriptive commit message"
+     ```
 
-> **Note**
-> If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
+6. **Push Changes:**
+   - Push your changes to your forked repository on GitHub:
+     ```
+     git push origin your-branch-name
+     ```
 
+7. **Create a Pull Request (PR):**
+   - Go to your forked repository on GitHub.
+   - Click on the "Compare & pull request" button next to the branch you just pushed.
+   - Provide a descriptive title and description for your pull request, outlining the changes you made.
+   - Click on the "Create pull request" button.
+
+8. **Review and Merge:**
+   - The repository maintainers will review your pull request, suggest changes, or approve and merge it into the main repository.
+
+Remember to communicate with the repository maintainers and follow any guidelines or contributing rules they may have specified in their repository's README or CONTRIBUTING file.
 
 ## Contributors
 
