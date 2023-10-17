@@ -25,6 +25,7 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
+  <a href="#packages">Packages</a>
   <a href="#how-to-fork">How To Fork</a> •
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
@@ -98,6 +99,67 @@
      git push origin your-branch-name
      ```
 
+
+## Environment
+
+Preferable environment management options:
+
+- Python's built-in `venv`
+- MiniConda or Conda
+
+## Packages
+
+Key packages and their versions currently in use:
+
+- Python: 3.10.13
+- Django: 4.2.6
+
+
+## How To Fork
+
+1. **Fork the Repository:**
+   - Click the "Fork" button in the top right corner of the page. This will create a copy (a fork) of the repository under your GitHub account.
+   
+
+2. **Clone the Forked Repository:**
+   - On your forked repository, click the "Code" button and copy the repository URL (e.g., `https://github.com/yourusername/repository.git`).
+   - Open your terminal or command prompt and navigate to the directory where you want to clone the repository.
+   - Run the following command to clone the repository to your local machine( Replace URL with your ):
+     ```
+     git clone https://github.com/yourusername/repository.git
+     ```
+
+3. **Create a New Branch:**
+   - Change to the repository directory:
+     ```
+     cd repository
+     ```
+   - Create a new branch with your github username for your contribution:
+     ```
+     git checkout -b your-username
+     ```
+    #### Merge will not be accepted unless branch name is your username.
+
+4. **Make Changes:**
+   - Make the necessary changes to the code, documentation, or any other files in your local repository.
+
+5. **Commit Changes:**
+   - Add the changes to the staging area:
+     ```
+     git add .
+     ```
+   - Commit the changes with a descriptive message:
+     ```
+     git commit -m "Your descriptive commit message"
+     ```
+
+6. **Push Changes:**
+   - Push your changes to your forked repository on GitHub:
+     ```
+     git push origin your-branch-name
+     ```
+
+>>>>>>> AlphaDarkmoon
 7. **Create a Pull Request (PR):**
    - Go to your forked repository on GitHub.
    - Click on the "Compare & pull request" button next to the branch you just pushed.
@@ -115,6 +177,10 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 
 - [AlphaDarkmoon](https://github.com/AlphaDarkmoon)
 - [SiddhantTotade](https://github.com/SiddhantTotade)
+<<<<<<< HEAD
+=======
+- [arunim-io](https://github.com/arunim-io)
+>>>>>>> 4a71be0bfcd5ad4f5a9421830c5af24674ed67d8
 - so on... [ Team members are recommended to add their own Github name. ]
 
 This project follows the [all-contributors](https://allcontributors.org) specification.
