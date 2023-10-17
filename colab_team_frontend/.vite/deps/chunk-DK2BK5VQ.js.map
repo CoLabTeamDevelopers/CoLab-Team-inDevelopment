@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../node_modules/@mui/material/styles/styled.js"],
-  "sourcesContent": ["'use client';\n\nimport { createStyled, shouldForwardProp } from '@mui/system';\nimport defaultTheme from './defaultTheme';\nimport THEME_ID from './identifier';\nexport const rootShouldForwardProp = prop => shouldForwardProp(prop) && prop !== 'classes';\nexport const slotShouldForwardProp = shouldForwardProp;\nconst styled = createStyled({\n  themeId: THEME_ID,\n  defaultTheme,\n  rootShouldForwardProp\n});\nexport default styled;"],
-  "mappings": ";;;;;;;;AAKO,IAAM,wBAAwB,UAAQ,kBAAkB,IAAI,KAAK,SAAS;AAC1E,IAAM,wBAAwB;AACrC,IAAM,SAAS,aAAa;AAAA,EAC1B,SAAS;AAAA,EACT;AAAA,EACA;AACF,CAAC;AACD,IAAO,iBAAQ;",
-  "names": []
-}
