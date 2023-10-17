@@ -3,6 +3,7 @@
 - Work in progress, expect some broken links.
 - We've kept our design simple, no fancy animations and no goobledycook.
  
+![Image Here](./images/complete.png)  
 
 # Checklist - Individual Pages Needed for the Project
 1. Landing Page 
@@ -35,9 +36,12 @@
 
 **Landing Page**
 
+![Image Here](./images/landing.png)  
+
 **Signup Form**
 
-**Login Form**
+![Image Here](./images/signup.png)  
+
 
 2. Posts - User can post project's ideas here, and lookout for other people willing to takle the project with them. It's almost like a social networking application but with limited features.
 
@@ -46,15 +50,26 @@
 
 **Workspace - home**
 
+![Image Here](./images/projects.png)  
+
 **Projects**
+
+![Image Here](./images/proj_details.png)  
 
 **Add Project Form**
 
+![Image Here](./images/add_proj.png)  
+
+
 **Search Workspace Popup Error**
+
+![Image Here](./images/popup_err.png)  
 
 4. Detailed Workspace - Once the user picks a project to collaborate on, he/she is given a link to a specific workspace, which contains all the details pertaining how to handle the project.
 
 **Detailed Workspace Home**
+
+![Image Here](./images/workspace_detail.png)  
 
 **Text Groups(Welcome)**
 
