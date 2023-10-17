@@ -115,6 +115,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 
 - [AlphaDarkmoon](https://github.com/AlphaDarkmoon)
 - [SiddhantTotade](https://github.com/SiddhantTotade)
+- [arunim-io](https://github.com/arunim-io)
 - so on... [ Team members are recommended to add their own Github name. ]
 
 This project follows the [all-contributors](https://allcontributors.org) specification.
