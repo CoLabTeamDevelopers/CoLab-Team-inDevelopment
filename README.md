@@ -25,6 +25,7 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
+  <a href="#packages">Packages</a> •
   <a href="#how-to-fork">How To Fork</a> •
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
@@ -53,6 +54,21 @@
   - Write distraction free.
 * Cross platform
   - Windows, macOS and Linux ready.
+
+## Environment
+
+Preferable environment management options:
+
+- Python's built-in `venv`
+- MiniConda or Conda
+
+## Packages
+
+Key packages and their versions currently in use:
+
+- Python: 3.10.13
+- Django: 4.2.6
+
 
 ## How To Fork
 
