@@ -114,6 +114,7 @@ Remember to communicate with the repository maintainers and follow any guideline
 Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 - [AlphaDarkmoon](https://github.com/AlphaDarkmoon)
+- [SiddhantTotade](https://github.com/SiddhantTotade)
 - so on... [ Team members are recommended to add their own Github name. ]
 
 This project follows the [all-contributors](https://allcontributors.org) specification.
