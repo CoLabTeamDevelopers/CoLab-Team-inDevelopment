@@ -8,7 +8,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-# Getting Start
+# Getting Started
 
 ### Setup Frontend
 + Clone the repo in your PC `git clone git@github.com:CoLabTeamDevelopers/CoLab-Team-inDevelopment.git`.
