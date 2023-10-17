@@ -32,6 +32,7 @@
 
 # Page Details
 1. Landing Page - This the project's landing page. It is the first user's interaction with the project.
+
 **Landing Page**
 
 **Signup Form**
