@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../node_modules/@mui/material/utils/capitalize.js", "../../node_modules/@mui/base/composeClasses/index.js", "../../node_modules/@mui/material/utils/useForkRef.js"],
-  "sourcesContent": ["import { unstable_capitalize as capitalize } from '@mui/utils';\nexport default capitalize;", "export { unstable_composeClasses } from '@mui/utils';", "'use client';\n\nimport { unstable_useForkRef as useForkRef } from '@mui/utils';\nexport default useForkRef;"],
-  "mappings": ";;;;;;;;;;AAAA,IACO;AADP;AAAA;AAAA;AACA,IAAO,qBAAQ;AAAA;AAAA;;;ACDf;AAAA;AAAA;AAAA;AAAA;;;ACAA,IAGO;AAHP;AAAA;AAAA;AAEA;AACA,IAAO,qBAAQ;AAAA;AAAA;",
-  "names": []
-}
