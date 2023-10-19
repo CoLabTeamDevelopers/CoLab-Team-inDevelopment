@@ -1,9 +1,11 @@
+import { useReducer } from "react";
+
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 
 import BasicButtons from "../../components/Button";
 import BasicTextFields from "../../components/TextField";
 import SimpleContainer from "../../components/authentication/Container";
-import { Box, Link, Typography, Slide } from "@mui/material";
+import { Box, Typography, Slide } from "@mui/material";
 
 import {
   AuthBoxStyle,
@@ -12,8 +14,14 @@ import {
   AuthButtonsStyle,
   AuthRegisterStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
+import {
+  authFormReducer,
+  continueSignupForm,
+} from "../../reducers/authFormReducer";
 
-export default function Login() {
+export default function ResetPassword() {
+  const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
+
   return (
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
@@ -24,7 +32,7 @@ export default function Login() {
         sx={{ textAlign: "center", color: "#673ab7" }}
         fontFamily="Roboto"
       >
-        Login
+        Reset Password
       </Typography>
       <SimpleContainer />
       <Box
@@ -38,40 +46,26 @@ export default function Login() {
         <Slide direction="right" in={true} mountOnEnter unmountOnExit>
           <Box sx={AuthRegisterStyle}>
             <BasicTextFields
-              id={"email"}
-              label={"Email"}
+              type="password"
+              id={"newPassword"}
+              label={"New Password"}
               sx={AuthTextFieldStyle}
             />
             <BasicTextFields
-              id={"password"}
-              label={"Password"}
-              type={"password"}
+              type="password"
+              id={"confirmNewPassword"}
+              label={"Confirm New Password"}
               sx={AuthTextFieldStyle}
             />
           </Box>
         </Slide>
-        <BasicButtons label={"Login"} sx={AuthButtonsStyle} />
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography
-            fontSize={15}
-            color={"#757575"}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <Link href="#" sx={{ color: "#9575cd" }}>
-              &nbsp;Forgot Password ?
-            </Link>
-          </Typography>
-          <Typography
-            fontSize={15}
-            color={"#757575"}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            Not a user ?
-            <Link href="#" sx={{ color: "#9575cd" }}>
-              &nbsp;Signup
-            </Link>
-          </Typography>
-        </Box>
+        <BasicButtons
+          dispatch={dispatch}
+          dispatchState={continueSignupForm.signupForm}
+          dispatchType={"continueSignupForm"}
+          label={"Reset Password"}
+          sx={AuthButtonsStyle}
+        />
       </Box>
     </Box>
   );

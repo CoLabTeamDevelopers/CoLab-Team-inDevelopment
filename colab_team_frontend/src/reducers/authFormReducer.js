@@ -9,7 +9,6 @@ export function authFormReducer(state, action) {
       return { signupForm: !state.signupForm };
     }
     case "submit": {
-      console.log("Hello");
       return "Form Submitted";
     }
     default: {

@@ -3,17 +3,16 @@ import CoLab from "../../assets/images/CoLab - Logo Light.png";
 import BasicButtons from "../../components/Button";
 import BasicTextFields from "../../components/TextField";
 import SimpleContainer from "../../components/authentication/Container";
-import { Box, Link, Typography, Slide } from "@mui/material";
+import { Box, Typography, Slide } from "@mui/material";
 
 import {
   AuthBoxStyle,
   AuthLogoStyle,
   AuthTextFieldStyle,
   AuthButtonsStyle,
-  AuthRegisterStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
 
-export default function Login() {
+export default function ForgotPassword() {
   return (
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
@@ -24,7 +23,7 @@ export default function Login() {
         sx={{ textAlign: "center", color: "#673ab7" }}
         fontFamily="Roboto"
       >
-        Login
+        Forgot Password
       </Typography>
       <SimpleContainer />
       <Box
@@ -36,42 +35,15 @@ export default function Login() {
         }}
       >
         <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-          <Box sx={AuthRegisterStyle}>
+          <Box>
             <BasicTextFields
               id={"email"}
               label={"Email"}
               sx={AuthTextFieldStyle}
             />
-            <BasicTextFields
-              id={"password"}
-              label={"Password"}
-              type={"password"}
-              sx={AuthTextFieldStyle}
-            />
           </Box>
         </Slide>
-        <BasicButtons label={"Login"} sx={AuthButtonsStyle} />
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography
-            fontSize={15}
-            color={"#757575"}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <Link href="#" sx={{ color: "#9575cd" }}>
-              &nbsp;Forgot Password ?
-            </Link>
-          </Typography>
-          <Typography
-            fontSize={15}
-            color={"#757575"}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            Not a user ?
-            <Link href="#" sx={{ color: "#9575cd" }}>
-              &nbsp;Signup
-            </Link>
-          </Typography>
-        </Box>
+        <BasicButtons label={"Send Link"} sx={AuthButtonsStyle} />
       </Box>
     </Box>
   );
