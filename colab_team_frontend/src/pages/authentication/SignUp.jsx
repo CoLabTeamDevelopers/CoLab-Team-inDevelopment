@@ -92,13 +92,19 @@ export default function SignUpForm() {
         {!state.signupForm ? (
           <BasicButtons
             dispatch={dispatch}
-            dispatchState={continueSignupForm}
+            dispatchState={continueSignupForm.signupForm}
             dispatchType={"continueSignupForm"}
             label={"Continue"}
             sx={AuthButtonsStyle}
           />
         ) : (
-          <BasicButtons label={"Submit"} sx={AuthButtonsStyle} />
+          <BasicButtons
+            dispatch={dispatch}
+            dispatchState={continueSignupForm.submit}
+            dispatchType={"submit"}
+            label={"Submit"}
+            sx={AuthButtonsStyle}
+          />
         )}
         <Box
           sx={{
@@ -111,7 +117,7 @@ export default function SignUpForm() {
             <BasicButtons
               sx={AuthResgisterBackButtonStyle}
               dispatch={dispatch}
-              dispatchState={continueSignupForm}
+              dispatchState={continueSignupForm.signupForm}
               dispatchType={"continueSignupForm"}
               label={<NavigateBeforeIcon sx={{ fontSize: "15px" }} />}
             ></BasicButtons>
