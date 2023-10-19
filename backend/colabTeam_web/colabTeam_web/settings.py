@@ -137,5 +137,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "omnishots.alpha@gmail.com"  # Your email address
+EMAIL_HOST_USER = "xyz@gmail.com"  # Your email address
 EMAIL_HOST_PASSWORD = "hssb ynrm ynwk tpvs"  # Your less secure app password
