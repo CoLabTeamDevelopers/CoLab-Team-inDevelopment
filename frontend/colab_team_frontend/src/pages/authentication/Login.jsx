@@ -13,7 +13,10 @@ import {
   AuthRegisterStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
 
+import { useValidation } from "../../utils/FormValidation";
+
 export default function Login() {
+  const { register, handleSubmit, errors } = useValidation();
   return (
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
@@ -40,6 +43,9 @@ export default function Login() {
             <BasicTextFields
               id={"email"}
               label={"Email"}
+              name={"email"}
+              register={register}
+              errors={errors}
               sx={AuthTextFieldStyle}
             />
             <BasicTextFields

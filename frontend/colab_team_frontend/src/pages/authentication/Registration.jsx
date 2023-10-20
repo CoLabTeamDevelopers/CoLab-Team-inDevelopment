@@ -16,12 +16,17 @@ import {
   AuthRegisterStyle,
   AuthResgisterBackButtonStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
+
 import {
   authFormReducer,
   continueSignupForm,
 } from "../../reducers/authFormReducer";
 
+import { useValidation } from "../../utils/FormValidation";
+
 export default function Registration() {
+  const { register, handleSubmit, errors } = useValidation();
+
   const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
 
   return (
@@ -56,13 +61,16 @@ export default function Registration() {
               <BasicTextFields
                 id={"username"}
                 label={"Username"}
+                name={"username"}
+                register={register}
+                errors={errors}
                 sx={AuthTextFieldStyle}
               />
-              <BasicTextFields
+              {/* <BasicTextFields
                 id={"email"}
                 label={"Email"}
                 sx={AuthTextFieldStyle}
-              />
+              /> */}
             </Box>
           </Slide>
         ) : null}
@@ -74,7 +82,7 @@ export default function Registration() {
             unmountOnExit
           >
             <Box sx={AuthRegisterStyle}>
-              <BasicTextFields
+              {/* <BasicTextFields
                 id={"password"}
                 label={"Password"}
                 type={"password"}
@@ -85,7 +93,7 @@ export default function Registration() {
                 label={"Confirm Password"}
                 type={"password"}
                 sx={AuthTextFieldStyle}
-              />
+              /> */}
             </Box>
           </Slide>
         ) : null}
