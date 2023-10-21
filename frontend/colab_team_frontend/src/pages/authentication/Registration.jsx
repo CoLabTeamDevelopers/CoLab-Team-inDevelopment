@@ -108,7 +108,7 @@ export default function Registration() {
         ) : (
           <BasicButtons
             dispatch={dispatch}
-            dispatchState={continueSignupForm.submit}
+            dispatchState={continueSignupForm.register}
             dispatchType={"submit"}
             label={"Submit"}
             sx={AuthButtonsStyle}

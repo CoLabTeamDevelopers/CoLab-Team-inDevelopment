@@ -1,6 +1,11 @@
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { useReducer } from "react";
+
+import { TextField, Box } from "@mui/material";
+
+import {
+  authFormFields,
+  authInputFormReducer,
+} from "../reducers/authInputFormReducers";
 
 export default function BasicTextFields({
   name,
@@ -10,19 +15,34 @@ export default function BasicTextFields({
   sx,
   register,
   errors,
+  fieldType,
 }) {
+  const [state, dispatch] = useReducer(authInputFormReducer, authFormFields);
+
+  const handleInputChange = (fieldValue, fieldType) => {
+    dispatch({
+      type: fieldType,
+      value: fieldValue,
+    });
+  };
+
   return (
     <Box component="form" noValidate autoComplete="off">
       <TextField
+        required
         autoComplete="true"
         sx={sx || ""}
         id={id || ""}
         name={name || ""}
         label={label || ""}
         type={type || "text"}
-        ref={register("name")}
-        error={errors}
-        helperText={"Hello"}
+        value={state[name]}
+        onChange={(e) => {
+          handleInputChange(e.target.value, name);
+        }}
+        // {...register()}
+        // error={!!errors.name}
+        // helperText={errors.name?.message}
         variant="outlined"
       />
     </Box>

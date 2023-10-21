@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
+import { authFormFields } from "../reducers/authInputFormReducers";
 
 export function useValidation() {
   const validationSchema = Yup.object().shape({
@@ -18,9 +19,9 @@ export function useValidation() {
       .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
   });
 
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(validationSchema),
-  });
+  const form = useForm(authFormFields);
 
-  return { register, handleSubmit, errors };
+  const { register, handleSubmit, formState } = form;
+
+  return { register, handleSubmit, formState };
 }

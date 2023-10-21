@@ -7,15 +7,21 @@ export default function BasicButtons({
   dispatch,
   dispatchType,
   dispatchState,
+  handleSubmit,
 }) {
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <Stack spacing={2} direction="row">
       <Button
         onClick={() => {
-          dispatch({
-            type: dispatchType,
-            state: dispatchState,
-          });
+          handleSubmit(onSubmit);
+          // dispatch({
+          //   type: dispatchType,
+          //   state: dispatchState,
+          // });
         }}
         variant="contained"
         sx={sx}

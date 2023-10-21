@@ -1,3 +1,5 @@
+import { useReducer } from "react";
+
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 
 import BasicButtons from "../../components/Button";
@@ -13,10 +15,18 @@ import {
   AuthRegisterStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
 
+import {
+  authFormReducer,
+  continueSignupForm,
+} from "../../reducers/authFormReducer";
+
 import { useValidation } from "../../utils/FormValidation";
 
 export default function Login() {
   const { register, handleSubmit, errors } = useValidation();
+
+  const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
+
   return (
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
@@ -44,6 +54,7 @@ export default function Login() {
               id={"email"}
               label={"Email"}
               name={"email"}
+              type={"email"}
               register={register}
               errors={errors}
               sx={AuthTextFieldStyle}
@@ -51,12 +62,23 @@ export default function Login() {
             <BasicTextFields
               id={"password"}
               label={"Password"}
+              name={"password"}
               type={"password"}
+              register={register}
+              errors={errors}
               sx={AuthTextFieldStyle}
             />
           </Box>
         </Slide>
-        <BasicButtons label={"Login"} sx={AuthButtonsStyle} />
+        <BasicButtons
+          handleSubmit={handleSubmit}
+          dispatch={dispatch}
+          dispatchState={continueSignupForm.login}
+          dispatchType={"login"}
+          label={"Login"}
+          sx={AuthButtonsStyle}
+        />
+
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
             fontSize={15}
