@@ -1,0 +1,13 @@
+## Ignore a specific folder
+#/specific-folder/
+
+## Ignore all .log files
+#*.log
+
+## Ignore all .txt files in the root directory
+#/*.txt
+
+## Ignore all .jpg and .png files
+#*.jpg
+#
+
