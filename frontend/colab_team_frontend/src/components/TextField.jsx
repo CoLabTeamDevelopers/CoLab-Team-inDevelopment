@@ -1,6 +1,8 @@
 import { useReducer } from "react";
 
-import { TextField, Box } from "@mui/material";
+import { Controller } from "react-hook-form";
+
+import { TextField } from "@mui/material";
 
 import {
   authFormFields,
@@ -13,6 +15,7 @@ export default function BasicTextFields({
   type,
   label,
   sx,
+  control,
   register,
   errors,
   fieldType,
@@ -27,24 +30,25 @@ export default function BasicTextFields({
   };
 
   return (
-    <Box component="form" noValidate autoComplete="off">
-      <TextField
-        required
-        autoComplete="true"
-        sx={sx || ""}
-        id={id || ""}
-        name={name || ""}
-        label={label || ""}
-        type={type || "text"}
-        value={state[name]}
-        onChange={(e) => {
-          handleInputChange(e.target.value, name);
-        }}
-        // {...register()}
-        // error={!!errors.name}
-        // helperText={errors.name?.message}
-        variant="outlined"
-      />
-    </Box>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { onChange, value }, fieldState: { error } }) => (
+        <TextField
+          autoComplete="true"
+          sx={sx || ""}
+          id={id || ""}
+          name={name || ""}
+          label={label || ""}
+          type={type || "text"}
+          value={value || ""}
+          onChange={onChange}
+          // {...register}
+          error={!!error}
+          helperText={error ? error.message : null}
+          variant="outlined"
+        />
+      )}
+    />
   );
 }

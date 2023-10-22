@@ -22,10 +22,14 @@ import {
   continueSignupForm,
 } from "../../reducers/authFormReducer";
 
-import { useValidation } from "../../utils/FormValidation";
+import validationSchema from "../../utils/FormValidation";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function Registration() {
-  const { register, handleSubmit, errors } = useValidation();
+  const { control, handleSubmit, errors } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
   const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
 
@@ -62,7 +66,7 @@ export default function Registration() {
                 id={"username"}
                 label={"Username"}
                 name={"username"}
-                register={register}
+                // register={register}
                 errors={errors}
                 sx={AuthTextFieldStyle}
               />
