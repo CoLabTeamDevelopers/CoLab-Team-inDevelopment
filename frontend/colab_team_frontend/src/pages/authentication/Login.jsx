@@ -89,10 +89,11 @@ export default function Login() {
             </Box>
           </Slide>
           <BasicButtons
+            dispatchFlag={false}
             type={"submit"}
-            dispatch={dispatch}
-            dispatchState={continueSignupForm}
-            dispatchType={"login"}
+            dispatch={null}
+            dispatchState={null}
+            dispatchType={null}
             label={"Login"}
             sx={AuthButtonsStyle}
           />

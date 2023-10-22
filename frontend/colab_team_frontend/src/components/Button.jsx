@@ -8,14 +8,19 @@ export default function BasicButtons({
   dispatch,
   dispatchType,
   dispatchState,
+  dispatchFlag,
 }) {
   return (
     <Stack spacing={2} direction="row">
       <Button
-        // onClick={dispatch({
-        //   type: dispatchType,
-        //   state: dispatchState,
-        // })}
+        onClick={() => {
+          if (dispatchFlag) {
+            dispatch({
+              type: dispatchType,
+              state: dispatchState,
+            });
+          }
+        }}
         type={type || ""}
         variant="contained"
         sx={sx}
