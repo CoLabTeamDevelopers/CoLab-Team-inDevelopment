@@ -5,7 +5,7 @@ import CoLab from "../../assets/images/CoLab - Logo Light.png";
 import BasicButtons from "../../components/Button";
 import BasicTextFields from "../../components/TextField";
 import SimpleContainer from "../../components/authentication/Container";
-import { Box, Link, Typography, Slide } from "@mui/material";
+import { Box, Link, Typography, Slide, FormControl } from "@mui/material";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import {
@@ -27,7 +27,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function Registration() {
-  const { control, handleSubmit, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -54,70 +59,94 @@ export default function Registration() {
           marginTop: "10px",
         }}
       >
-        {!state.signupForm ? (
-          <Slide
-            direction="right"
-            in={!state.signupForm}
-            mountOnEnter
-            unmountOnExit
-          >
-            <Box sx={AuthRegisterStyle}>
-              <BasicTextFields
-                id={"username"}
-                label={"Username"}
-                name={"username"}
-                // register={register}
-                errors={errors}
-                sx={AuthTextFieldStyle}
-              />
-              {/* <BasicTextFields
-                id={"email"}
-                label={"Email"}
-                sx={AuthTextFieldStyle}
-              /> */}
-            </Box>
-          </Slide>
-        ) : null}
-        {state.signupForm ? (
-          <Slide
-            direction="right"
-            in={state.signupForm}
-            mountOnEnter
-            unmountOnExit
-          >
-            <Box sx={AuthRegisterStyle}>
-              {/* <BasicTextFields
-                id={"password"}
-                label={"Password"}
-                type={"password"}
-                sx={AuthTextFieldStyle}
-              />
-              <BasicTextFields
-                id={"confirmPassword"}
-                label={"Confirm Password"}
-                type={"password"}
-                sx={AuthTextFieldStyle}
-              /> */}
-            </Box>
-          </Slide>
-        ) : null}
-        {!state.signupForm ? (
-          <BasicButtons
-            dispatch={dispatch}
-            dispatchState={continueSignupForm.signupForm}
-            dispatchType={"continueSignupForm"}
-            label={"Continue"}
-            sx={AuthButtonsStyle}
-          />
-        ) : (
-          <BasicButtons
-            dispatch={dispatch}
-            dispatchState={continueSignupForm.register}
-            dispatchType={"submit"}
-            label={"Submit"}
-            sx={AuthButtonsStyle}
-          />
-        )}
+        <FormControl
+          sx={{ gap: "10px" }}
+          component="form"
+          onSubmit={handleSubmit(() => console.log("Click"))}
+        >
+          {!state.signupForm ? (
+            <Slide
+              direction="right"
+              in={!state.signupForm}
+              mountOnEnter
+              unmountOnExit
+            >
+              <Box sx={AuthRegisterStyle}>
+                <BasicTextFields
+                  id={"username"}
+                  label={"Username"}
+                  name={"username"}
+                  type={"text"}
+                  control={control}
+                  register={register}
+                  errors={errors.username}
+                  sx={AuthTextFieldStyle}
+                />
+                <BasicTextFields
+                  id={"email"}
+                  label={"Email"}
+                  name={"email"}
+                  type={"text"}
+                  control={control}
+                  register={register}
+                  errors={errors.email}
+                  sx={AuthTextFieldStyle}
+                />
+              </Box>
+            </Slide>
+          ) : null}
+          {state.signupForm ? (
+            <Slide
+              direction="right"
+              in={state.signupForm}
+              mountOnEnter
+              unmountOnExit
+            >
+              <Box sx={AuthRegisterStyle}>
+                <BasicTextFields
+                  id={"password"}
+                  label={"Password"}
+                  name={"password"}
+                  type={"password"}
+                  control={control}
+                  register={register}
+                  errors={errors.password}
+                  sx={AuthTextFieldStyle}
+                />
+                <BasicTextFields
+                  id={"confirmPassword"}
+                  label={"Confirm Password"}
+                  name={"confirmPassword"}
+                  type={"password"}
+                  control={control}
+                  register={register}
+                  errors={errors.confirmPassword}
+                  sx={AuthTextFieldStyle}
+                />
+              </Box>
+            </Slide>
+          ) : null}
+          {!state.signupForm ? (
+            <BasicButtons
+              dispatchFlag={true}
+              dispatch={dispatch}
+              dispatchState={continueSignupForm.signupForm}
+              dispatchType={"continueSignupForm"}
+              label={"Continue"}
+              sx={AuthButtonsStyle}
+            />
+          ) : (
+            <BasicButtons
+              dispatchFlag={false}
+              type={"submit"}
+              dispatch={null}
+              dispatchState={null}
+              dispatchType={null}
+              label={"Submit"}
+              sx={AuthButtonsStyle}
+            />
+          )}
+        </FormControl>
         <Box
           sx={{
             display: "flex",

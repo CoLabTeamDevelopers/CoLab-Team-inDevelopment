@@ -21,9 +21,7 @@ import {
 } from "../../reducers/authFormReducer";
 
 import validationSchema from "../../utils/FormValidation";
-
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { useForm } from "react-hook-form";
 
 export default function Login() {

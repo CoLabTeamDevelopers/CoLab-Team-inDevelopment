@@ -11,7 +11,7 @@ const validationSchema = Yup.object().shape({
     .min(8, "Password must be atleast 8 characters")
     .max(24, "Password must not exceed 24 characters"),
   confirmPassword: Yup.string()
-    .required()
+    .required("Confirm password is required")
     .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
 });
 
