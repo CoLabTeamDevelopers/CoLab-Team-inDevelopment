@@ -27,12 +27,12 @@
 </p>
 
 <p align="center">
-<a href="#images">📷 Images</a> •
-  <a href="#guide">📖 Guide</a> •
+  <a href="#📷-images">📷 Images</a> •
+  <a href="#📖-guide">📖 Guide</a> •
   <a href="#packages">Packages</a> •
-  <a href="#how-to-fork">💾 How To Fork</a> •
+  <a href="#💾-how-to-fork">💾 How To Fork</a> •
   <a href="#download">Download</a> •
-  <a href="#contributors">👤 Contributors</a> •
+  <a href="#👤-contributors">👤 Contributors</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
