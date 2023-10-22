@@ -1,5 +1,5 @@
 import Login from "./pages/authentication/Login";
-import SignUpForm from "./pages/authentication/Registration";
+import Registration from "./pages/authentication/Registration";
 import ForgotPassword from "./pages/authentication/ForgotPassword";
 import ResetPassword from "./pages/authentication/ResetPassword";
 
@@ -8,7 +8,7 @@ function App() {
     <>
       <div>
         {/* <Login /> */}
-        <SignUpForm />
+        <Registration />
         {/* <ForgotPassword /> */}
         {/* <ResetPassword /> */}
       </div>

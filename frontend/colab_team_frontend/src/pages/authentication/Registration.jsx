@@ -156,10 +156,11 @@ export default function Registration() {
         >
           {state.signupForm && (
             <BasicButtons
-              sx={AuthResgisterBackButtonStyle}
+              dispatchFlag={true}
               dispatch={dispatch}
               dispatchState={continueSignupForm.signupForm}
               dispatchType={"continueSignupForm"}
+              sx={AuthResgisterBackButtonStyle}
               label={<NavigateBeforeIcon sx={{ fontSize: "15px" }} />}
             ></BasicButtons>
           )}
