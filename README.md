@@ -1,3 +1,5 @@
+<h6 align="center" style="color:red;">⚠️ IMPORTANT NOTICE: Please refrain from deleting any elements within this README.md file that contain emojis.
+</h6>
 
 <h1 align="center">
   <br>
@@ -5,6 +7,7 @@
 </h1>
 
 <h4 align="center">A collaboration web app built on top of <a href="https://www.djangoproject.com" target="_blank">Django framework</a>.</h4>
+
 <h5 align="center">This README.md is a base template, and updates will be made in the future.
 
 <a href="None">Feel free to use this as a starting point for your project.</a></h5>
@@ -24,80 +27,37 @@
 </p>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#packages">Packages</a>
-  <a href="#how-to-fork">How To Fork</a> •
+<a href="#images">📷 Images</a> •
+  <a href="#guide">📖 Guide</a> •
+  <a href="#packages">Packages</a> •
+  <a href="#how-to-fork">💾 How To Fork</a> •
   <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
+  <a href="#contributors">👤 Contributors</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
-## Key Features
+## 📷 Images
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
-* Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
-* Cross platform
-  - Windows, macOS and Linux ready.
+### Password Reset Email
 
-## How To Fork
+<div align="center">
+<img src="https://i.ibb.co/7SjXwmR/pass-Reset.png"/>
+</div>
 
-1. **Fork the Repository:**
-   - Click the "Fork" button in the top right corner of the page. This will create a copy (a fork) of the repository under your GitHub account.
-   
+## 📖 Guide
 
-2. **Clone the Forked Repository:**
-   - On your forked repository, click the "Code" button and copy the repository URL (e.g., `https://github.com/yourusername/repository.git`).
-   - Open your terminal or command prompt and navigate to the directory where you want to clone the repository.
-   - Run the following command to clone the repository to your local machine( Replace URL with your ):
-     ```
-     git clone https://github.com/yourusername/repository.git
-     ```
+All Guide files locations.
 
-3. **Create a New Branch:**
-   - Change to the repository directory:
-     ```
-     cd repository
-     ```
-   - Create a new branch with your github username for your contribution:
-     ```
-     git checkout -b your-username
-     ```
-    #### Merge will not be accepted unless branch name is your username.
-
-4. **Make Changes:**
-   - Make the necessary changes to the code, documentation, or any other files in your local repository.
-
-5. **Commit Changes:**
-   - Add the changes to the staging area:
-     ```
-     git add .
-     ```
-   - Commit the changes with a descriptive message:
-     ```
-     git commit -m "Your descriptive commit message"
-     ```
-
-6. **Push Changes:**
-   - Push your changes to your forked repository on GitHub:
-     ```
-     git push origin your-branch-name
-     ```
+* README.md
+  - <a href="#">CoLab-Team-inDevelopment/README.md</a>
+* Backend Setup
+  - <a href="#">CoLab-Team-inDevelopment/backend/SETUP.md</a>
+* Figma design files
+  - <a href="#">CoLab-Team-inDevelopment/frontend/UI_Design/UI.md</a>
+* Frontend React code
+  - <a href="#">CoLab-Team-inDevelopment/frontend/colab_team_frontend/FRONTEND_CODE.md</a>
 
 
 ## Environment
@@ -115,7 +75,7 @@ Key packages and their versions currently in use:
 - Django: 4.2.6
 
 
-## How To Fork
+## 💾 How To Fork
 
 1. **Fork the Repository:**
    - Click the "Fork" button in the top right corner of the page. This will create a copy (a fork) of the repository under your GitHub account.
@@ -159,7 +119,6 @@ Key packages and their versions currently in use:
      git push origin your-branch-name
      ```
 
->>>>>>> AlphaDarkmoon
 7. **Create a Pull Request (PR):**
    - Go to your forked repository on GitHub.
    - Click on the "Compare & pull request" button next to the branch you just pushed.
@@ -171,16 +130,13 @@ Key packages and their versions currently in use:
 
 Remember to communicate with the repository maintainers and follow any guidelines or contributing rules they may have specified in their repository's README or CONTRIBUTING file.
 
-## Contributors
+## 👤 Contributors
 
 Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 - [AlphaDarkmoon](https://github.com/AlphaDarkmoon)
 - [SiddhantTotade](https://github.com/SiddhantTotade)
-<<<<<<< HEAD
-=======
 - [arunim-io](https://github.com/arunim-io)
->>>>>>> 4a71be0bfcd5ad4f5a9421830c5af24674ed67d8
 - so on... [ Team members are recommended to add their own Github name. ]
 
 This project follows the [all-contributors](https://allcontributors.org) specification.

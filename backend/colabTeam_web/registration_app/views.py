@@ -130,3 +130,4 @@ def verify_user(request, auth_token):
 # View for displaying an error page
 def error_page(request):
     return render(request, 'registration/error.html')
+

@@ -33,18 +33,21 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
+PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/custom_password_reset_email.html'
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    "home_app",
+    "registration_app",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "home_app",
-    "registration_app",
 ]
 
 MIDDLEWARE = [
