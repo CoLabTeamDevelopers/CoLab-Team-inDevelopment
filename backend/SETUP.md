@@ -6,7 +6,7 @@
     - [Email Verification](#email-verification)
     - [Login](#login)
 
-2. [Setting Up Project](#setting-up-project)
+2. [Setting Up Project](#setting_up_project)
 
     - [Settings.py](#settingspy)
     - [Navigate to Project Directory](#navigate-to-project-directory)
