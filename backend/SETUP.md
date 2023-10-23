@@ -1,16 +1,4 @@
 # Table of Contents
-# Table of Contents
-
-- [Section 1](#section-1)
-- [Section 2](#section-2)
-- [Section 3](#section-3)
-
-## Section 1
-Some content for Section 1. You can link to this section by clicking [here](#section-1).
-
-## Section 2
-Some content for Section 2. You can link to this section by clicking [here](#section-2).
-
 
 1. [User Registration and Verification Guide](#user-registration-and-verification-guide)
 
@@ -138,10 +126,6 @@ Poetry is a tool that helps Python developers manage the libraries (dependencies
 -   Build and share your Python code with others.
 
 It's like a librarian for your Python project, making sure you have the right books (libraries) in a neat and organized library (virtual environment) so your project runs smoothly and can be easily shared with others.
-
-
-## Section 3
-Some content for Section 3. You can link to this section by clicking [here](#section-3).
 
 ### Install Poetry:
 
