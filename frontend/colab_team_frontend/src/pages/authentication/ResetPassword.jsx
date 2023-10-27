@@ -5,7 +5,7 @@ import CoLab from "../../assets/images/CoLab - Logo Light.png";
 import BasicButtons from "../../components/Button";
 import BasicTextFields from "../../components/TextField";
 import SimpleContainer from "../../components/authentication/Container";
-import { Box, Typography, Slide } from "@mui/material";
+import { Box, Typography, Slide, FormControl } from "@mui/material";
 
 import {
   AuthBoxStyle,
@@ -14,12 +14,26 @@ import {
   AuthButtonsStyle,
   AuthRegisterStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
+
 import {
   authFormReducer,
   continueSignupForm,
 } from "../../reducers/authFormReducer";
 
+import validationSchema from "../../utils/FormValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
 export default function ResetPassword() {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
   const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
 
   return (
@@ -43,29 +57,44 @@ export default function ResetPassword() {
           marginTop: "10px",
         }}
       >
-        <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-          <Box sx={AuthRegisterStyle}>
-            <BasicTextFields
-              type="password"
-              id={"newPassword"}
-              label={"New Password"}
-              sx={AuthTextFieldStyle}
-            />
-            <BasicTextFields
-              type="password"
-              id={"confirmNewPassword"}
-              label={"Confirm New Password"}
-              sx={AuthTextFieldStyle}
-            />
-          </Box>
-        </Slide>
-        <BasicButtons
-          dispatch={dispatch}
-          dispatchState={continueSignupForm.signupForm}
-          dispatchType={"continueSignupForm"}
-          label={"Reset Password"}
-          sx={AuthButtonsStyle}
-        />
+        <FormControl
+          sx={{ gap: "10px" }}
+          component="form"
+          onSubmit={handleSubmit(() => console.log("Click"))}
+        >
+          <Slide direction="right" in={true} mountOnEnter unmountOnExit>
+            <Box sx={AuthRegisterStyle}>
+              <BasicTextFields
+                id={"newPassword"}
+                label={"New Password"}
+                name={"password"}
+                type="password"
+                control={control}
+                register={register}
+                errors={errors.password}
+                sx={AuthTextFieldStyle}
+              />
+              <BasicTextFields
+                id={"confirmNewPassword"}
+                label={"Confirm New Password"}
+                name={"confirmPassword"}
+                type="password"
+                control={control}
+                register={register}
+                errors={errors.confirmPassword}
+                sx={AuthTextFieldStyle}
+              />
+            </Box>
+          </Slide>
+          <BasicButtons
+            dispatchFlag={false}
+            dispatch={dispatch}
+            dispatchState={continueSignupForm.signupForm}
+            dispatchType={"continueSignupForm"}
+            label={"Reset Password"}
+            sx={AuthButtonsStyle}
+          />
+        </FormControl>
       </Box>
     </Box>
   );

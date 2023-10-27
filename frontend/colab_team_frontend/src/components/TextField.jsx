@@ -1,6 +1,13 @@
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { useReducer } from "react";
+
+import { Controller } from "react-hook-form";
+
+import { TextField } from "@mui/material";
+
+import {
+  authFormFields,
+  authInputFormReducer,
+} from "../reducers/authInputFormReducers";
 
 export default function BasicTextFields({
   name,
@@ -8,23 +15,40 @@ export default function BasicTextFields({
   type,
   label,
   sx,
+  control,
   register,
   errors,
+  fieldType,
 }) {
+  const [state, dispatch] = useReducer(authInputFormReducer, authFormFields);
+
+  const handleInputChange = (fieldValue, fieldType) => {
+    dispatch({
+      type: fieldType,
+      value: fieldValue,
+    });
+  };
+
   return (
-    <Box component="form" noValidate autoComplete="off">
-      <TextField
-        autoComplete="true"
-        sx={sx || ""}
-        id={id || ""}
-        name={name || ""}
-        label={label || ""}
-        type={type || "text"}
-        ref={register("name")}
-        error={errors}
-        helperText={"Hello"}
-        variant="outlined"
-      />
-    </Box>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { onChange, value }, fieldState: { error } }) => (
+        <TextField
+          autoComplete="true"
+          sx={sx || ""}
+          id={id || ""}
+          name={name || ""}
+          label={label || ""}
+          type={type || "text"}
+          value={value || ""}
+          onChange={onChange}
+          // {...register}
+          error={!!error}
+          helperText={error ? error.message : null}
+          variant="outlined"
+        />
+      )}
+    />
   );
 }

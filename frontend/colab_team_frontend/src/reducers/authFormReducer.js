@@ -1,6 +1,6 @@
 export const continueSignupForm = {
   signupForm: false,
-  submit: false,
+  register: false,
 };
 
 export function authFormReducer(state, action) {
@@ -8,8 +8,11 @@ export function authFormReducer(state, action) {
     case "continueSignupForm": {
       return { signupForm: !state.signupForm };
     }
-    case "submit": {
+    case "register": {
       return "Form Submitted";
+    }
+    case "login": {
+      return "Logged In Successfully";
     }
     default: {
       return null;
