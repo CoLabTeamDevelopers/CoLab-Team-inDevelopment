@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 
@@ -38,6 +38,12 @@ export default function Registration() {
 
   const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
 
+  const [next, setNext] = useState(false);
+
+  function onSubmit(data) {
+    console.log(data);
+  }
+
   return (
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
@@ -62,7 +68,7 @@ export default function Registration() {
         <FormControl
           sx={{ gap: "10px" }}
           component="form"
-          onSubmit={handleSubmit(() => console.log("Click"))}
+          onSubmit={handleSubmit((data) => onSubmit(data))}
         >
           {!state.signupForm ? (
             <Slide
@@ -128,7 +134,13 @@ export default function Registration() {
           ) : null}
           {!state.signupForm ? (
             <BasicButtons
-              dispatchFlag={true}
+              dispatchFlag={
+                errors.username?.message === undefined
+                  ? errors.username?.message.length > 0
+                    ? true
+                    : false
+                  : false
+              }
               dispatch={dispatch}
               dispatchState={continueSignupForm.signupForm}
               dispatchType={"continueSignupForm"}

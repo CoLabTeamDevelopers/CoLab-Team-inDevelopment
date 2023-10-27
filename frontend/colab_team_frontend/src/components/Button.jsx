@@ -1,5 +1,4 @@
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import { Stack, Button } from "@mui/material";
 
 export default function BasicButtons({
   label,
