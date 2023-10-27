@@ -1,9 +1,11 @@
+import { useReducer } from "react";
+
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 
 import BasicButtons from "../../components/Button";
 import BasicTextFields from "../../components/TextField";
 import SimpleContainer from "../../components/authentication/Container";
-import { Box, Link, Typography, Slide } from "@mui/material";
+import { Box, Link, Typography, Slide, FormControl } from "@mui/material";
 
 import {
   AuthBoxStyle,
@@ -13,10 +15,27 @@ import {
   AuthRegisterStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
 
-import { useValidation } from "../../utils/FormValidation";
+import {
+  authFormReducer,
+  continueSignupForm,
+} from "../../reducers/authFormReducer";
+
+import validationSchema from "../../utils/FormValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
-  const { register, handleSubmit, errors } = useValidation();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
+
   return (
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
@@ -38,25 +57,46 @@ export default function Login() {
           marginTop: "10px",
         }}
       >
-        <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-          <Box sx={AuthRegisterStyle}>
-            <BasicTextFields
-              id={"email"}
-              label={"Email"}
-              name={"email"}
-              register={register}
-              errors={errors}
-              sx={AuthTextFieldStyle}
-            />
-            <BasicTextFields
-              id={"password"}
-              label={"Password"}
-              type={"password"}
-              sx={AuthTextFieldStyle}
-            />
-          </Box>
-        </Slide>
-        <BasicButtons label={"Login"} sx={AuthButtonsStyle} />
+        <FormControl
+          sx={{ gap: "10px" }}
+          component="form"
+          onSubmit={handleSubmit(() => console.log("Click"))}
+        >
+          <Slide direction="right" in={true} mountOnEnter unmountOnExit>
+            <Box sx={AuthRegisterStyle}>
+              <BasicTextFields
+                id={"email"}
+                label={"Email"}
+                name={"email"}
+                type={"email"}
+                control={control}
+                register={register}
+                errors={errors.email}
+                sx={AuthTextFieldStyle}
+              />
+              <BasicTextFields
+                id={"password"}
+                label={"Password"}
+                name={"password"}
+                type={"password"}
+                control={control}
+                register={register}
+                errors={errors}
+                sx={AuthTextFieldStyle}
+              />
+            </Box>
+          </Slide>
+          <BasicButtons
+            dispatchFlag={false}
+            type={"submit"}
+            dispatch={null}
+            dispatchState={null}
+            dispatchType={null}
+            label={"Login"}
+            sx={AuthButtonsStyle}
+          />
+        </FormControl>
+
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
             fontSize={15}
