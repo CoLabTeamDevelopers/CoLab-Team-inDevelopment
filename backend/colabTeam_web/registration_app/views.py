@@ -36,7 +36,7 @@ def login_user(request):
             return redirect("registration_app:login")
 
         login(request, user)
-        return redirect("home_app:home")
+        return redirect("home")
 
     return render(request, "registration/login.html")
 
