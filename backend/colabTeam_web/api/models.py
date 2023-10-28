@@ -13,7 +13,7 @@ class Post(models.Model):
     ]
     title = models.CharField(max_length=30)
     description = models.TextField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     requirements = models.TextField(blank= True, null= True)
     benefits = models.TextField(blank=True, null= True)
     max_contributors = models.IntegerField(blank=True, null= True)
@@ -22,7 +22,7 @@ class Post(models.Model):
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.title} created by: user-{self.user_id}"
+        return f"{self.title} created by: user-{self.user}"
 
 
 class Group(models.Model):
