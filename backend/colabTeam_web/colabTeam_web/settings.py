@@ -39,15 +39,16 @@ PASSWORD_RESET_EMAIL_TEMPLATE = "registration/custom_password_reset_email.html"
 # Application definition
 
 INSTALLED_APPS = [
-    "home_app",
-    "registration_app",
-    "api.apps.ApiConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "home_app",
+    "registration_app",
+    "api",
 ]
 
 MIDDLEWARE = [
