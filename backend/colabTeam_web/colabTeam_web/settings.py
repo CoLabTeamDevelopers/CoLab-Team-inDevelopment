@@ -41,7 +41,7 @@ PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/custom_password_reset_email.html'
 INSTALLED_APPS = [
     "home_app",
     "registration_app",
-
+    "api.apps.ApiConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

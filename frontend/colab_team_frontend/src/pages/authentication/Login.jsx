@@ -36,6 +36,11 @@ export default function Login() {
 
   const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
 
+  function onSubmit(e) {
+    e.preventDefault();
+    console.log("Hello");
+  }
+
   return (
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
@@ -60,7 +65,7 @@ export default function Login() {
         <FormControl
           sx={{ gap: "10px" }}
           component="form"
-          onSubmit={handleSubmit(() => console.log("Click"))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <Slide direction="right" in={true} mountOnEnter unmountOnExit>
             <Box sx={AuthRegisterStyle}>
@@ -70,8 +75,8 @@ export default function Login() {
                 name={"email"}
                 type={"email"}
                 control={control}
-                register={register}
                 errors={errors.email}
+                register={register}
                 sx={AuthTextFieldStyle}
               />
               <BasicTextFields
@@ -80,8 +85,8 @@ export default function Login() {
                 name={"password"}
                 type={"password"}
                 control={control}
+                errors={errors.password}
                 register={register}
-                errors={errors}
                 sx={AuthTextFieldStyle}
               />
             </Box>
