@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 
@@ -31,17 +31,21 @@ export default function Registration() {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
-  const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
+  const watchField = watch(["username", "email"]);
 
-  const [next, setNext] = useState(false);
+  const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
 
   function onSubmit(data) {
     console.log(data);
+    reset();
+    document.getElementById("registrationForm").reset();
   }
 
   return (
@@ -68,6 +72,7 @@ export default function Registration() {
         <FormControl
           sx={{ gap: "10px" }}
           component="form"
+          id="registrationForm"
           onSubmit={handleSubmit((data) => onSubmit(data))}
         >
           {!state.signupForm ? (
@@ -115,7 +120,7 @@ export default function Registration() {
                   name={"password"}
                   type={"password"}
                   control={control}
-                  register={register}
+                  // register={register}
                   errors={errors.password}
                   sx={AuthTextFieldStyle}
                 />
@@ -125,7 +130,7 @@ export default function Registration() {
                   name={"confirmPassword"}
                   type={"password"}
                   control={control}
-                  register={register}
+                  // register={register}
                   errors={errors.confirmPassword}
                   sx={AuthTextFieldStyle}
                 />
@@ -134,13 +139,8 @@ export default function Registration() {
           ) : null}
           {!state.signupForm ? (
             <BasicButtons
-              dispatchFlag={
-                errors.username?.message === undefined
-                  ? errors.username?.message.length > 0
-                    ? true
-                    : false
-                  : false
-              }
+              id={"continue"}
+              dispatchFlag={watchField[0] && watchField[1] ? true : false}
               dispatch={dispatch}
               dispatchState={continueSignupForm.signupForm}
               dispatchType={"continueSignupForm"}
@@ -149,6 +149,7 @@ export default function Registration() {
             />
           ) : (
             <BasicButtons
+              id={"submit"}
               dispatchFlag={false}
               type={"submit"}
               dispatch={null}

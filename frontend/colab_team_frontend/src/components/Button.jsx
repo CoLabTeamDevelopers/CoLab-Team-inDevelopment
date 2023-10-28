@@ -1,6 +1,7 @@
 import { Stack, Button } from "@mui/material";
 
 export default function BasicButtons({
+  id,
   label,
   sx,
   type,
@@ -20,6 +21,7 @@ export default function BasicButtons({
             });
           }
         }}
+        id={id || ""}
         type={type || ""}
         variant="contained"
         sx={sx}
