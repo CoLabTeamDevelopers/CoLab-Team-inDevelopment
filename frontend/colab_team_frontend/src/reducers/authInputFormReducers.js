@@ -8,6 +8,7 @@ export const authFormFields = {
 export function authInputFormReducer(state, action) {
   switch (action.type) {
     case "username": {
+      console.log(authFormFields.us);
       return {
         username: action.value,
       };

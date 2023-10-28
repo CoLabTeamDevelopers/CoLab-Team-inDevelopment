@@ -31,12 +31,22 @@ export default function Registration() {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
+  const watchField = watch(["username", "email"]);
+
   const [state, dispatch] = useReducer(authFormReducer, continueSignupForm);
+
+  function onSubmit(data) {
+    console.log(data);
+    reset();
+    document.getElementById("registrationForm").reset();
+  }
 
   return (
     <Box sx={AuthBoxStyle}>
@@ -62,7 +72,8 @@ export default function Registration() {
         <FormControl
           sx={{ gap: "10px" }}
           component="form"
-          onSubmit={handleSubmit(() => console.log("Click"))}
+          id="registrationForm"
+          onSubmit={handleSubmit((data) => onSubmit(data))}
         >
           {!state.signupForm ? (
             <Slide
@@ -109,7 +120,7 @@ export default function Registration() {
                   name={"password"}
                   type={"password"}
                   control={control}
-                  register={register}
+                  // register={register}
                   errors={errors.password}
                   sx={AuthTextFieldStyle}
                 />
@@ -119,7 +130,7 @@ export default function Registration() {
                   name={"confirmPassword"}
                   type={"password"}
                   control={control}
-                  register={register}
+                  // register={register}
                   errors={errors.confirmPassword}
                   sx={AuthTextFieldStyle}
                 />
@@ -128,7 +139,8 @@ export default function Registration() {
           ) : null}
           {!state.signupForm ? (
             <BasicButtons
-              dispatchFlag={true}
+              id={"continue"}
+              dispatchFlag={watchField[0] && watchField[1] ? true : false}
               dispatch={dispatch}
               dispatchState={continueSignupForm.signupForm}
               dispatchType={"continueSignupForm"}
@@ -137,6 +149,7 @@ export default function Registration() {
             />
           ) : (
             <BasicButtons
+              id={"submit"}
               dispatchFlag={false}
               type={"submit"}
               dispatch={null}
