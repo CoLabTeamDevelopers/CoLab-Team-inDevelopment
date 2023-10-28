@@ -33,7 +33,7 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
-PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/custom_password_reset_email.html'
+PASSWORD_RESET_EMAIL_TEMPLATE = "registration/custom_password_reset_email.html"
 
 
 # Application definition
