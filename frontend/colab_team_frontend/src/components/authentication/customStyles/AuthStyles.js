@@ -43,8 +43,8 @@ const AuthRegisterStyle = {
 };
 
 const AuthResgisterBackButtonStyle = {
-  padding: "4px",
-  margin: "4px",
+  padding: "2px",
+  margin: "2px",
   minWidth: "15px",
   background: AuthButtonsStyle.background,
   borderRadius: "50px",

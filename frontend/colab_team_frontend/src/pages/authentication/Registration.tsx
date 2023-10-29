@@ -1,115 +1,190 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import { Box, Button, Link, Slide, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useRef, useState } from "react";
 
-import Waves from '@/assets/svg/Waves';
-import Logo from '@/components/Logo';
-import { registrationSchema } from '@/schemas/auth';
-import styles from '@/styles/auth';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registrationSchema } from "../../schemas/authSchemas";
+import { useForm } from "react-hook-form";
+
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import {
+  Box,
+  Button,
+  FormControl,
+  Link,
+  Slide,
+  Typography,
+} from "@mui/material";
+import BasicTextFields from "../../components/TextField";
+
+import {
+  AuthBoxStyle,
+  AuthLogoStyle,
+  AuthTextFieldStyle,
+  AuthButtonsStyle,
+  AuthRegisterStyle,
+  AuthResgisterBackButtonStyle,
+} from "../../components/authentication/customStyles/AuthStyles";
+import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
+import Waves from "../../assets/svg/Wave";
+
+import { registrationTypes } from "../../typings/authTypes";
+import { LOGIN } from "../../api/authentication/authEndpoints";
 
 export default function RegistrationPage() {
   const [continueForm, setContinueForm] = useState(false);
-  const { register, handleSubmit } = useForm({ resolver: yupResolver(registrationSchema) });
 
-  const onSubmit = handleSubmit((data) => {
+  const { handleSubmit, control, watch, setError, reset } =
+    useForm<registrationTypes>({
+      resolver: yupResolver(registrationSchema),
+    });
+
+  const watchField = watch(["username", "email"]);
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const onSubmit = (data: Record<string, any>) => {
     console.log(data);
-  });
+    formRef.current?.reset();
+    reset();
+  };
+
+  const handleContinue = () => {
+    if (watchField[0] && watchField[1]) {
+      setContinueForm(true);
+    } else {
+      if (!watchField[0]) {
+        setError("username", {
+          type: "required",
+          message: "Username is required",
+        });
+      }
+      if (!watchField[1]) {
+        setError("email", {
+          type: "required",
+          message: "Email is required",
+        });
+      }
+    }
+  };
 
   return (
-    <Box sx={styles.box}>
-      <Logo />
-      <Typography fontSize={25} sx={{ textAlign: 'center', color: '#673ab7' }} fontFamily="Roboto">
+    <Box sx={AuthBoxStyle}>
+      <Box sx={AuthLogoStyle}>
+        <img src={CoLabLightLogo} alt="app_img" width={200} height={200} />
+      </Box>
+      <Typography
+        fontSize={25}
+        sx={{ textAlign: "center", color: "#673ab7" }}
+        fontFamily="Roboto"
+      >
         Register
       </Typography>
       <Waves />
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-          marginTop: '10px',
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          marginTop: "10px",
         }}
-        component="form"
-        onSubmit={onSubmit}
       >
-        {!continueForm && (
-          <Slide direction="right" in={!continueForm} mountOnEnter unmountOnExit>
-            <Box sx={styles.form}>
-              <TextField
-                autoComplete="true"
-                variant="outlined"
-                type="text"
-                label="Username"
-                sx={styles.textField}
-                {...register('username')}
-              />
-              <TextField
-                autoComplete="true"
-                variant="outlined"
-                type="email"
-                label="Email"
-                sx={styles.textField}
-                {...register('email')}
-              />
-            </Box>
-          </Slide>
-        )}
-        {continueForm ? (
-          <Slide direction="right" in={continueForm} mountOnEnter unmountOnExit>
-            <Box sx={styles.form}>
-              <TextField
-                autoComplete="true"
-                variant="outlined"
-                type="password"
-                label="New Password"
-                sx={styles.textField}
-                {...register('password')}
-              />
-              <TextField
-                autoComplete="true"
-                variant="outlined"
-                type="password"
-                label="Confirm Password"
-                sx={styles.textField}
-                {...register('confirmPassword')}
-              />
-            </Box>
-          </Slide>
-        ) : undefined}
-        {continueForm ? (
-          <Button type="submit" variant="contained" sx={styles.button}>
-            Submit
-          </Button>
-        ) : (
-          <Button variant="contained" sx={styles.button} onClick={() => setContinueForm(true)}>
-            Continue
-          </Button>
-        )}
+        <FormControl
+          sx={{ gap: "10px" }}
+          id="registrationForm"
+          component="form"
+          ref={formRef}
+          onSubmit={handleSubmit((data) => onSubmit(data))}
+        >
+          {!continueForm && (
+            <Slide
+              direction="right"
+              in={!continueForm}
+              mountOnEnter
+              unmountOnExit
+            >
+              <Box sx={AuthRegisterStyle}>
+                <BasicTextFields
+                  id={"username"}
+                  label={"Username"}
+                  name={"username"}
+                  type={"text"}
+                  control={control}
+                  sx={AuthTextFieldStyle}
+                />
+                <BasicTextFields
+                  id={"email"}
+                  label={"Email"}
+                  name={"email"}
+                  type={"text"}
+                  control={control}
+                  sx={AuthTextFieldStyle}
+                />
+              </Box>
+            </Slide>
+          )}
+          {continueForm ? (
+            <Slide
+              direction="right"
+              in={continueForm}
+              mountOnEnter
+              unmountOnExit
+            >
+              <Box sx={AuthRegisterStyle}>
+                <BasicTextFields
+                  id={"newPassword"}
+                  label={"New Password"}
+                  name={"password"}
+                  type={"password"}
+                  control={control}
+                  sx={AuthTextFieldStyle}
+                />
+                <BasicTextFields
+                  id={"confirmPassword"}
+                  label={"Confirm Password"}
+                  name={"confirmPassword"}
+                  type={"password"}
+                  control={control}
+                  sx={AuthTextFieldStyle}
+                />
+              </Box>
+            </Slide>
+          ) : undefined}
+          {continueForm ? (
+            <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
+              Submit
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              sx={AuthButtonsStyle}
+              onClick={() => handleContinue()}
+            >
+              Continue
+            </Button>
+          )}
+        </FormControl>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: continueForm ? 'space-between' : 'center',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: continueForm ? "space-between" : "center",
+            alignItems: "center",
           }}
         >
           {continueForm && (
             <Button
               variant="contained"
-              sx={styles.backButton}
+              sx={AuthResgisterBackButtonStyle}
               onClick={() => setContinueForm(false)}
             >
-              <NavigateBeforeIcon sx={{ fontSize: '15px' }} />
+              <NavigateBeforeIcon sx={{ fontSize: "14px" }} />
             </Button>
           )}
           <Typography
             fontSize={15}
             color="#757575"
-            sx={{ display: 'flex', justifyContent: 'center' }}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
-            Already a user?&nbsp;
-            <Link href="#" sx={{ color: '#9575cd' }}>
+            Already a user ?&nbsp;
+            <Link href={LOGIN} sx={{ color: "#9575cd" }}>
               Login
             </Link>
           </Typography>

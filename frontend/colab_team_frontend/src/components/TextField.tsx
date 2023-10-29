@@ -1,18 +1,19 @@
+import React from "react";
+
 import { Controller } from "react-hook-form";
 
 import { TextField } from "@mui/material";
 
+import { BasicTextFieldPropTypes } from "../typings/authTypes";
+
 export default function BasicTextFields({
-  name,
   id,
-  type,
   label,
-  sx,
+  name,
+  type,
   control,
-  register,
-  errors,
-  fieldType,
-}) {
+  sx,
+}: BasicTextFieldPropTypes) {
   return (
     <Controller
       control={control}
