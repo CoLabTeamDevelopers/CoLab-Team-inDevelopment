@@ -5,13 +5,14 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from .models import Profile
 
 
 # View for user login
-def login_user(request):
+def login_user(request: HttpRequest):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -42,7 +43,7 @@ def login_user(request):
 
 
 # View for user registration
-def register_user(request):
+def register_user(request: HttpRequest):
     if request.method == "POST":
         username = request.POST.get("username")
         email = request.POST.get("email")
