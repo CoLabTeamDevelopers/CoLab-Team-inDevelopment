@@ -17,14 +17,14 @@ def login_user(request):
         password = request.POST.get("password")
 
         # Check if the user exists
-        user_obj = User.objects.filter(username=username).first()
-        if user_obj is None:
+        user = User.objects.filter(username=username).first()
+        if user is None:
             messages.success(request, "User not found.")
             return redirect("registration_app:login")
 
         # Check if the user's email is verified
-        profile_obj = Profile.objects.filter(user=user_obj).first()
-        if profile_obj and not profile_obj.is_verified:
+        profile = Profile.objects.filter(user=user).first()
+        if profile and not profile.is_verified:
             messages.success(request, "Your email is not verified. Check your mail")
             return redirect("registration_app:login")
 
@@ -42,7 +42,7 @@ def login_user(request):
 
 
 # View for user registration
-def register_User(request):
+def register_user(request):
     if request.method == "POST":
         username = request.POST.get("username")
         email = request.POST.get("email")
@@ -82,7 +82,7 @@ def register_User(request):
 
 
 # View for user logout
-def logoutUser(request):
+def logout_user(request):
     logout(request)
     return redirect("registration_app:login")
 

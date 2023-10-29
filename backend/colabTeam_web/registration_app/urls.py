@@ -8,8 +8,8 @@ app_name = "registration_app"
 # Define URL patterns for various views in the 'registration_app' app.
 urlpatterns = [
     path("login", views.login_user, name="login"),  # URL for user login
-    path("register", views.register_User, name="register"),  # URL for user registration
-    path("logout", views.logoutUser, name="logout"),  # URL for user logout
+    path("register", views.register_user, name="register"),  # URL for user registration
+    path("logout", views.logout_user, name="logout"),  # URL for user logout
     path(
         "token", views.token_send, name="token"
     ),  # URL for sending tokens (corrected typo)
