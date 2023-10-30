@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useReducer, useRef, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registrationSchema } from "../../schemas/authSchemas";
@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import BasicTextFields from "../../components/TextField";
+import PasswordAdornment from "../../components/authentication/PasswordAdornment";
 
 import {
   AuthBoxStyle,
@@ -29,6 +30,9 @@ import Waves from "../../assets/svg/Wave";
 import { registrationTypes } from "../../typings/authTypes";
 import { LOGIN } from "../../api/authentication/authEndpoints";
 
+import { authReducer } from "../../reducers/authFormReducer";
+import { AuthInitialState } from "../../states/authInitialState";
+
 export default function RegistrationPage() {
   const [continueForm, setContinueForm] = useState(false);
 
@@ -40,6 +44,8 @@ export default function RegistrationPage() {
   const watchField = watch(["username", "email"]);
 
   const formRef = useRef<HTMLFormElement | null>(null);
+
+  const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
   const onSubmit = (data: Record<string, any>) => {
     console.log(data);
@@ -108,6 +114,7 @@ export default function RegistrationPage() {
                   name={"username"}
                   type={"text"}
                   control={control}
+                  inputProps={null}
                   sx={AuthTextFieldStyle}
                 />
                 <BasicTextFields
@@ -116,6 +123,7 @@ export default function RegistrationPage() {
                   name={"email"}
                   type={"text"}
                   control={control}
+                  inputProps={null}
                   sx={AuthTextFieldStyle}
                 />
               </Box>
@@ -133,16 +141,23 @@ export default function RegistrationPage() {
                   id={"newPassword"}
                   label={"New Password"}
                   name={"password"}
-                  type={"password"}
+                  type={state.togglePasswordView ? "text" : "password"}
                   control={control}
+                  inputProps={
+                    <PasswordAdornment
+                      dispatch={dispatch}
+                      togglePasswordView={state.togglePasswordView}
+                    />
+                  }
                   sx={AuthTextFieldStyle}
                 />
                 <BasicTextFields
                   id={"confirmPassword"}
                   label={"Confirm Password"}
                   name={"confirmPassword"}
-                  type={"password"}
+                  type={state.togglePasswordView ? "text" : "password"}
                   control={control}
+                  inputProps={null}
                   sx={AuthTextFieldStyle}
                 />
               </Box>

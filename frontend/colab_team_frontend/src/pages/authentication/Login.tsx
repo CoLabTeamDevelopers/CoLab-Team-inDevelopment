@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useReducer, useRef } from "react";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import BasicTextFields from "../../components/TextField";
+import PasswordAdornment from "../../components/authentication/PasswordAdornment";
 
 import {
   AuthBoxStyle,
@@ -30,7 +31,9 @@ import {
   FORGOT_PASSWORD,
   REGISTER,
 } from "../../api/authentication/authEndpoints";
-import { useNavigate } from "react-router-dom";
+
+import { authReducer } from "../../reducers/authFormReducer";
+import { AuthInitialState } from "../../states/authInitialState";
 
 export default function LoginPage() {
   const { handleSubmit, control, reset } = useForm<loginTypes>({
@@ -39,7 +42,7 @@ export default function LoginPage() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const navigate = useNavigate();
+  const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
   function onSubmit(data: Record<string, any>) {
     console.log(data);
@@ -82,14 +85,21 @@ export default function LoginPage() {
                 name={"email"}
                 type={"email"}
                 control={control}
+                inputProps={null}
                 sx={AuthTextFieldStyle}
               />
               <BasicTextFields
                 id={"password"}
                 label={"Password"}
                 name={"password"}
-                type={"password"}
+                type={state.togglePasswordView ? "text" : "password"}
                 control={control}
+                inputProps={
+                  <PasswordAdornment
+                    dispatch={dispatch}
+                    togglePasswordView={state.togglePasswordView}
+                  />
+                }
                 sx={AuthTextFieldStyle}
               />
             </Box>

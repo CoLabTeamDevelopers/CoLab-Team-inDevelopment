@@ -2,7 +2,7 @@ import React from "react";
 
 import { Controller } from "react-hook-form";
 
-import { TextField } from "@mui/material";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
 
 import { BasicTextFieldPropTypes } from "../typings/authTypes";
 
@@ -13,6 +13,7 @@ export default function BasicTextFields({
   type,
   control,
   sx,
+  inputProps,
 }: BasicTextFieldPropTypes) {
   return (
     <Controller
@@ -20,6 +21,9 @@ export default function BasicTextFields({
       name={name}
       render={({ field: { onChange }, fieldState: { error } }) => (
         <TextField
+          InputProps={{
+            endAdornment: inputProps || "",
+          }}
           autoComplete="true"
           sx={sx || ""}
           id={id || ""}

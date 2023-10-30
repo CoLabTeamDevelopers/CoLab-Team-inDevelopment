@@ -25,5 +25,16 @@ export interface BasicTextFieldPropTypes {
   name: string;
   type: string;
   control: any;
+  inputProps: any;
   sx: any;
+}
+
+export type ReducerAppStateTypes = {
+  continueRegistrationForm: boolean;
+  togglePasswordView: boolean;
+};
+
+export interface ReducerAppActionTypes {
+  type: string;
+  payload: boolean | any;
 }

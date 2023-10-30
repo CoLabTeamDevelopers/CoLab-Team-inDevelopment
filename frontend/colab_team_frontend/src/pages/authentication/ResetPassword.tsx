@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useReducer, useRef } from "react";
 
 import { resetPasswordSchema } from "../../schemas/authSchemas";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,13 +11,18 @@ import {
   AuthButtonsStyle,
   AuthRegisterStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
+import BasicTextFields from "../../components/TextField";
+import PasswordAdornment from "../../components/authentication/PasswordAdornment";
+
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 import Waves from "../../assets/svg/Wave";
 
 import { Box, Button, Slide, FormControl, Typography } from "@mui/material";
-import BasicTextFields from "../../components/TextField";
 
 import { resetPasswordTypes } from "../../typings/authTypes";
+
+import { authReducer } from "../../reducers/authFormReducer";
+import { AuthInitialState } from "../../states/authInitialState";
 
 export default function ResetPasswordPage() {
   const { handleSubmit, control, reset } = useForm<resetPasswordTypes>({
@@ -25,6 +30,8 @@ export default function ResetPasswordPage() {
   });
 
   const formRef = useRef<HTMLFormElement | null>(null);
+
+  const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
   function onSubmit(data: Record<string, any>) {
     console.log(data);
@@ -65,16 +72,23 @@ export default function ResetPasswordPage() {
                 id={"newPassword"}
                 label={"New Password"}
                 name={"password"}
-                type="password"
+                type={state.togglePasswordView ? "text" : "password"}
                 control={control}
+                inputProps={
+                  <PasswordAdornment
+                    dispatch={dispatch}
+                    togglePasswordView={state.togglePasswordView}
+                  />
+                }
                 sx={AuthTextFieldStyle}
               />
               <BasicTextFields
                 id={"confirmNewPassword"}
                 label={"Confirm New Password"}
                 name={"confirmPassword"}
-                type="password"
+                type={state.togglePasswordView ? "text" : "password"}
                 control={control}
+                inputProps={null}
                 sx={AuthTextFieldStyle}
               />
             </Box>
