@@ -1,9 +1,8 @@
-import CoLab from "../../assets/images/CoLab - Logo Light.png";
+import React, { useRef } from "react";
 
-import BasicButtons from "../../components/Button";
-import BasicTextFields from "../../components/TextField";
-import SimpleContainer from "../../components/authentication/Container";
-import { Box, Typography, Slide, FormControl } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { forgotPasswordSchema } from "../../schemas/authSchemas";
 
 import {
   AuthBoxStyle,
@@ -11,18 +10,26 @@ import {
   AuthTextFieldStyle,
   AuthButtonsStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
+import CoLab from "../../assets/images/CoLab - Logo Light.png";
+import Waves from "../../assets/svg/Wave";
 
-import validationSchema from "../../utils/FormValidation";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import BasicTextFields from "../../components/TextField";
+import { Box, Typography, Slide, FormControl, Button } from "@mui/material";
 
-export default function ForgotPassword() {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(validationSchema) });
+import { forgotPasswordTypes } from "../../typings/authTypes";
+
+export default function ForgotPasswordPage() {
+  const { handleSubmit, control, reset } = useForm<forgotPasswordTypes>({
+    resolver: yupResolver(forgotPasswordSchema),
+  });
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  function onSubmit(data: Record<string, any>) {
+    console.log(data);
+    formRef.current?.reset();
+    reset();
+  }
 
   return (
     <Box sx={AuthBoxStyle}>
@@ -36,7 +43,7 @@ export default function ForgotPassword() {
       >
         Forgot Password
       </Typography>
-      <SimpleContainer />
+      <Waves />
       <Box
         sx={{
           display: "flex",
@@ -47,8 +54,10 @@ export default function ForgotPassword() {
       >
         <FormControl
           sx={{ gap: "10px" }}
+          id="registrationForm"
           component="form"
-          onSubmit={handleSubmit(() => console.log("Click"))}
+          ref={formRef}
+          onSubmit={handleSubmit((data) => onSubmit(data))}
         >
           <Slide direction="right" in={true} mountOnEnter unmountOnExit>
             <Box>
@@ -58,21 +67,13 @@ export default function ForgotPassword() {
                 name={"email"}
                 type={"text"}
                 control={control}
-                register={register}
-                errors={errors.email}
                 sx={AuthTextFieldStyle}
               />
             </Box>
           </Slide>
-          <BasicButtons
-            dispatchFlag={false}
-            type={"submit"}
-            dispatch={null}
-            dispatchState={null}
-            dispatchType={null}
-            label={"Send Link"}
-            sx={AuthButtonsStyle}
-          />
+          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
+            Send Link
+          </Button>
         </FormControl>
       </Box>
     </Box>

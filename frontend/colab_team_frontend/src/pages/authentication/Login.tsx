@@ -1,75 +1,130 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Link, Slide, TextField, Typography } from '@mui/material';
-import { useForm } from 'react-hook-form';
+import React, { useReducer, useRef } from "react";
 
-import Waves from '@/assets/svg/Waves';
-import Logo from '@/components/Logo';
-import { loginSchema } from '@/schemas/auth';
-import styles from '@/styles/auth';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../schemas/authSchemas";
+
+import {
+  Box,
+  Button,
+  Link,
+  Slide,
+  FormControl,
+  Typography,
+} from "@mui/material";
+import BasicTextFields from "../../components/TextField";
+import PasswordAdornment from "../../components/authentication/PasswordAdornment";
+
+import {
+  AuthBoxStyle,
+  AuthLogoStyle,
+  AuthButtonsStyle,
+  AuthTextFieldStyle,
+  AuthRegisterStyle,
+} from "../../components/authentication/customStyles/AuthStyles";
+import Waves from "../../assets/svg/Wave";
+import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
+
+import { loginTypes } from "../../typings/authTypes";
+
+import {
+  FORGOT_PASSWORD,
+  REGISTER,
+} from "../../api/authentication/authEndpoints";
+
+import { authReducer } from "../../reducers/authFormReducer";
+import { AuthInitialState } from "../../states/authInitialState";
 
 export default function LoginPage() {
-  const { register, handleSubmit } = useForm({ resolver: yupResolver(loginSchema) });
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const { handleSubmit, control, reset } = useForm<loginTypes>({
+    resolver: yupResolver(loginSchema),
   });
 
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const [state, dispatch] = useReducer(authReducer, AuthInitialState);
+
+  function onSubmit(data: Record<string, any>) {
+    console.log(data);
+    formRef.current?.reset();
+    reset();
+  }
+
   return (
-    <Box sx={styles.box}>
-      <Logo />
-      <Typography fontSize={25} sx={{ textAlign: 'center', color: '#673ab7' }} fontFamily="Roboto">
+    <Box sx={AuthBoxStyle}>
+      <Box sx={AuthLogoStyle}>
+        <img src={CoLabLightLogo} alt="app_img" width={200} height={200} />
+      </Box>
+      <Typography
+        fontSize={25}
+        sx={{ textAlign: "center", color: "#673ab7" }}
+        fontFamily="Roboto"
+      >
         Login
       </Typography>
       <Waves />
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-          marginTop: '10px',
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          marginTop: "10px",
         }}
-        component="form"
-        onSubmit={onSubmit}
       >
-        <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-          <Box sx={styles.form}>
-            <TextField
-              autoComplete="true"
-              variant="outlined"
-              type="email"
-              label="Email"
-              sx={styles.textField}
-              {...register('email')}
-            />
-            <TextField
-              autoComplete="true"
-              variant="outlined"
-              type="password"
-              label="Password"
-              sx={styles.textField}
-              {...register('password')}
-            />
-          </Box>
-        </Slide>
-        <Button type="submit" variant="contained" sx={styles.button}>
-          Login
-        </Button>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <FormControl
+          sx={{ gap: "10px" }}
+          component="form"
+          ref={formRef}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Slide direction="right" in={true} mountOnEnter unmountOnExit>
+            <Box sx={AuthRegisterStyle}>
+              <BasicTextFields
+                id={"email"}
+                label={"Email"}
+                name={"email"}
+                type={"email"}
+                control={control}
+                inputProps={null}
+                sx={AuthTextFieldStyle}
+              />
+              <BasicTextFields
+                id={"password"}
+                label={"Password"}
+                name={"password"}
+                type={state.togglePasswordView ? "text" : "password"}
+                control={control}
+                inputProps={
+                  <PasswordAdornment
+                    dispatch={dispatch}
+                    togglePasswordView={state.togglePasswordView}
+                  />
+                }
+                sx={AuthTextFieldStyle}
+              />
+            </Box>
+          </Slide>
+          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
+            Login
+          </Button>
+        </FormControl>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
             fontSize={15}
             color="#757575"
-            sx={{ display: 'flex', justifyContent: 'center' }}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
-            <Link href="#" sx={{ color: '#9575cd' }}>
+            <Link href={FORGOT_PASSWORD} sx={{ color: "#9575cd" }}>
               &nbsp;Forgot Password ?
             </Link>
           </Typography>
           <Typography
             fontSize={15}
             color="#757575"
-            sx={{ display: 'flex', justifyContent: 'center' }}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
             Not a user ?
-            <Link href="#" sx={{ color: '#9575cd' }}>
+            <Link href={REGISTER} sx={{ color: "#9575cd" }}>
               &nbsp;Signup
             </Link>
           </Typography>
