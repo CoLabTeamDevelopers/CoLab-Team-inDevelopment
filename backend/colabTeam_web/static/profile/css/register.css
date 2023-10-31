@@ -1,0 +1,85 @@
+.main-container {
+    margin-top: 5em;
+    margin-bottom: 0;
+}
+
+.container {
+    width: 70%;
+    flex-direction: column;
+    margin: 0em auto;
+    border-radius: 2em;
+    border: solid rgba(0, 0, 0, 0.15) .1px;
+}
+
+.user-content-container {
+    width: 70%;
+}
+
+.signup-heading {
+    margin-top: 1em;
+}
+
+.signup-button {
+    margin-top: 1.5em;
+    width: 100%;
+    padding: .5em;
+    background-color: #FFD13A;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.login-link {
+    margin: 1em 0;
+}
+
+.login-link a {
+    text-decoration: none;
+    color: blue;
+    font-weight: 600;
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        margin: 0 auto;
+        width: 90%;
+        border: none;
+    }
+
+    .signup-heading {
+        margin: 1em auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-container {
+        padding: 2em 0em;
+
+    }
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    .user-profile-form-container {
+        margin: 2em auto;
+    }
+
+    .main-container {
+        margin: 10% auto;
+        width: 90%;
+        padding-bottom: 0;
+    }
+
+    .container {
+        margin: 0 auto;
+        width: 90%;
+        border: none;
+    }
+
+    .signup-heading {
+        margin: 1em auto;
+    }
+  }

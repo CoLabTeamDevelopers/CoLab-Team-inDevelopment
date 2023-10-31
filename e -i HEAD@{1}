@@ -1,0 +1,316 @@
+[33mcommit c3815c75d784c88cddef96527a0c289a656b022b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: AlphaDarkmoon <darkmode.alpha@gmail.com>
+Date:   Tue Oct 31 16:02:35 2023 +0530
+
+    Test@ --unwanted
+
+[33mcommit 3d09093ccc909078a2389140d796dedbe7187f28[m
+Author: Madhukar-Palakaveeti <115029172+Madhukar-Palakaveeti@users.noreply.github.com>
+Date:   Sat Oct 28 16:19:50 2023 +0530
+
+    PR for adding new models (#16)
+    
+    * Added database models
+    
+    * Added new models
+
+[33mcommit c57bd3a3d767e5c51ca9d3b795da988fc47417cc[m
+Author: Siddhant Totade <siddhanttotade.1994@gmail.com>
+Date:   Sat Oct 28 16:19:36 2023 +0530
+
+    Authentication Validation  (#15)
+    
+    * intial commit : docs : modified Readme.md
+    
+    * created : frontend directory
+    
+    * created : login page
+    
+    * Update README.md
+    
+    modified : Readme.md
+    
+    * docs : Readme.md
+    
+    * docs : Readme.md
+    
+    * deleted : vite deps
+    
+    * Registration Page Done
+    
+    * modified : pages
+    
+    * created auth pages
+    
+    * modified : directory sturcture
+    
+    * chore : directory
+    
+    * docs : Readme.md
+    
+    * bug : form validation
+    
+    * bug : form  validation
+    
+    * bug : form validation
+    
+    * fix : form validation
+    
+    * refactor : Login.jsx and Button.jsx
+    
+    * chore : deleted dependencies
+    
+    * bug : Register.jsx
+    
+    * add : form validation
+    
+    * bug : registration form validation
+    
+    * fix : Registration form
+    
+    * test : guardian
+
+[33mcommit 577109552105cce303c9e64ac33ee19d3893b66f[m
+Author: Mugdha Arunim Ahmed <mugdhaarunimahmed2017@gmail.com>
+Date:   Sat Oct 28 16:49:17 2023 +0600
+
+    chore: move form schemas into separate file (#14)
+    
+    Added typescript
+
+[33mcommit c7b6e90c04ad0d20cefc62a546d46ab0561fc50c[m
+Author: Siddhant Totade <siddhanttotade.1994@gmail.com>
+Date:   Fri Oct 27 17:29:55 2023 +0530
+
+    Add : Form Validation (#13)
+    
+    * intial commit : docs : modified Readme.md
+    
+    * created : frontend directory
+    
+    * created : login page
+    
+    * Update README.md
+    
+    modified : Readme.md
+    
+    * docs : Readme.md
+    
+    * docs : Readme.md
+    
+    * deleted : vite deps
+    
+    * Registration Page Done
+    
+    * modified : pages
+    
+    * created auth pages
+    
+    * modified : directory sturcture
+    
+    * chore : directory
+    
+    * docs : Readme.md
+    
+    * bug : form validation
+    
+    * bug : form  validation
+    
+    * bug : form validation
+    
+    * fix : form validation
+    
+    * refactor : Login.jsx and Button.jsx
+    
+    * chore : deleted dependencies
+    
+    * bug : Register.jsx
+    
+    * add : form validation
+
+[33mcommit bb3f37a4af35ca4594c9e09dd6b98357ccacfa49[m
+Author: RekkusuYash <128054193+AlphaDarkmoon@users.noreply.github.com>
+Date:   Sun Oct 22 17:28:33 2023 +0530
+
+    Login and Register Complete. (#12)
+    
+    * Clean Folders
+    
+    * Added Register and Home app
+    
+    * Added User Login and Register function 🫐
+    
+    * Re-write AlphaDarkmoon Branch
+    
+    * Added Forgot / Reset password with email
+    
+    * README.md updates
+
+[33mcommit 6032985c9957e25599bc355736e61954c470cb8c[m
+Author: Mugdha Arunim Ahmed <mugdhaarunimahmed2017@gmail.com>
+Date:   Sat Oct 21 10:11:30 2023 +0600
+
+    Changes to backend (#11)
+    
+    * chore: add gitignore
+    
+    Signed-off-by: Mugdha Arunim Ahmed <mugdhaarunimahmed2017@gmail.com>
+    
+    * chore(backend): secure django settings with environment variables
+    
+    Signed-off-by: Mugdha Arunim Ahmed <mugdhaarunimahmed2017@gmail.com>
+    
+    ---------
+    
+    Signed-off-by: Mugdha Arunim Ahmed <mugdhaarunimahmed2017@gmail.com>
+
+[33mcommit 5b7f24ad9b3ff94b8e09de0d2afc1362cd2d05c7[m
+Author: Siddhant Totade <siddhanttotade.1994@gmail.com>
+Date:   Sat Oct 21 09:37:42 2023 +0530
+
+    Chore : Directory Structure Frontend (#9)
+    
+    * intial commit : docs : modified Readme.md
+    
+    * created : frontend directory
+    
+    * created : login page
+    
+    * Update README.md
+    
+    modified : Readme.md
+    
+    * docs : Readme.md
+    
+    * docs : Readme.md
+    
+    * deleted : vite deps
+    
+    * Registration Page Done
+    
+    * modified : pages
+    
+    * created auth pages
+    
+    * modified : directory sturcture
+    
+    * chore : directory
+    
+    * docs : Readme.md
+    
+    * bug : form validation
+
+[33mcommit bd9ee96446c63a3d4b21079ceac79d01f81062f1[m
+Author: RekkusuYash <128054193+AlphaDarkmoon@users.noreply.github.com>
+Date:   Thu Oct 19 16:42:27 2023 +0530
+
+    Added Login and Register function with mail verification. (#8)
+    
+    * Clean Folders
+    
+    * Added Register and Home app
+    
+    * Added User Login and Register function 🫐
+    
+    * Secured email & Password
+
+[33mcommit cf90e21e527eb1cee13b077e89c07978b69c50cd[m
+Author: Siddhant Totade <siddhanttotade.1994@gmail.com>
+Date:   Wed Oct 18 15:36:36 2023 +0530
+
+    Login Page : Completed (#6)
+    
+    * intial commit : docs : modified Readme.md
+    
+    * created : frontend directory
+    
+    * created : login page
+    
+    * Update README.md
+    
+    modified : Readme.md
+    
+    * docs : Readme.md
+    
+    * docs : Readme.md
+    
+    * deleted : vite deps
+
+[33mcommit 4a71be0bfcd5ad4f5a9421830c5af24674ed67d8[m
+Author: RekkusuYash <128054193+AlphaDarkmoon@users.noreply.github.com>
+Date:   Tue Oct 17 16:54:17 2023 +0530
+
+    Added Django project Folder (#4)
+    
+    * Updates in README.md 🍒
+    
+    * Empty .md file(Should contain details for the project's figma design)
+    
+    * Update UI.md file
+    
+    This is the initial contribution to the UI of the Colab Project. This contains screenshots and links to the project's figma designs.
+    
+    * added images folder to store screenshots for the UI design
+    
+    * images for markdown
+    
+    * Move UI.md to design folder
+    
+    * Move UI.md to design folder
+    
+    * Update UI.md file
+    
+    Added descriptive images to the UI.md markdown.
+    
+    * Remove file from root - UI.md
+    
+    * Update UI.md
+    
+    Error fix on images that couldn't display.
+    
+    * Updates in README.md and Added Django project 🫐
+    
+    ---------
+    
+    Co-authored-by: Lawi Kiprotich <fleeklawi@gmail.com>
+    Co-authored-by: Lawi Kiprotich <91130301+Kiprotich-Code@users.noreply.github.com>
+
+[33mcommit 41618f9c4bb7ef51844835174000205597c1e4dd[m
+Author: Mugdha Arunim Ahmed <mugdhaarunimahmed2017@gmail.com>
+Date:   Tue Oct 17 16:28:51 2023 +0600
+
+    add name to contributors in `README.md` (#3)
+
+[33mcommit 5469e1bc9dab1b728b8d530fbccc319aef3a761c[m
+Author: Siddhant Totade <siddhanttotade.1994@gmail.com>
+Date:   Tue Oct 17 06:58:00 2023 +0530
+
+    intial commit : docs : modified Readme.md (#2)
+    
+    Done 👍
+
+[33mcommit d81d555fd0e9cd2f96b1b3ba79541038ebd2e81a[m
+Author: RekkusuYash <128054193+AlphaDarkmoon@users.noreply.github.com>
+Date:   Mon Oct 16 13:06:41 2023 +0530
+
+    Updates in README.md 🍒 (#1)
+    
+    Accepted
+
+[33mcommit c2d9e95b9c7f759588b8193294a11b57ab65e9e9[m
+Author: AlphaDarkmoon <darkmode.alpha@gmail.com>
+Date:   Mon Oct 16 09:55:06 2023 +0530
+
+    Testing 1#
+
+[33mcommit 97ee102e6d104d78ccd648cb399058320892cf94[m
+Author: AlphaDarkmoon <darkmode.alpha@gmail.com>
+Date:   Mon Oct 16 09:50:55 2023 +0530
+
+    added .gitignore
+
+[33mcommit d1f7c59fb50b1e4723904e626fe7f2be900decd8[m
+Author: AlphaDarkmoon <darkmode.alpha@gmail.com>
+Date:   Mon Oct 16 09:38:10 2023 +0530
+
+    Added README.md 🫐

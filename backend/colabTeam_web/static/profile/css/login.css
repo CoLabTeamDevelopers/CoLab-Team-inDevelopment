@@ -1,0 +1,53 @@
+.main-container {
+    width: 30%;
+}
+
+.container {
+    width: 90%;
+    margin: 1em auto;
+    border: none;
+}
+
+@media only screen and (max-width: 1200px) {
+
+    .signup-heading {
+        margin: 1em auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-container {
+        width: 60%;
+        margin: 5em auto;
+    }
+    
+    .container {
+        width: 90%;
+        margin: 1em auto;
+        border: none;
+    }
+    
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    .user-profile-form-container {
+        margin: 2em auto;
+    }
+
+    .main-container {
+        margin: 10% auto;
+        width: 90%;
+        padding-bottom: 0;
+    }
+
+    .container {
+        margin: 0 auto;
+        width: 90%;
+        border: none;
+    }
+
+    .signup-heading {
+        margin: 1em auto;
+    }
+  }
