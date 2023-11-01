@@ -1,8 +1,6 @@
-import React from "react";
-
 import { Controller } from "react-hook-form";
 
-import { TextField, InputAdornment, IconButton } from "@mui/material";
+import { TextField } from "@mui/material";
 
 import { BasicTextFieldPropTypes } from "../typings/authTypes";
 

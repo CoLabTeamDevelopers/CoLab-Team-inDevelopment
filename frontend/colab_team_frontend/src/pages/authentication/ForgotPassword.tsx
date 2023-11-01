@@ -68,6 +68,7 @@ export default function ForgotPasswordPage() {
                 type={"text"}
                 control={control}
                 sx={AuthTextFieldStyle}
+                inputProps={undefined}
               />
             </Box>
           </Slide>

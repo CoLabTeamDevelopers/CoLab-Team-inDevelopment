@@ -27,11 +27,6 @@ import {
 
 import { loginTypes } from "../../typings/authTypes";
 
-import {
-  FORGOT_PASSWORD,
-  REGISTER,
-} from "../../api/authentication/authEndpoints";
-
 import { authReducer } from "../../reducers/authFormReducer";
 import { AuthInitialState } from "../../states/authInitialState";
 
@@ -114,7 +109,7 @@ export default function LoginPage() {
             color="#757575"
             sx={{ display: "flex", justifyContent: "center" }}
           >
-            <Link href={FORGOT_PASSWORD} sx={{ color: "#9575cd" }}>
+            <Link href="/forgot-password" sx={{ color: "#9575cd" }}>
               &nbsp;Forgot Password ?
             </Link>
           </Typography>

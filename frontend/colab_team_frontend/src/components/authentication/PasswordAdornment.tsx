@@ -1,10 +1,14 @@
-import React from "react";
-
-import { InputAdornment, IconButton } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { IconButton, InputAdornment } from "@mui/material";
 
-export default function PasswordAdornment({ dispatch, togglePasswordView }) {
+export default function PasswordAdornment({
+  dispatch,
+  togglePasswordView,
+}: {
+  dispatch: any;
+  togglePasswordView: boolean;
+}) {
   return (
     <InputAdornment position="end">
       <IconButton onClick={() => dispatch({ type: "TOGGLE_PASSWORD_VIEW" })}>
