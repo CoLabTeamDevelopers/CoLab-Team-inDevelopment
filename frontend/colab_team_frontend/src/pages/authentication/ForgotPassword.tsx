@@ -1,20 +1,20 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { forgotPasswordSchema } from "../../schemas/authSchemas";
 
-import {
-  AuthBoxStyle,
-  AuthLogoStyle,
-  AuthTextFieldStyle,
-  AuthButtonsStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 import Waves from "../../assets/svg/Wave";
+import {
+  AuthBoxStyle,
+  AuthButtonsStyle,
+  AuthLogoStyle,
+  AuthTextFieldStyle,
+} from "../../components/authentication/customStyles/AuthStyles";
 
+import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
 import BasicTextFields from "../../components/TextField";
-import { Box, Typography, Slide, FormControl, Button } from "@mui/material";
 
 import { forgotPasswordTypes } from "../../typings/authTypes";
 

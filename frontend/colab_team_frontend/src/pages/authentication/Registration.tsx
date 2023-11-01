@@ -1,8 +1,8 @@
-import React, { useReducer, useRef, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registrationSchema } from "../../schemas/authSchemas";
 import { useForm } from "react-hook-form";
+import { registrationSchema } from "../../schemas/authSchemas";
 
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import {
@@ -16,19 +16,18 @@ import {
 import BasicTextFields from "../../components/TextField";
 import PasswordAdornment from "../../components/authentication/PasswordAdornment";
 
-import {
-  AuthBoxStyle,
-  AuthLogoStyle,
-  AuthTextFieldStyle,
-  AuthButtonsStyle,
-  AuthRegisterStyle,
-  AuthResgisterBackButtonStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
 import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
 import Waves from "../../assets/svg/Wave";
+import {
+  AuthBoxStyle,
+  AuthButtonsStyle,
+  AuthLogoStyle,
+  AuthRegisterStyle,
+  AuthResgisterBackButtonStyle,
+  AuthTextFieldStyle,
+} from "../../components/authentication/customStyles/AuthStyles";
 
 import { registrationTypes } from "../../typings/authTypes";
-import { LOGIN } from "../../api/authentication/authEndpoints";
 
 import { authReducer } from "../../reducers/authFormReducer";
 import { AuthInitialState } from "../../states/authInitialState";
@@ -199,7 +198,7 @@ export default function RegistrationPage() {
             sx={{ display: "flex", justifyContent: "center" }}
           >
             Already a user ?&nbsp;
-            <Link href={LOGIN} sx={{ color: "#9575cd" }}>
+            <Link href="/login" sx={{ color: "#9575cd" }}>
               Login
             </Link>
           </Typography>

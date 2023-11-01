@@ -1,23 +1,23 @@
-import React, { useReducer, useRef } from "react";
+import { useReducer, useRef } from "react";
 
-import { resetPasswordSchema } from "../../schemas/authSchemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { resetPasswordSchema } from "../../schemas/authSchemas";
 
-import {
-  AuthBoxStyle,
-  AuthLogoStyle,
-  AuthTextFieldStyle,
-  AuthButtonsStyle,
-  AuthRegisterStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
 import BasicTextFields from "../../components/TextField";
 import PasswordAdornment from "../../components/authentication/PasswordAdornment";
+import {
+  AuthBoxStyle,
+  AuthButtonsStyle,
+  AuthLogoStyle,
+  AuthRegisterStyle,
+  AuthTextFieldStyle,
+} from "../../components/authentication/customStyles/AuthStyles";
 
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 import Waves from "../../assets/svg/Wave";
 
-import { Box, Button, Slide, FormControl, Typography } from "@mui/material";
+import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
 
 import { resetPasswordTypes } from "../../typings/authTypes";
 

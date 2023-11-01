@@ -1,29 +1,29 @@
-import React, { useReducer, useRef } from "react";
+import { useReducer, useRef } from "react";
 
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { loginSchema } from "../../schemas/authSchemas";
 
 import {
   Box,
   Button,
+  FormControl,
   Link,
   Slide,
-  FormControl,
   Typography,
 } from "@mui/material";
 import BasicTextFields from "../../components/TextField";
 import PasswordAdornment from "../../components/authentication/PasswordAdornment";
 
+import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
+import Waves from "../../assets/svg/Wave";
 import {
   AuthBoxStyle,
-  AuthLogoStyle,
   AuthButtonsStyle,
-  AuthTextFieldStyle,
+  AuthLogoStyle,
   AuthRegisterStyle,
+  AuthTextFieldStyle,
 } from "../../components/authentication/customStyles/AuthStyles";
-import Waves from "../../assets/svg/Wave";
-import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
 
 import { loginTypes } from "../../typings/authTypes";
 
@@ -124,7 +124,7 @@ export default function LoginPage() {
             sx={{ display: "flex", justifyContent: "center" }}
           >
             Not a user ?
-            <Link href={REGISTER} sx={{ color: "#9575cd" }}>
+            <Link href="/register" sx={{ color: "#9575cd" }}>
               &nbsp;Signup
             </Link>
           </Typography>
