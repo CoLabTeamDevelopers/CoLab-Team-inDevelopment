@@ -85,7 +85,7 @@ export default function LoginPage() {
                 name={"password"}
                 type={state.togglePasswordView ? "text" : "password"}
                 control={control}
-                inputProps={
+                endAdornment={
                   <PasswordAdornment
                     dispatch={dispatch}
                     togglePasswordView={state.togglePasswordView}

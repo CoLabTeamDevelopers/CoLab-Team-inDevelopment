@@ -1,16 +1,18 @@
-import { TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-import { BasicTextFieldPropertyTypes } from "@/typings/authTypes";
+export type BasicTextFieldPropertyTypes = TextFieldProps & {
+  name: string;
+  control: any;
+  endAdornment?: React.ReactNode;
+};
 
 export default function BasicTextFields({
-  id,
-  label,
   name,
-  type,
+  type = "text",
   control,
-  sx,
-  inputProps,
+  endAdornment,
+  ...otherProps
 }: BasicTextFieldPropertyTypes) {
   return (
     <Controller
@@ -18,19 +20,14 @@ export default function BasicTextFields({
       name={name}
       render={({ field: { onChange }, fieldState: { error } }) => (
         <TextField
-          InputProps={{
-            endAdornment: inputProps || "",
-          }}
           autoComplete="true"
-          sx={sx || ""}
-          id={id || ""}
-          name={name || ""}
-          label={label || ""}
-          type={type || "text"}
+          type={type}
           onChange={onChange}
           error={!!error}
           helperText={error ? error.message : undefined}
           variant="outlined"
+          InputProps={{ endAdornment }}
+          {...otherProps}
         />
       )}
     />

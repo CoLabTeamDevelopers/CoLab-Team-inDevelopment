@@ -1,16 +1,21 @@
-import { Button, Stack } from "@mui/material";
+import { Button, ButtonProps, Stack } from "@mui/material";
 
-import { BasicButtonType } from "@/typings/authTypes";
+export interface BasicButtonType extends ButtonProps {
+  label: string | React.ReactNode;
+  dispatch?: any;
+  dispatchType?: any;
+  dispatchState?: any;
+  dispatchFlag?: boolean;
+}
 
 export default function BasicButtons({
-  id,
   label,
   sx,
-  type,
   dispatch,
   dispatchType,
   dispatchState,
   dispatchFlag,
+  ...otherProps
 }: BasicButtonType) {
   return (
     <Stack spacing={2} direction="row">
@@ -23,10 +28,9 @@ export default function BasicButtons({
             });
           }
         }}
-        id={id || ""}
-        type={type || ""}
         variant="contained"
         sx={sx}
+        {...otherProps}
       >
         {label}
       </Button>
