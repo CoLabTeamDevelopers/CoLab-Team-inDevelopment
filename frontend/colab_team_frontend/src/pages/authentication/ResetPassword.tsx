@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
+import { Box, FormControl, Slide, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -7,11 +7,11 @@ import CoLab from "@/assets/images/CoLab - Logo Light.png";
 import Waves from "@/assets/svg/Wave";
 import {
   AuthBoxStyle,
-  AuthButtonsStyle,
   AuthLogoStyle,
-  AuthRegisterStyle,
 } from "@/components/authentication/customStyles/AuthStyles";
+import ActionButton from "@/components/form/ActionButton";
 import PasswordField from "@/components/form/PasswordField";
+import TextFieldContainer from "@/components/form/TextFieldContainer";
 import { resetPasswordSchema } from "@/schemas/authSchemas";
 import { resetPasswordTypes } from "@/typings/authTypes";
 
@@ -51,24 +51,21 @@ export default function ResetPasswordPage() {
       >
         <FormControl
           sx={{ gap: "10px" }}
-          id="registrationForm"
           component="form"
           ref={formRef}
           onSubmit={handleSubmit((data) => onSubmit(data))}
         >
-          <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-            <Box sx={AuthRegisterStyle}>
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
               <PasswordField control={control} label="New Password" />
               <PasswordField
                 control={control}
                 name="confirmPassword"
                 label="Confirm New Password"
               />
-            </Box>
+            </TextFieldContainer>
           </Slide>
-          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
-            Reset Password
-          </Button>
+          <ActionButton label="Reset Password" />
         </FormControl>
       </Box>
     </Box>

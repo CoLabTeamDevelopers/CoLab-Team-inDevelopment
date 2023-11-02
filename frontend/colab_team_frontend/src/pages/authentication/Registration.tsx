@@ -15,14 +15,14 @@ import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
 import Waves from "@/assets/svg/Wave";
 import {
   AuthBoxStyle,
-  AuthButtonsStyle,
   AuthLogoStyle,
   AuthRegisterBackButtonStyle,
-  AuthRegisterStyle,
 } from "@/components/authentication/customStyles/AuthStyles";
+import ActionButton from "@/components/form/ActionButton";
 import BasicTextField from "@/components/form/BaseTextField";
 import EmailField from "@/components/form/EmailField";
 import PasswordField from "@/components/form/PasswordField";
+import TextFieldContainer from "@/components/form/TextFieldContainer";
 import { registrationSchema } from "@/schemas/authSchemas";
 import { registrationTypes } from "@/typings/authTypes";
 
@@ -93,36 +93,33 @@ export default function RegistrationPage() {
         >
           {continueForm ? undefined : (
             <Slide direction="right" in mountOnEnter unmountOnExit>
-              <Box sx={AuthRegisterStyle}>
+              <TextFieldContainer>
                 <BasicTextField
                   name="username"
                   control={control}
                   fieldProps={{ label: "Username" }}
                 />
                 <EmailField control={control} />
-              </Box>
+              </TextFieldContainer>
             </Slide>
           )}
           {continueForm ? (
             <Slide direction="right" in mountOnEnter unmountOnExit>
-              <Box sx={AuthRegisterStyle}>
+              <TextFieldContainer>
                 <PasswordField control={control} />
                 <PasswordField
                   control={control}
                   label="Confirm Password"
                   name="confirmPassword"
                 />
-              </Box>
+              </TextFieldContainer>
             </Slide>
           ) : undefined}
-          <Button
-            type="submit"
-            variant="contained"
-            sx={AuthButtonsStyle}
+          <ActionButton
+            type={continueForm ? "submit" : "button"}
             onClick={continueForm ? undefined : handleContinue}
-          >
-            {continueForm ? "Submit" : "Continue"}
-          </Button>
+            label={continueForm ? "Submit" : "Continue"}
+          />
         </FormControl>
         <Box
           sx={{

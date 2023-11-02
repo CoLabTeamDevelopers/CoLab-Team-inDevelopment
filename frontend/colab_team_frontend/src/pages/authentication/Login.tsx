@@ -1,12 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Box,
-  Button,
-  FormControl,
-  Link,
-  Slide,
-  Typography,
-} from "@mui/material";
+import { Box, FormControl, Link, Slide, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -16,10 +9,11 @@ import {
   AuthBoxStyle,
   AuthButtonsStyle,
   AuthLogoStyle,
-  AuthRegisterStyle,
 } from "@/components/authentication/customStyles/AuthStyles";
+import ActionButton from "@/components/form/ActionButton";
 import EmailField from "@/components/form/EmailField";
 import PasswordField from "@/components/form/PasswordField";
+import TextFieldContainer from "@/components/form/TextFieldContainer";
 import { loginSchema } from "@/schemas/authSchemas";
 import { loginTypes } from "@/typings/authTypes";
 
@@ -59,20 +53,22 @@ export default function LoginPage() {
         }}
       >
         <FormControl
-          sx={{ gap: "10px" }}
           component="form"
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-            <Box sx={AuthRegisterStyle}>
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
               <EmailField control={control} />
               <PasswordField control={control} />
-            </Box>
+            </TextFieldContainer>
           </Slide>
-          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
-            Login
-          </Button>
+          <ActionButton
+            type="submit"
+            variant="contained"
+            sx={AuthButtonsStyle}
+            label="Login"
+          />
         </FormControl>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
