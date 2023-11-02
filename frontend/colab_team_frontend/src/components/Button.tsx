@@ -1,5 +1,6 @@
+import { Button, Stack } from "@mui/material";
+
 import { BasicButtonType } from "@/typings/authTypes";
-import { Stack, Button } from "@mui/material";
 
 export default function BasicButtons({
   id,

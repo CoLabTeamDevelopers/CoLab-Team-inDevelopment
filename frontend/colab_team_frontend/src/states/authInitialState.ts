@@ -1,4 +1,4 @@
-import { ReducerAppStateTypes } from "../typings/authTypes";
+import { ReducerAppStateTypes } from "@/typings/authTypes";
 
 export const AuthInitialState: ReducerAppStateTypes = {
   continueRegistrationForm: false,

@@ -1,13 +1,14 @@
 import {
+  createBrowserRouter,
   RouteObject,
   RouterProvider,
-  createBrowserRouter,
 } from "react-router-dom";
-import Home from "@/pages/app/Home";
-import LoginPage from "./pages/authentication/Login";
-import RegistrationPage from "./pages/authentication/Registration";
-import ForgotPasswordPage from "./pages/authentication/ForgotPassword";
-import ResetPasswordPage from "./pages/authentication/ResetPassword";
+
+import Home from "@/pages/app/Home.tsx";
+import ForgotPasswordPage from "@/pages/authentication/ForgotPassword";
+import LoginPage from "@/pages/authentication/Login";
+import RegistrationPage from "@/pages/authentication/Registration";
+import ResetPasswordPage from "@/pages/authentication/ResetPassword";
 
 const authRoutes: RouteObject[] = [
   { path: "/login", element: <LoginPage /> },

@@ -1,8 +1,7 @@
+import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-import { TextField } from "@mui/material";
-
-import { BasicTextFieldPropTypes } from "../typings/authTypes";
+import { BasicTextFieldPropertyTypes } from "@/typings/authTypes";
 
 export default function BasicTextFields({
   id,
@@ -12,7 +11,7 @@ export default function BasicTextFields({
   control,
   sx,
   inputProps,
-}: BasicTextFieldPropTypes) {
+}: BasicTextFieldPropertyTypes) {
   return (
     <Controller
       control={control}
@@ -30,7 +29,7 @@ export default function BasicTextFields({
           type={type || "text"}
           onChange={onChange}
           error={!!error}
-          helperText={error ? error.message : null}
+          helperText={error ? error.message : undefined}
           variant="outlined"
         />
       )}

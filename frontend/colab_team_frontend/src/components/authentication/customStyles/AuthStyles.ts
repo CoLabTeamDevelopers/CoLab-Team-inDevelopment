@@ -42,7 +42,7 @@ const AuthRegisterStyle = {
   gap: "10px",
 };
 
-const AuthResgisterBackButtonStyle = {
+const AuthRegisterBackButtonStyle = {
   padding: "2px",
   margin: "2px",
   minWidth: "15px",
@@ -55,7 +55,7 @@ export {
   AuthBoxStyle,
   AuthButtonsStyle,
   AuthLogoStyle,
-  AuthTextFieldStyle,
+  AuthRegisterBackButtonStyle,
   AuthRegisterStyle,
-  AuthResgisterBackButtonStyle,
+  AuthTextFieldStyle,
 };

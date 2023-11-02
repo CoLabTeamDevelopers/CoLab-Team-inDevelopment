@@ -1,9 +1,4 @@
-import { useReducer, useRef } from "react";
-
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { loginSchema } from "../../schemas/authSchemas";
-
 import {
   Box,
   Button,
@@ -12,23 +7,24 @@ import {
   Slide,
   Typography,
 } from "@mui/material";
-import BasicTextFields from "../../components/TextField";
-import PasswordAdornment from "../../components/authentication/PasswordAdornment";
+import { useReducer, useRef } from "react";
+import { useForm } from "react-hook-form";
 
-import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
-import Waves from "../../assets/svg/Wave";
+import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
+import Waves from "@/assets/svg/Wave";
 import {
   AuthBoxStyle,
   AuthButtonsStyle,
   AuthLogoStyle,
   AuthRegisterStyle,
   AuthTextFieldStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
-
-import { loginTypes } from "../../typings/authTypes";
-
-import { authReducer } from "../../reducers/authFormReducer";
-import { AuthInitialState } from "../../states/authInitialState";
+} from "@/components/authentication/customStyles/AuthStyles";
+import PasswordAdornment from "@/components/authentication/PasswordAdornment";
+import BasicTextFields from "@/components/TextField";
+import { authReducer } from "@/reducers/authFormReducer";
+import { loginSchema } from "@/schemas/authSchemas";
+import { AuthInitialState } from "@/states/authInitialState";
+import { loginTypes } from "@/typings/authTypes";
 
 export default function LoginPage() {
   const { handleSubmit, control, reset } = useForm<loginTypes>({
@@ -39,6 +35,7 @@ export default function LoginPage() {
 
   const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onSubmit(data: Record<string, any>) {
     console.log(data);
     formRef.current?.reset();

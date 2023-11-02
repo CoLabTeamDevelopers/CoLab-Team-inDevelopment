@@ -1,9 +1,4 @@
-import { useReducer, useRef, useState } from "react";
-
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { registrationSchema } from "../../schemas/authSchemas";
-
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import {
   Box,
@@ -13,24 +8,25 @@ import {
   Slide,
   Typography,
 } from "@mui/material";
-import BasicTextFields from "../../components/TextField";
-import PasswordAdornment from "../../components/authentication/PasswordAdornment";
+import { useReducer, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
-import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
-import Waves from "../../assets/svg/Wave";
+import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
+import Waves from "@/assets/svg/Wave";
 import {
   AuthBoxStyle,
   AuthButtonsStyle,
   AuthLogoStyle,
+  AuthRegisterBackButtonStyle,
   AuthRegisterStyle,
-  AuthResgisterBackButtonStyle,
   AuthTextFieldStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
-
-import { registrationTypes } from "../../typings/authTypes";
-
-import { authReducer } from "../../reducers/authFormReducer";
-import { AuthInitialState } from "../../states/authInitialState";
+} from "@/components/authentication/customStyles/AuthStyles";
+import PasswordAdornment from "@/components/authentication/PasswordAdornment";
+import BasicTextFields from "@/components/TextField";
+import { authReducer } from "@/reducers/authFormReducer";
+import { registrationSchema } from "@/schemas/authSchemas";
+import { AuthInitialState } from "@/states/authInitialState";
+import { registrationTypes } from "@/typings/authTypes";
 
 export default function RegistrationPage() {
   const [continueForm, setContinueForm] = useState(false);
@@ -46,6 +42,7 @@ export default function RegistrationPage() {
 
   const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: Record<string, any>) => {
     console.log(data);
     formRef.current?.reset();
@@ -113,7 +110,6 @@ export default function RegistrationPage() {
                   name={"username"}
                   type={"text"}
                   control={control}
-                  inputProps={null}
                   sx={AuthTextFieldStyle}
                 />
                 <BasicTextFields
@@ -122,7 +118,6 @@ export default function RegistrationPage() {
                   name={"email"}
                   type={"text"}
                   control={control}
-                  inputProps={null}
                   sx={AuthTextFieldStyle}
                 />
               </Box>
@@ -156,7 +151,6 @@ export default function RegistrationPage() {
                   name={"confirmPassword"}
                   type={state.togglePasswordView ? "text" : "password"}
                   control={control}
-                  inputProps={null}
                   sx={AuthTextFieldStyle}
                 />
               </Box>
@@ -186,7 +180,7 @@ export default function RegistrationPage() {
           {continueForm && (
             <Button
               variant="contained"
-              sx={AuthResgisterBackButtonStyle}
+              sx={AuthRegisterBackButtonStyle}
               onClick={() => setContinueForm(false)}
             >
               <NavigateBeforeIcon sx={{ fontSize: "14px" }} />

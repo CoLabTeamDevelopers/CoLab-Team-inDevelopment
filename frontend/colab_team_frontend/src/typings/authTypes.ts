@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export interface loginTypes {
   email: string;
   password: string;
@@ -19,7 +21,7 @@ export interface resetPasswordTypes {
   confirmPassword: string;
 }
 
-export interface BasicTextFieldPropTypes {
+export interface BasicTextFieldPropertyTypes {
   id: string;
   label: string;
   name: string;

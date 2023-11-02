@@ -1,4 +1,4 @@
-import { AuthInitialState } from "../states/authInitialState";
+import { AuthInitialState } from "@/states/authInitialState";
 
 type AuthAction =
   | { type: "TOGGLE_PASSWORD_VIEW" }

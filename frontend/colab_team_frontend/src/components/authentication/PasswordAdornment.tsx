@@ -6,6 +6,7 @@ export default function PasswordAdornment({
   dispatch,
   togglePasswordView,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: any;
   togglePasswordView: boolean;
 }) {

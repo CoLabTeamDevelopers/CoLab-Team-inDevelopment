@@ -1,22 +1,19 @@
-import { useRef } from "react";
-
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { forgotPasswordSchema } from "../../schemas/authSchemas";
 
-import CoLab from "../../assets/images/CoLab - Logo Light.png";
-import Waves from "../../assets/svg/Wave";
+import CoLab from "@/assets/images/CoLab - Logo Light.png";
+import Waves from "@/assets/svg/Wave";
 import {
   AuthBoxStyle,
   AuthButtonsStyle,
   AuthLogoStyle,
   AuthTextFieldStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
-
-import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
-import BasicTextFields from "../../components/TextField";
-
-import { forgotPasswordTypes } from "../../typings/authTypes";
+} from "@/components/authentication/customStyles/AuthStyles";
+import BasicTextFields from "@/components/TextField";
+import { forgotPasswordSchema } from "@/schemas/authSchemas";
+import { forgotPasswordTypes } from "@/typings/authTypes";
 
 export default function ForgotPasswordPage() {
   const { handleSubmit, control, reset } = useForm<forgotPasswordTypes>({
@@ -25,6 +22,7 @@ export default function ForgotPasswordPage() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onSubmit(data: Record<string, any>) {
     console.log(data);
     formRef.current?.reset();

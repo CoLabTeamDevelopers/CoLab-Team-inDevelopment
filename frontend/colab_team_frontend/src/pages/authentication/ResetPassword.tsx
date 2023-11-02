@@ -1,28 +1,23 @@
-import { useReducer, useRef } from "react";
-
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
+import { useReducer, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { resetPasswordSchema } from "../../schemas/authSchemas";
 
-import BasicTextFields from "../../components/TextField";
-import PasswordAdornment from "../../components/authentication/PasswordAdornment";
+import CoLab from "@/assets/images/CoLab - Logo Light.png";
+import Waves from "@/assets/svg/Wave";
 import {
   AuthBoxStyle,
   AuthButtonsStyle,
   AuthLogoStyle,
   AuthRegisterStyle,
   AuthTextFieldStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
-
-import CoLab from "../../assets/images/CoLab - Logo Light.png";
-import Waves from "../../assets/svg/Wave";
-
-import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
-
-import { resetPasswordTypes } from "../../typings/authTypes";
-
-import { authReducer } from "../../reducers/authFormReducer";
-import { AuthInitialState } from "../../states/authInitialState";
+} from "@/components/authentication/customStyles/AuthStyles";
+import PasswordAdornment from "@/components/authentication/PasswordAdornment";
+import BasicTextFields from "@/components/TextField";
+import { authReducer } from "@/reducers/authFormReducer";
+import { resetPasswordSchema } from "@/schemas/authSchemas";
+import { AuthInitialState } from "@/states/authInitialState";
+import { resetPasswordTypes } from "@/typings/authTypes";
 
 export default function ResetPasswordPage() {
   const { handleSubmit, control, reset } = useForm<resetPasswordTypes>({
@@ -33,6 +28,7 @@ export default function ResetPasswordPage() {
 
   const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onSubmit(data: Record<string, any>) {
     console.log(data);
     reset();
