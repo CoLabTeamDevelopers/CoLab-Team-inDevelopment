@@ -9,9 +9,8 @@ import {
   AuthBoxStyle,
   AuthButtonsStyle,
   AuthLogoStyle,
-  AuthTextFieldStyle,
 } from "@/components/authentication/customStyles/AuthStyles";
-import BasicTextFields from "@/components/TextField";
+import EmailField from "@/components/form/EmailField";
 import { forgotPasswordSchema } from "@/schemas/authSchemas";
 import { forgotPasswordTypes } from "@/typings/authTypes";
 
@@ -59,14 +58,7 @@ export default function ForgotPasswordPage() {
         >
           <Slide direction="right" in={true} mountOnEnter unmountOnExit>
             <Box>
-              <BasicTextFields
-                id={"email"}
-                label={"Email"}
-                name={"email"}
-                type={"text"}
-                control={control}
-                sx={AuthTextFieldStyle}
-              />
+              <EmailField control={control} />
             </Box>
           </Slide>
           <Button type="submit" variant="contained" sx={AuthButtonsStyle}>

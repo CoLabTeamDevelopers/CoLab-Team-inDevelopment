@@ -40,7 +40,7 @@ module.exports = {
     "unicorn/prevent-abbreviations": [
       "error",
       {
-        ignore: ["(R|r)ef", "Prop"],
+        ignore: ["(R|r)ef", "(P|p)rop"],
       },
     ],
   },

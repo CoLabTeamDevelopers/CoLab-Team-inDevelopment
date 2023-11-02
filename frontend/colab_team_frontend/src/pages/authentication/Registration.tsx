@@ -8,7 +8,7 @@ import {
   Slide,
   Typography,
 } from "@mui/material";
-import { useReducer, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
@@ -19,13 +19,11 @@ import {
   AuthLogoStyle,
   AuthRegisterBackButtonStyle,
   AuthRegisterStyle,
-  AuthTextFieldStyle,
 } from "@/components/authentication/customStyles/AuthStyles";
-import PasswordAdornment from "@/components/authentication/PasswordAdornment";
-import BasicTextFields from "@/components/TextField";
-import { authReducer } from "@/reducers/authFormReducer";
+import BasicTextField from "@/components/form/BaseTextField";
+import EmailField from "@/components/form/EmailField";
+import PasswordField from "@/components/form/PasswordField";
 import { registrationSchema } from "@/schemas/authSchemas";
-import { AuthInitialState } from "@/states/authInitialState";
 import { registrationTypes } from "@/typings/authTypes";
 
 export default function RegistrationPage() {
@@ -39,8 +37,6 @@ export default function RegistrationPage() {
   const watchField = watch(["username", "email"]);
 
   const formRef = useRef<HTMLFormElement | null>(null);
-
-  const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: Record<string, any>) => {
@@ -104,22 +100,12 @@ export default function RegistrationPage() {
               unmountOnExit
             >
               <Box sx={AuthRegisterStyle}>
-                <BasicTextFields
-                  id={"username"}
-                  label={"Username"}
-                  name={"username"}
-                  type={"text"}
+                <BasicTextField
+                  name="username"
                   control={control}
-                  sx={AuthTextFieldStyle}
+                  fieldProps={{ label: "Username" }}
                 />
-                <BasicTextFields
-                  id={"email"}
-                  label={"Email"}
-                  name={"email"}
-                  type={"text"}
-                  control={control}
-                  sx={AuthTextFieldStyle}
-                />
+                <EmailField control={control} />
               </Box>
             </Slide>
           )}
@@ -131,27 +117,11 @@ export default function RegistrationPage() {
               unmountOnExit
             >
               <Box sx={AuthRegisterStyle}>
-                <BasicTextFields
-                  id={"newPassword"}
-                  label={"New Password"}
-                  name={"password"}
-                  type={state.togglePasswordView ? "text" : "password"}
+                <PasswordField control={control} />
+                <PasswordField
                   control={control}
-                  inputProps={
-                    <PasswordAdornment
-                      dispatch={dispatch}
-                      togglePasswordView={state.togglePasswordView}
-                    />
-                  }
-                  sx={AuthTextFieldStyle}
-                />
-                <BasicTextFields
-                  id={"confirmPassword"}
-                  label={"Confirm Password"}
-                  name={"confirmPassword"}
-                  type={state.togglePasswordView ? "text" : "password"}
-                  control={control}
-                  sx={AuthTextFieldStyle}
+                  label="Confirm Password"
+                  name="confirmPassword"
                 />
               </Box>
             </Slide>

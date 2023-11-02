@@ -7,7 +7,7 @@ import {
   Slide,
   Typography,
 } from "@mui/material";
-import { useReducer, useRef } from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
@@ -17,13 +17,10 @@ import {
   AuthButtonsStyle,
   AuthLogoStyle,
   AuthRegisterStyle,
-  AuthTextFieldStyle,
 } from "@/components/authentication/customStyles/AuthStyles";
-import PasswordAdornment from "@/components/authentication/PasswordAdornment";
-import BasicTextFields from "@/components/TextField";
-import { authReducer } from "@/reducers/authFormReducer";
+import EmailField from "@/components/form/EmailField";
+import PasswordField from "@/components/form/PasswordField";
 import { loginSchema } from "@/schemas/authSchemas";
-import { AuthInitialState } from "@/states/authInitialState";
 import { loginTypes } from "@/typings/authTypes";
 
 export default function LoginPage() {
@@ -32,8 +29,6 @@ export default function LoginPage() {
   });
 
   const formRef = useRef<HTMLFormElement | null>(null);
-
-  const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onSubmit(data: Record<string, any>) {
@@ -71,28 +66,8 @@ export default function LoginPage() {
         >
           <Slide direction="right" in={true} mountOnEnter unmountOnExit>
             <Box sx={AuthRegisterStyle}>
-              <BasicTextFields
-                id={"email"}
-                label={"Email"}
-                name={"email"}
-                type={"email"}
-                control={control}
-                sx={AuthTextFieldStyle}
-              />
-              <BasicTextFields
-                id={"password"}
-                label={"Password"}
-                name={"password"}
-                type={state.togglePasswordView ? "text" : "password"}
-                control={control}
-                endAdornment={
-                  <PasswordAdornment
-                    dispatch={dispatch}
-                    togglePasswordView={state.togglePasswordView}
-                  />
-                }
-                sx={AuthTextFieldStyle}
-              />
+              <EmailField control={control} />
+              <PasswordField control={control} />
             </Box>
           </Slide>
           <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
