@@ -88,7 +88,6 @@ export default function ResetPasswordPage() {
                 name={"confirmPassword"}
                 type={state.togglePasswordView ? "text" : "password"}
                 control={control}
-                inputProps={null}
                 sx={AuthTextFieldStyle}
               />
             </Box>

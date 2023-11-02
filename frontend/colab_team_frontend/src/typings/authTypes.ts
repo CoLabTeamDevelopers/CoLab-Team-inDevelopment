@@ -25,8 +25,19 @@ export interface BasicTextFieldPropTypes {
   name: string;
   type: string;
   control: any;
-  inputProps: any;
+  inputProps?: any;
   sx: any;
+}
+
+export interface BasicButtonType {
+  id: string;
+  label: string;
+  sx: any;
+  type?: any;
+  dispatch?: any;
+  dispatchType?: any;
+  dispatchState?: any;
+  dispatchFlag?: boolean;
 }
 
 export type ReducerAppStateTypes = {

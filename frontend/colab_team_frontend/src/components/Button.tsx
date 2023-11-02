@@ -1,3 +1,4 @@
+import { BasicButtonType } from "@/typings/authTypes";
 import { Stack, Button } from "@mui/material";
 
 export default function BasicButtons({
@@ -9,7 +10,7 @@ export default function BasicButtons({
   dispatchType,
   dispatchState,
   dispatchFlag,
-}) {
+}: BasicButtonType) {
   return (
     <Stack spacing={2} direction="row">
       <Button

@@ -80,7 +80,6 @@ export default function LoginPage() {
                 name={"email"}
                 type={"email"}
                 control={control}
-                inputProps={null}
                 sx={AuthTextFieldStyle}
               />
               <BasicTextFields
