@@ -8,9 +8,9 @@ import {
   AuthBoxStyle,
   AuthLogoStyle,
   AuthTextFieldStyle,
-  AuthButtonsStyle,
+  ButtonsStyle,
   AuthRegisterStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
+} from "../../styles/customStyles/CustomStyles";
 import BasicTextFields from "../../components/TextField";
 import PasswordAdornment from "../../components/authentication/PasswordAdornment";
 
@@ -93,7 +93,7 @@ export default function ResetPasswordPage() {
               />
             </Box>
           </Slide>
-          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
+          <Button type="submit" variant="contained" sx={ButtonsStyle}>
             Reset Password
           </Button>
         </FormControl>

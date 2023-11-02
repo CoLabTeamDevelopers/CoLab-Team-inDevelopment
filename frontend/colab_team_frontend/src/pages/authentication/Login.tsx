@@ -18,10 +18,10 @@ import PasswordAdornment from "../../components/authentication/PasswordAdornment
 import {
   AuthBoxStyle,
   AuthLogoStyle,
-  AuthButtonsStyle,
+  ButtonsStyle,
   AuthTextFieldStyle,
   AuthRegisterStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
+} from "../../styles/customStyles/CustomStyles";
 import Waves from "../../assets/svg/Wave";
 import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
 
@@ -104,7 +104,7 @@ export default function LoginPage() {
               />
             </Box>
           </Slide>
-          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
+          <Button type="submit" variant="contained" sx={ButtonsStyle}>
             Login
           </Button>
         </FormControl>

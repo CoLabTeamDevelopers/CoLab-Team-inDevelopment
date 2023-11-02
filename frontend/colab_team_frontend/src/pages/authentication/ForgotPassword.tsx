@@ -8,8 +8,8 @@ import {
   AuthBoxStyle,
   AuthLogoStyle,
   AuthTextFieldStyle,
-  AuthButtonsStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
+  ButtonsStyle,
+} from "../../styles/customStyles/CustomStyles";
 import CoLab from "../../assets/images/CoLab - Logo Light.png";
 import Waves from "../../assets/svg/Wave";
 
@@ -67,11 +67,12 @@ export default function ForgotPasswordPage() {
                 name={"email"}
                 type={"text"}
                 control={control}
+                inputProps={null}
                 sx={AuthTextFieldStyle}
               />
             </Box>
           </Slide>
-          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
+          <Button type="submit" variant="contained" sx={ButtonsStyle}>
             Send Link
           </Button>
         </FormControl>

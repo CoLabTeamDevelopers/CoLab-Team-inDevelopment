@@ -20,10 +20,10 @@ import {
   AuthBoxStyle,
   AuthLogoStyle,
   AuthTextFieldStyle,
-  AuthButtonsStyle,
+  ButtonsStyle,
   AuthRegisterStyle,
   AuthResgisterBackButtonStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
+} from "../../styles/customStyles/CustomStyles";
 import CoLabLightLogo from "../../assets/images/CoLab - Logo Light.png";
 import Waves from "../../assets/svg/Wave";
 
@@ -164,13 +164,13 @@ export default function RegistrationPage() {
             </Slide>
           ) : undefined}
           {continueForm ? (
-            <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
+            <Button type="submit" variant="contained" sx={ButtonsStyle}>
               Submit
             </Button>
           ) : (
             <Button
               variant="contained"
-              sx={AuthButtonsStyle}
+              sx={ButtonsStyle}
               onClick={() => handleContinue()}
             >
               Continue

@@ -1,1 +1,2 @@
-export const HOME = "api/home/";
+export const HOME = "home";
+export const PROJECTS = "projects";

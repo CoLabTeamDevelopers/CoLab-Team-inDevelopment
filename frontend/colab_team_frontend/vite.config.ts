@@ -1,17 +1,19 @@
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-import react from '@vitejs/plugin-react-swc';
-import { defineConfig } from 'vite';
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
+
+import svgr from "vite-plugin-svgr";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [svgr(), react()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src/'),
+      "@": resolve(__dirname, "./src/"),
     },
   },
 });
