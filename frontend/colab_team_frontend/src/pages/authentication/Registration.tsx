@@ -87,18 +87,12 @@ export default function RegistrationPage() {
       >
         <FormControl
           sx={{ gap: "10px" }}
-          id="registrationForm"
           component="form"
           ref={formRef}
           onSubmit={handleSubmit((data) => onSubmit(data))}
         >
-          {!continueForm && (
-            <Slide
-              direction="right"
-              in={!continueForm}
-              mountOnEnter
-              unmountOnExit
-            >
+          {continueForm ? undefined : (
+            <Slide direction="right" in mountOnEnter unmountOnExit>
               <Box sx={AuthRegisterStyle}>
                 <BasicTextField
                   name="username"
@@ -110,12 +104,7 @@ export default function RegistrationPage() {
             </Slide>
           )}
           {continueForm ? (
-            <Slide
-              direction="right"
-              in={continueForm}
-              mountOnEnter
-              unmountOnExit
-            >
+            <Slide direction="right" in mountOnEnter unmountOnExit>
               <Box sx={AuthRegisterStyle}>
                 <PasswordField control={control} />
                 <PasswordField
@@ -126,19 +115,14 @@ export default function RegistrationPage() {
               </Box>
             </Slide>
           ) : undefined}
-          {continueForm ? (
-            <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
-              Submit
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              sx={AuthButtonsStyle}
-              onClick={() => handleContinue()}
-            >
-              Continue
-            </Button>
-          )}
+          <Button
+            type="submit"
+            variant="contained"
+            sx={AuthButtonsStyle}
+            onClick={continueForm ? undefined : handleContinue}
+          >
+            {continueForm ? "Submit" : "Continue"}
+          </Button>
         </FormControl>
         <Box
           sx={{
@@ -147,7 +131,7 @@ export default function RegistrationPage() {
             alignItems: "center",
           }}
         >
-          {continueForm && (
+          {continueForm ? (
             <Button
               variant="contained"
               sx={AuthRegisterBackButtonStyle}
@@ -155,7 +139,7 @@ export default function RegistrationPage() {
             >
               <NavigateBeforeIcon sx={{ fontSize: "14px" }} />
             </Button>
-          )}
+          ) : undefined}
           <Typography
             fontSize={15}
             color="#757575"
