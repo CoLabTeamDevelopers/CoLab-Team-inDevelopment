@@ -7,7 +7,6 @@ import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
 import Waves from "@/assets/svg/Wave";
 import {
   AuthBoxStyle,
-  AuthButtonsStyle,
   AuthLogoStyle,
 } from "@/components/authentication/customStyles/AuthStyles";
 import ActionButton from "@/components/form/ActionButton";
@@ -58,17 +57,14 @@ export default function LoginPage() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Slide direction="right" in mountOnEnter unmountOnExit>
-            <TextFieldContainer>
-              <EmailField control={control} />
-              <PasswordField control={control} />
-            </TextFieldContainer>
+            <div>
+              <TextFieldContainer>
+                <EmailField control={control} />
+                <PasswordField control={control} />
+              </TextFieldContainer>
+            </div>
           </Slide>
-          <ActionButton
-            type="submit"
-            variant="contained"
-            sx={AuthButtonsStyle}
-            label="Login"
-          />
+          <ActionButton type="submit" variant="contained" label="Login" />
         </FormControl>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
