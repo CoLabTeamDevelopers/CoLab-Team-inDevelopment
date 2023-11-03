@@ -6,6 +6,9 @@ app_name = "home_app"
 
 urlpatterns = [
     path("", views.HomeView, name="home"),
+    path("add_post", views.add_post, name="add_post"),
+    path("posts", views.posts, name="posts"),
+    path("post/<int:post_id>/", views.post_detail, name="post_detail"),
     path(
         "reset-password",
         auth_views.PasswordResetView.as_view(
