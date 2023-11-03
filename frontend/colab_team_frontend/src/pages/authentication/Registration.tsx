@@ -11,18 +11,12 @@ import {
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
-import Waves from "@/assets/svg/Wave";
-import {
-  AuthBoxStyle,
-  AuthLogoStyle,
-  AuthRegisterBackButtonStyle,
-} from "@/components/authentication/customStyles/AuthStyles";
 import ActionButton from "@/components/form/ActionButton";
 import BasicTextField from "@/components/form/BaseTextField";
 import EmailField from "@/components/form/EmailField";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AuthFormLayout from "@/layouts/AuthForm";
 import { registrationSchema } from "@/schemas/authSchemas";
 import { registrationTypes } from "@/typings/authTypes";
 
@@ -65,90 +59,77 @@ export default function RegistrationPage() {
   };
 
   return (
-    <Box sx={AuthBoxStyle}>
-      <Box sx={AuthLogoStyle}>
-        <img src={CoLabLightLogo} alt="app_img" width={200} height={200} />
-      </Box>
-      <Typography
-        fontSize={25}
-        sx={{ textAlign: "center", color: "#673ab7" }}
-        fontFamily="Roboto"
+    <AuthFormLayout title="Register">
+      <FormControl
+        sx={{ gap: "10px" }}
+        component="form"
+        ref={formRef}
+        onSubmit={handleSubmit((data) => onSubmit(data))}
       >
-        Register
-      </Typography>
-      <Waves />
+        {continueForm ? undefined : (
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
+              <BasicTextField
+                name="username"
+                control={control}
+                fieldProps={{ label: "Username" }}
+              />
+              <EmailField control={control} />
+            </TextFieldContainer>
+          </Slide>
+        )}
+        {continueForm ? (
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
+              <PasswordField control={control} />
+              <PasswordField
+                control={control}
+                label="Confirm Password"
+                name="confirmPassword"
+              />
+            </TextFieldContainer>
+          </Slide>
+        ) : undefined}
+        <ActionButton
+          type={continueForm ? "submit" : "button"}
+          onClick={continueForm ? undefined : handleContinue}
+          label={continueForm ? "Submit" : "Continue"}
+        />
+      </FormControl>
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          marginTop: "10px",
+          justifyContent: continueForm ? "space-between" : "center",
+          alignItems: "center",
         }}
       >
-        <FormControl
-          sx={{ gap: "10px" }}
-          component="form"
-          ref={formRef}
-          onSubmit={handleSubmit((data) => onSubmit(data))}
-        >
-          {continueForm ? undefined : (
-            <Slide direction="right" in mountOnEnter unmountOnExit>
-              <TextFieldContainer>
-                <BasicTextField
-                  name="username"
-                  control={control}
-                  fieldProps={{ label: "Username" }}
-                />
-                <EmailField control={control} />
-              </TextFieldContainer>
-            </Slide>
-          )}
-          {continueForm ? (
-            <Slide direction="right" in mountOnEnter unmountOnExit>
-              <TextFieldContainer>
-                <PasswordField control={control} />
-                <PasswordField
-                  control={control}
-                  label="Confirm Password"
-                  name="confirmPassword"
-                />
-              </TextFieldContainer>
-            </Slide>
-          ) : undefined}
-          <ActionButton
-            type={continueForm ? "submit" : "button"}
-            onClick={continueForm ? undefined : handleContinue}
-            label={continueForm ? "Submit" : "Continue"}
-          />
-        </FormControl>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: continueForm ? "space-between" : "center",
-            alignItems: "center",
-          }}
-        >
-          {continueForm ? (
-            <Button
-              variant="contained"
-              sx={AuthRegisterBackButtonStyle}
-              onClick={() => setContinueForm(false)}
-            >
-              <NavigateBeforeIcon sx={{ fontSize: "14px" }} />
-            </Button>
-          ) : undefined}
-          <Typography
-            fontSize={15}
-            color="#757575"
-            sx={{ display: "flex", justifyContent: "center" }}
+        {continueForm ? (
+          <Button
+            variant="contained"
+            sx={{
+              padding: "2px",
+              margin: "2px",
+              minWidth: "15px",
+              background: "#b39ddb",
+              borderRadius: "50px",
+              "&:hover": { background: "#9575cd" },
+            }}
+            onClick={() => setContinueForm(false)}
           >
-            Already a user ?&nbsp;
-            <Link href="/login" sx={{ color: "#9575cd" }}>
-              Login
-            </Link>
-          </Typography>
-        </Box>
+            <NavigateBeforeIcon sx={{ fontSize: "14px" }} />
+          </Button>
+        ) : undefined}
+        <Typography
+          fontSize={15}
+          color="#757575"
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          Already a user ?&nbsp;
+          <Link href="/login" sx={{ color: "#9575cd" }}>
+            Login
+          </Link>
+        </Typography>
       </Box>
-    </Box>
+    </AuthFormLayout>
   );
 }
