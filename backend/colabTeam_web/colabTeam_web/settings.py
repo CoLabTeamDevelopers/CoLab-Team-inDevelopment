@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
-
+from django.urls import reverse_lazy
 from environ import Env
 
+import os
 env = Env(DEBUG=(bool, True))
 
 
@@ -36,6 +37,7 @@ ALLOWED_HOSTS = []
 
 PASSWORD_RESET_EMAIL_TEMPLATE = "registration/custom_password_reset_email.html"
 
+LOGIN_URL = reverse_lazy('registration_app:login')
 
 # Application definition
 
@@ -130,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 

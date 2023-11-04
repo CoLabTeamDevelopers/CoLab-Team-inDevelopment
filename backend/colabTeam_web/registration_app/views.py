@@ -1,4 +1,15 @@
+# registration_app/views.py
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from .models import *
 import uuid
+from django.conf import settings
+from django.core.mail import send_mail
+from .forms import ProfileForm
+from django.contrib.auth.decorators import login_required
 
 from django.conf import settings
 from django.contrib import messages
@@ -9,6 +20,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from .models import Profile
+from api.models import Post
 
 
 # View for user login
@@ -18,12 +30,14 @@ def login_user(request: HttpRequest):
         password = request.POST.get("password")
 
         # Check if the user exists
+
         user = User.objects.filter(username=username).first()
         if user is None:
             messages.success(request, "User not found.")
             return redirect("registration_app:login")
 
         # Check if the user's email is verified
+
         profile = Profile.objects.filter(user=user).first()
         if profile and not profile.is_verified:
             messages.success(request, "Your email is not verified. Check your mail")
@@ -37,7 +51,9 @@ def login_user(request: HttpRequest):
             return redirect("registration_app:login")
 
         login(request, user)
-        return redirect("home")
+
+        return redirect("home_app:home")
+
 
     return render(request, "registration/login.html")
 
@@ -137,3 +153,24 @@ def verify_user(request, auth_token):
 # View for displaying an error page
 def error_page(request):
     return render(request, "registration/error.html")
+
+
+@login_required(login_url="registration_app:login")
+def profilePage(request):
+    user = request.user
+    user_posts = Post.objects.filter(user=user)
+    return render(request, 'profile/profile.html', {'user_posts': user_posts, 'user': user})
+
+
+
+@login_required(login_url="registration_app:login")
+def profileUpdatePage(request):
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+
+            return redirect("/")
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, "profile/edit_profile.html", {"form": form})

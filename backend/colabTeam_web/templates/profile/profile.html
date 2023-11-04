@@ -1,0 +1,81 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'profile/css/home.css' %}">
+
+    <title>Home</title>
+  </head>
+  <body>
+    <header>
+        <nav class="navbar">
+            <p class="logo">Profile</p>
+            {% if user.is_authenticated %}
+              <a href='{% url 'home_app:home' %}' ><button class="btn btn-primary m-1">Home</button></a>
+            {% else %}
+            {% endif %}
+        </nav>
+    </header>
+
+    <script>
+        var cross = document.getElementById('cross')
+        cross.addEventListener('click', ()=> {
+            document.getElementsByClassName('notification-container')[0].style.display = 'none';
+        })
+
+    </script>
+
+
+    <main class="main-container" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+        <div class="container">
+            <div class="profile-photo-container">
+                <img src="{{ user.profile.profilePic.url }}" alt="User Image" width="100px" srcset="">
+            </div>
+    
+            <div class="user-content-container">
+                <p class="username">Username: {{ user.profile.user }}</p>
+                <p class="user-title">Name: {{ user.profile.fName }} {{ user.profile.lName }}</p>
+                <p id="bio" class="user-desc">{{ user.profile.bioText }}</p>
+                <div class="profile-edit-link-container">
+                    <a href="{% url 'registration_app:edit_profile' %}">Edit</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 container">
+        {% if user_posts %}
+                {% for post in user_posts %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://wpklik.com/wp-content/uploads/2018/10/wordpress-blog-post.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.description|truncatewords:100 }}
+              </p>
+              <a href="{% url 'home_app:post_detail' post_id=post.pk %}"><button type="button" class="btn btn-secondary">Update</button></a>
+              <a href="{% url 'home_app:post_detail' post_id=post.pk %}"><button type="button" class="btn btn-outline-warning">More →</button></a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+            {% else %}
+            <center>
+                No posts to display
+            </center>
+            {% endif %}
+      </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
