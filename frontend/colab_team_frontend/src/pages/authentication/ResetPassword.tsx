@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useReducer, useRef } from "react";
 
 import { resetPasswordSchema } from "../../schemas/authSchemas";
@@ -23,6 +24,19 @@ import { resetPasswordTypes } from "../../typings/authTypes";
 
 import { authReducer } from "../../reducers/authFormReducer";
 import { AuthInitialState } from "../../states/authInitialState";
+=======
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormControl, Slide } from "@mui/material";
+import { useRef } from "react";
+import { useForm } from "react-hook-form";
+
+import ActionButton from "@/components/form/ActionButton";
+import PasswordField from "@/components/form/PasswordField";
+import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AuthFormLayout from "@/layouts/AuthForm";
+import { resetPasswordSchema } from "@/schemas/authSchemas";
+import { resetPasswordTypes } from "@/typings/authTypes";
+>>>>>>> 8c4416c3e5dbd94e051b3762b70e465c843f4eae
 
 export default function ResetPasswordPage() {
   const { handleSubmit, control, reset } = useForm<resetPasswordTypes>({
@@ -31,14 +45,19 @@ export default function ResetPasswordPage() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
+<<<<<<< HEAD
   const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
+=======
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+>>>>>>> 8c4416c3e5dbd94e051b3762b70e465c843f4eae
   function onSubmit(data: Record<string, any>) {
     console.log(data);
     reset();
   }
 
   return (
+<<<<<<< HEAD
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
         <img src={CoLab} alt="app_img" width={200} height={200} />
@@ -99,5 +118,27 @@ export default function ResetPasswordPage() {
         </FormControl>
       </Box>
     </Box>
+=======
+    <AuthFormLayout title="Reset Password">
+      <FormControl
+        sx={{ gap: "10px" }}
+        component="form"
+        ref={formRef}
+        onSubmit={handleSubmit((data) => onSubmit(data))}
+      >
+        <Slide direction="right" in mountOnEnter unmountOnExit>
+          <TextFieldContainer>
+            <PasswordField control={control} label="New Password" />
+            <PasswordField
+              control={control}
+              name="confirmPassword"
+              label="Confirm New Password"
+            />
+          </TextFieldContainer>
+        </Slide>
+        <ActionButton label="Reset Password" />
+      </FormControl>
+    </AuthFormLayout>
+>>>>>>> 8c4416c3e5dbd94e051b3762b70e465c843f4eae
   );
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useReducer, useRef, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -32,6 +33,29 @@ import { LOGIN } from "../../api/authentication/authEndpoints";
 
 import { authReducer } from "../../reducers/authFormReducer";
 import { AuthInitialState } from "../../states/authInitialState";
+=======
+import { yupResolver } from "@hookform/resolvers/yup";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import {
+  Box,
+  Button,
+  FormControl,
+  Link,
+  Slide,
+  Typography,
+} from "@mui/material";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+
+import ActionButton from "@/components/form/ActionButton";
+import BasicTextField from "@/components/form/BaseTextField";
+import EmailField from "@/components/form/EmailField";
+import PasswordField from "@/components/form/PasswordField";
+import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AuthFormLayout from "@/layouts/AuthForm";
+import { registrationSchema } from "@/schemas/authSchemas";
+import { registrationTypes } from "@/typings/authTypes";
+>>>>>>> 8c4416c3e5dbd94e051b3762b70e465c843f4eae
 
 export default function RegistrationPage() {
   const [continueForm, setContinueForm] = useState(false);
@@ -45,8 +69,12 @@ export default function RegistrationPage() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
+<<<<<<< HEAD
   const [state, dispatch] = useReducer(authReducer, AuthInitialState);
 
+=======
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+>>>>>>> 8c4416c3e5dbd94e051b3762b70e465c843f4eae
   const onSubmit = (data: Record<string, any>) => {
     console.log(data);
     formRef.current?.reset();
@@ -73,6 +101,7 @@ export default function RegistrationPage() {
   };
 
   return (
+<<<<<<< HEAD
     <Box sx={AuthBoxStyle}>
       <Box sx={AuthLogoStyle}>
         <img src={CoLabLightLogo} alt="app_img" width={200} height={200} />
@@ -204,7 +233,79 @@ export default function RegistrationPage() {
             </Link>
           </Typography>
         </Box>
+=======
+    <AuthFormLayout title="Register">
+      <FormControl
+        sx={{ gap: "10px" }}
+        component="form"
+        ref={formRef}
+        onSubmit={handleSubmit((data) => onSubmit(data))}
+      >
+        {continueForm ? undefined : (
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
+              <BasicTextField
+                name="username"
+                control={control}
+                fieldProps={{ label: "Username" }}
+              />
+              <EmailField control={control} />
+            </TextFieldContainer>
+          </Slide>
+        )}
+        {continueForm ? (
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
+              <PasswordField control={control} />
+              <PasswordField
+                control={control}
+                label="Confirm Password"
+                name="confirmPassword"
+              />
+            </TextFieldContainer>
+          </Slide>
+        ) : undefined}
+        <ActionButton
+          type={continueForm ? "submit" : "button"}
+          onClick={continueForm ? undefined : handleContinue}
+          label={continueForm ? "Submit" : "Continue"}
+        />
+      </FormControl>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: continueForm ? "space-between" : "center",
+          alignItems: "center",
+        }}
+      >
+        {continueForm ? (
+          <Button
+            variant="contained"
+            sx={{
+              padding: "2px",
+              margin: "2px",
+              minWidth: "15px",
+              background: "#b39ddb",
+              borderRadius: "50px",
+              "&:hover": { background: "#9575cd" },
+            }}
+            onClick={() => setContinueForm(false)}
+          >
+            <NavigateBeforeIcon sx={{ fontSize: "14px" }} />
+          </Button>
+        ) : undefined}
+        <Typography
+          fontSize={15}
+          color="#757575"
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          Already a user ?&nbsp;
+          <Link href="/login" sx={{ color: "#9575cd" }}>
+            Login
+          </Link>
+        </Typography>
+>>>>>>> 8c4416c3e5dbd94e051b3762b70e465c843f4eae
       </Box>
-    </Box>
+    </AuthFormLayout>
   );
 }

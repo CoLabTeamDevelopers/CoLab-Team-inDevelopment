@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.js";
@@ -27,4 +28,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <App />
     </ThemeProvider>
   </React.StrictMode>
+=======
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+
+import App from "./App.js";
+
+createRoot(document.querySelector("#root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+>>>>>>> 8c4416c3e5dbd94e051b3762b70e465c843f4eae
 );
