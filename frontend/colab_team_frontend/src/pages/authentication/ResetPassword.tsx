@@ -1,28 +1,14 @@
-import React, { useReducer, useRef } from "react";
-
-import { resetPasswordSchema } from "../../schemas/authSchemas";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FormControl, Slide } from "@mui/material";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
-import {
-  AuthBoxStyle,
-  AuthLogoStyle,
-  AuthTextFieldStyle,
-  AuthButtonsStyle,
-  AuthRegisterStyle,
-} from "../../components/authentication/customStyles/AuthStyles";
-import BasicTextFields from "../../components/TextField";
-import PasswordAdornment from "../../components/authentication/PasswordAdornment";
-
-import CoLab from "../../assets/images/CoLab - Logo Light.png";
-import Waves from "../../assets/svg/Wave";
-
-import { Box, Button, Slide, FormControl, Typography } from "@mui/material";
-
-import { resetPasswordTypes } from "../../typings/authTypes";
-
-import { authReducer } from "../../reducers/authFormReducer";
-import { AuthInitialState } from "../../states/authInitialState";
+import ActionButton from "@/components/form/ActionButton";
+import PasswordField from "@/components/form/PasswordField";
+import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AuthFormLayout from "@/layouts/AuthForm";
+import { resetPasswordSchema } from "@/schemas/authSchemas";
+import { resetPasswordTypes } from "@/typings/authTypes";
 
 export default function ResetPasswordPage() {
   const { handleSubmit, control, reset } = useForm<resetPasswordTypes>({
@@ -31,73 +17,32 @@ export default function ResetPasswordPage() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const [state, dispatch] = useReducer(authReducer, AuthInitialState);
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onSubmit(data: Record<string, any>) {
     console.log(data);
     reset();
   }
 
   return (
-    <Box sx={AuthBoxStyle}>
-      <Box sx={AuthLogoStyle}>
-        <img src={CoLab} alt="app_img" width={200} height={200} />
-      </Box>
-      <Typography
-        fontSize={25}
-        sx={{ textAlign: "center", color: "#673ab7" }}
-        fontFamily="Roboto"
+    <AuthFormLayout title="Reset Password">
+      <FormControl
+        sx={{ gap: "10px" }}
+        component="form"
+        ref={formRef}
+        onSubmit={handleSubmit((data) => onSubmit(data))}
       >
-        Reset Password
-      </Typography>
-      <Waves />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          marginTop: "10px",
-        }}
-      >
-        <FormControl
-          sx={{ gap: "10px" }}
-          id="registrationForm"
-          component="form"
-          ref={formRef}
-          onSubmit={handleSubmit((data) => onSubmit(data))}
-        >
-          <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-            <Box sx={AuthRegisterStyle}>
-              <BasicTextFields
-                id={"newPassword"}
-                label={"New Password"}
-                name={"password"}
-                type={state.togglePasswordView ? "text" : "password"}
-                control={control}
-                inputProps={
-                  <PasswordAdornment
-                    dispatch={dispatch}
-                    togglePasswordView={state.togglePasswordView}
-                  />
-                }
-                sx={AuthTextFieldStyle}
-              />
-              <BasicTextFields
-                id={"confirmNewPassword"}
-                label={"Confirm New Password"}
-                name={"confirmPassword"}
-                type={state.togglePasswordView ? "text" : "password"}
-                control={control}
-                inputProps={null}
-                sx={AuthTextFieldStyle}
-              />
-            </Box>
-          </Slide>
-          <Button type="submit" variant="contained" sx={AuthButtonsStyle}>
-            Reset Password
-          </Button>
-        </FormControl>
-      </Box>
-    </Box>
+        <Slide direction="right" in mountOnEnter unmountOnExit>
+          <TextFieldContainer>
+            <PasswordField control={control} label="New Password" />
+            <PasswordField
+              control={control}
+              name="confirmPassword"
+              label="Confirm New Password"
+            />
+          </TextFieldContainer>
+        </Slide>
+        <ActionButton label="Reset Password" />
+      </FormControl>
+    </AuthFormLayout>
   );
 }
