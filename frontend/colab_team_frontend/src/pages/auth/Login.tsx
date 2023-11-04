@@ -1,7 +1,7 @@
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, FormControl, Link, Slide, Typography } from "@mui/material";
+import { useRef } from "react";
+import { useForm } from "react-hook-form";
 
 import ActionButton from "@/components/form/ActionButton";
 import EmailField from "@/components/form/EmailField";
@@ -10,7 +10,6 @@ import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
 import { loginSchema } from "@/schemas/authSchemas";
 import { loginTypes } from "@/typings/authTypes";
-import { FORGOT_PASSWORD, REGISTER } from "@/api/auth/authEndpoints";
 
 export default function LoginPage() {
   const { handleSubmit, control, reset } = useForm<loginTypes>({
@@ -29,7 +28,6 @@ export default function LoginPage() {
   return (
     <AuthFormLayout title="Login">
       <FormControl
-        sx={{ gap: "10px" }}
         component="form"
         ref={formRef}
         onSubmit={handleSubmit(onSubmit)}
@@ -48,10 +46,19 @@ export default function LoginPage() {
           color="#757575"
           sx={{ display: "flex", justifyContent: "center" }}
         >
-          <Link href={FORGOT_PASSWORD}>&nbsp;Forgot Password ?</Link>
+          <Link href="/forgot-password" sx={{ color: "#9575cd" }}>
+            &nbsp;Forgot Password ?
+          </Link>
         </Typography>
-        <Typography color="#757575">
-          Not a user ?<Link href={REGISTER}>&nbsp;Signup</Link>
+        <Typography
+          fontSize={15}
+          color="#757575"
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          Not a user ?
+          <Link href="/register" sx={{ color: "#9575cd" }}>
+            &nbsp;Signup
+          </Link>
         </Typography>
       </Box>
     </AuthFormLayout>
