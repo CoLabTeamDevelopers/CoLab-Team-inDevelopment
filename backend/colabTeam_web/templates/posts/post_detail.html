@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-  <h1>{{ post.title }}</h1>
-  <p>{{ post.description }}</p>
-  <p>{{ post.user }}</p>
+{% block title %}{{ post.title }} Add Post{% endblock %}
 
-  <a href="{% url 'home_app:posts' %}">Back to Posts</a>
+{% block content %}
+<br>
+<a href="{% url 'home_app:posts' %}" class="btn btn-outline-primary">Back to Posts</a>
+  <div class="card m-4">
+    <h5 class="card-header">{{ post.title }} | {{ post.category }}</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{ post.benefits }}</h5>
+      <p class="card-text">{{ post.description }} </p>
+      <hr>
+      <p class="card-text">Max Contributors Allowed: {{ post.max_contributors }} </p>
+      <p>Request by: {{ post.user }}</p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="#" class="btn btn-primary">Apply</a>
+      </div>
+    </div>
+  </div>
 
-
-</body>
-</html>
+  {% endblock %}

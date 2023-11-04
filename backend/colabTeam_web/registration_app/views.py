@@ -20,7 +20,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from .models import Profile
-
+from api.models import Post
 
 
 # View for user login
@@ -155,9 +155,12 @@ def error_page(request):
     return render(request, "registration/error.html")
 
 
-
+@login_required(login_url="registration_app:login")
 def profilePage(request):
-    return render(request, "profile/profile.html")
+    user = request.user
+    user_posts = Post.objects.filter(user=user)
+    return render(request, 'profile/profile.html', {'user_posts': user_posts, 'user': user})
+
 
 
 @login_required(login_url="registration_app:login")

@@ -36,20 +36,45 @@
     <main class="main-container" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
         <div class="container">
             <div class="profile-photo-container">
-                <img src="{{ user.profile.profilePic.url}}" alt="User Image" width="100px" srcset="">
+                <img src="{{ user.profile.profilePic.url }}" alt="User Image" width="100px" srcset="">
             </div>
-
-
+    
             <div class="user-content-container">
-                <p class="username">{{ user.profile.user }}</p>
-                <p class="user-title">{{ user.profile.fName }}</p>
-                <p class="user-desc">{{ user.profile.bioText }}</p>
+                <p class="username">Username: {{ user.profile.user }}</p>
+                <p class="user-title">Name: {{ user.profile.fName }} {{ user.profile.lName }}</p>
+                <p id="bio" class="user-desc">{{ user.profile.bioText }}</p>
                 <div class="profile-edit-link-container">
                     <a href="{% url 'registration_app:edit_profile' %}">Edit</a>
                 </div>
             </div>
         </div>
     </main>
+    
+    
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 container">
+        {% if user_posts %}
+                {% for post in user_posts %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://wpklik.com/wp-content/uploads/2018/10/wordpress-blog-post.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.description|truncatewords:100 }}
+              </p>
+              <a href="{% url 'home_app:post_detail' post_id=post.pk %}"><button type="button" class="btn btn-secondary">Update</button></a>
+              <a href="{% url 'home_app:post_detail' post_id=post.pk %}"><button type="button" class="btn btn-outline-warning">More →</button></a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+            {% else %}
+            <center>
+                No posts to display
+            </center>
+            {% endif %}
+      </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
