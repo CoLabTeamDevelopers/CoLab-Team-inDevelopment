@@ -1,7 +1,12 @@
-import Router from "@/Router";
+import Router from "./Router";
+import StoreProvider from "./Store";
 
 function App() {
-  return <Router />;
+  return (
+    <StoreProvider>
+      <Router />
+    </StoreProvider>
+  );
 }
 
 export default App;
