@@ -6,6 +6,8 @@ import { Box, Card, Chip, Typography } from "@mui/material";
 
 import NavBar from "../../components/Navbar";
 
+import Image from "../../components/Image";
+
 import {
   ProjectCardChipStyle,
   ProjectCardContentStyle,
@@ -31,7 +33,7 @@ export default function ProjectsListPage() {
       <Box sx={ProjectListCardStyle}>
         <Card sx={ProjectCardStyle}>
           <Box sx={ProjectCardImageStyle}>
-            <img
+            <Image
               src="https://neural.love/cdn/ai-photostock/1edc6d57-83d6-69c8-b715-b73582e1fb7e/0.jpg?Expires=1701388799&Signature=UgnN5MpbWI6UFRgYyo4JHbHKt0KOlFodnrbgew0~xjBAxv2rO3JJkGLmOZeLQzvhW-O0lc~3VJQ1ERpVogvkHbiRXWHdZ~mtlohtDfY6plfZPohI~pP25LYLf2P7WJQiAdpIuajlKH5nI05cuJewLPbgbf7-u6nBGtY-IYfNTvtuJjJKwJ0Y7fmsI-PW-K~y30Lv7bEsAU8orHMHfgWnRj-97SnvLKKGlT3jYNF5I~6Kk0Eo9Kq6w4EgA~NRQG-K6zPuGW6Ry5HKZZ3MPDzzUURE1q54iP9OD2~J2XUEbvVFaNJArNvWGZu7fC~pil8gtSA0mzDIA7d1FFvD66m-tQ__&Key-Pair-Id=K2RFTOXRBNSROX"
               alt="Project Logo"
               width="100%"

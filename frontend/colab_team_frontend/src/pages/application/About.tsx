@@ -5,6 +5,8 @@ import { Box, Container, Typography } from "@mui/material";
 import ColabAbout from "../../assets/images/Colab About Light.png";
 import AboutCss from "../../styles/About.module.css";
 
+import Image from "../../components/Image";
+
 import { AboutBoxStyle } from "../../styles/customStyles/CustomStyles";
 
 export default function AboutPage() {
@@ -28,11 +30,12 @@ export default function AboutPage() {
         </Typography>
       </Container>
       <Box>
-        <img
+        <Image
           className={AboutCss["about-logo"]}
           src={ColabAbout}
           width={300}
           height={300}
+          alt="About Logo"
         />
       </Box>
     </Box>

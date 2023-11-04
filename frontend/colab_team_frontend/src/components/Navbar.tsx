@@ -4,16 +4,18 @@ import { AppBar, Box, Toolbar, Typography, Button, Link } from "@mui/material/";
 
 import NavDrawer from "./NavDrawer";
 
+import { ButtonsStyle } from "../styles/customStyles/CustomStyles";
+
 import {
-  ButtonsStyle,
   ColabTitleStyle,
-  NavigationLinksStyle,
   TeamTitleStyle,
-} from "../styles/customStyles/CustomStyles";
+} from "../styles/customStyles/AppStyles";
+
+import NavLinks from "./NavLinks";
 
 export default function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar sx={{ background: "#ede7f6" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center", width: "120px" }}>
@@ -25,74 +27,15 @@ export default function NavBar() {
                 alignItems: "baseline",
               }}
             >
-              <Typography
-                fontFamily={"Helvetica Neue"}
-                fontStyle={"oblique"}
-                variant="h4"
-                color={"#9575cd"}
-                sx={ColabTitleStyle}
-              >
+              <Typography fontSize={30} sx={ColabTitleStyle}>
                 COLAB
               </Typography>
-              <Typography
-                fontFamily={"Helvetica Neue"}
-                fontStyle={"oblique"}
-                variant="h6"
-                color={"#673ab7"}
-                sx={TeamTitleStyle}
-              >
+              <Typography fontSize={20} sx={TeamTitleStyle}>
                 TEAM
               </Typography>
             </Box>
           </Box>
-          <Box
-            sx={{
-              display: "flex",
-              gap: "50px",
-              justifyContent: "center",
-            }}
-          >
-            <Link
-              href="home"
-              sx={NavigationLinksStyle}
-              fontSize={18}
-              underline="none"
-            >
-              Home
-            </Link>
-            <Link
-              href="projects"
-              sx={NavigationLinksStyle}
-              fontSize={18}
-              underline="none"
-            >
-              Projects
-            </Link>
-            <Link
-              href="workspace"
-              sx={NavigationLinksStyle}
-              fontSize={18}
-              underline="none"
-            >
-              Workspace
-            </Link>
-            <Link
-              href="discuss"
-              sx={NavigationLinksStyle}
-              fontSize={18}
-              underline="none"
-            >
-              Discuss
-            </Link>
-            <Link
-              href="about"
-              sx={NavigationLinksStyle}
-              fontSize={18}
-              underline="none"
-            >
-              About
-            </Link>
-          </Box>
+          <NavLinks />
           <Box
             sx={{
               display: "flex",

@@ -57,37 +57,10 @@ const ColabLogoBoxStyle = {
   transform: "translate(-50%, -50%)",
 };
 
-const ColabTitleStyle = {
-  flexGrow: 1,
-  display: "flex",
-  alignItems: "end",
-  letterSpacing: "1px",
-  textTransform: "none",
-  "@media (max-width: 600px)": {
-    fontSize: "20px",
-  },
-};
-
-const TeamTitleStyle = {
-  ColabTitleStyle: ColabTitleStyle,
-  "@media (max-width: 600px)": {
-    fontSize: "12px",
-  },
-};
-
-const NavigationLinksStyle = {
-  color: "#7e57c2",
-  "&:hover": {
-    color: "#512da8",
-  },
-  "@media (max-width: 1024px)": {
-    display: "none",
-  },
-};
-
 const NavigationDrawerStyle = {
   display: "none",
   "@media (max-width: 1024px)": {
+    background: "#ede7f6",
     display: "block",
     width: "10%",
   },
@@ -105,6 +78,7 @@ const AboutBoxStyle = {
 };
 
 const ProjectListBoxStyle = {
+  marginTop: "6rem",
   "@media (max-width: 1024px)": {
     width: "100%",
   },
@@ -113,7 +87,7 @@ const ProjectListBoxStyle = {
 const ProjectListCardStyle = {
   width: "55%",
   margin: "auto",
-  marginTop: "6rem",
+  // marginTop: "6rem",
   "@media (max-width: 600px)": {
     width: "100%",
   },
@@ -167,6 +141,56 @@ const ProjectCardContentStyle = {
 
 const ProjectCardChipStyle = { background: "#ede7f6" };
 
+const ProjectRootBoxStyle = {
+  width: "60%",
+  margin: "auto",
+  gap: "15px",
+  "@media (max-width: 600px)": {
+    width: "100%",
+  },
+};
+
+const ProjectBoxStyle = {
+  display: "flex",
+  justifyContent: "center",
+  width: "100%",
+  margin: "auto",
+  marginTop: "6rem",
+  gap: "15px",
+  "@media (max-width: 600px)": {
+    display: "grid",
+    justifyContent: "center",
+  },
+};
+
+const ProjectBoxImageStyle = {
+  "@media (max-width: 600px)": {
+    display: "flex",
+    justifyContent: "center",
+  },
+};
+
+const ProjectTitleFontStyle = {
+  "@media (max-width: 600px)": {
+    fontSize: "17px",
+  },
+};
+
+const ProjectSubContentFontStyle = {
+  "@media (max-width: 600px)": {
+    fontSize: "14px",
+  },
+};
+
+const ProjectContentBoxStyle = {
+  display: "grid",
+  gap: "15px",
+  padding: "0px 20px",
+  "@media (max-width: 600px)": {
+    padding: "0",
+  },
+};
+
 export {
   AuthBoxStyle,
   ButtonsStyle,
@@ -174,9 +198,6 @@ export {
   AuthTextFieldStyle,
   AuthRegisterStyle,
   AuthResgisterBackButtonStyle,
-  ColabTitleStyle,
-  TeamTitleStyle,
-  NavigationLinksStyle,
   NavigationDrawerStyle,
   AboutBoxStyle,
   ColabLogoBoxStyle,
@@ -188,4 +209,10 @@ export {
   ProjectCardImageStyle,
   ProjectCardContentStyle,
   ProjectCardChipStyle,
+  ProjectRootBoxStyle,
+  ProjectBoxStyle,
+  ProjectBoxImageStyle,
+  ProjectTitleFontStyle,
+  ProjectSubContentFontStyle,
+  ProjectContentBoxStyle,
 };

@@ -1,6 +1,8 @@
 import * as React from "react";
 
-import { styled, useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+
+import { styled } from "@mui/material/styles";
 import {
   Box,
   Drawer,
@@ -11,13 +13,21 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Link,
+  Typography,
 } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import DescriptionIcon from "@mui/icons-material/Description";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
 import { NavigationDrawerStyle } from "../styles/customStyles/CustomStyles";
+
+import { navLinks } from "./NavLinks";
 
 const drawerWidth = 240;
 
@@ -30,9 +40,23 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+const navIcons = [
+  { icon: <HomeIcon sx={{ color: "#9575cd" }} /> },
+  { icon: <ViewListIcon sx={{ color: "#9575cd" }} /> },
+  { icon: <WorkspacesIcon sx={{ color: "#9575cd" }} /> },
+  { icon: <Diversity3Icon sx={{ color: "#9575cd" }} /> },
+  { icon: <DescriptionIcon sx={{ color: "#9575cd" }} /> },
+];
+
+const drawerLinks = navLinks.map((links, index) => ({
+  ...links,
+  ...navIcons[index],
+}));
+
 export default function NavDrawer() {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -62,36 +86,29 @@ export default function NavDrawer() {
         variant="persistent"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader sx={{ justifyContent: "space-between" }}>
+          <Typography>Colab</Typography>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {["Home", "Projects", "Workspace", "Discuss", "About"].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
+          {drawerLinks.map((item, index) => (
+            <ListItem key={index} disablePadding>
+              <ListItemButton onClick={() => navigate(item.href)}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
         <Divider />
         <List>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <InboxIcon />
+                <LogoutIcon sx={{ color: "#9575cd" }} />
               </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItemButton>
