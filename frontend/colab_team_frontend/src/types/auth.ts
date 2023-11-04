@@ -19,8 +19,12 @@ export interface User {
   last_name: string;
 }
 
+export interface Token {
+  expiry_date: string;
+  key: string;
+}
+
 export interface LoginResponse {
-  expiry: string;
-  token: string;
+  token: Token;
   user: User;
 }

@@ -1,17 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { User } from "@/types/auth";
+import { Token, User } from "@/types/auth";
 
 import authApi from "../api/auth";
 
 interface AuthState {
   user?: User;
+  authToken?: Token;
   authenticated: boolean;
 }
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: { authenticated: false, user: undefined } as AuthState,
+  initialState: { authenticated: false } as AuthState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -19,6 +20,7 @@ const authSlice = createSlice({
       (state, { payload }) => {
         state.authenticated = true;
         state.user = payload.user;
+        state.authToken = payload.token;
       }
     );
   },
