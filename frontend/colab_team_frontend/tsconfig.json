@@ -21,6 +21,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "types": [
+      "vite/client"
+    ],
     "checkJs": true,
     "baseUrl": ".",
     "paths": {
