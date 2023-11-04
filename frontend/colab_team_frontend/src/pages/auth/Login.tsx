@@ -4,25 +4,30 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import ActionButton from "@/components/form/ActionButton";
-import EmailField from "@/components/form/EmailField";
+import BasicTextField from "@/components/form/BaseTextField";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
-import { loginSchema } from "@/schemas/authSchemas";
-import { loginTypes } from "@/typings/authTypes";
+import { loginSchema } from "@/schemas/auth";
+import { useLoginMutation } from "@/store/api/auth";
+import { LoginSchema } from "@/types/auth";
 
 export default function LoginPage() {
-  const { handleSubmit, control, reset } = useForm<loginTypes>({
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const { handleSubmit, control, reset } = useForm<LoginSchema>({
     resolver: yupResolver(loginSchema),
   });
+  const [login] = useLoginMutation();
 
-  const formRef = useRef<HTMLFormElement | null>(null);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function onSubmit(data: Record<string, any>) {
-    console.log(data);
-    formRef.current?.reset();
-    reset();
+  async function onSubmit(data: LoginSchema) {
+    try {
+      const payload = await login(data).unwrap();
+      console.log("Received data:", payload);
+      formRef.current?.reset();
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -34,7 +39,11 @@ export default function LoginPage() {
       >
         <Slide direction="right" in mountOnEnter unmountOnExit>
           <TextFieldContainer>
-            <EmailField control={control} />
+            <BasicTextField
+              name="username"
+              control={control}
+              fieldProps={{ label: "Username" }}
+            />
             <PasswordField control={control} />
           </TextFieldContainer>
         </Slide>

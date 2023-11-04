@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { PropsWithChildren } from "react";
 
 import CoLabLightLogo from "@/assets/images/CoLab - Logo Light.png";
 import Waves from "@/assets/svg/Wave";
@@ -6,7 +7,7 @@ import Waves from "@/assets/svg/Wave";
 export default function AuthFormLayout({
   children,
   title,
-}: React.PropsWithChildren<{ title: string }>) {
+}: PropsWithChildren<{ title: string }>) {
   return (
     <Box
       sx={{

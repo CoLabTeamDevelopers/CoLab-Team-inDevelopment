@@ -6,16 +6,18 @@ import authApi from "../api/auth";
 
 interface AuthState {
   user?: User;
+  authenticated: boolean;
 }
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {} as AuthState,
+  initialState: { authenticated: false, user: undefined } as AuthState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
       authApi.endpoints.login.matchFulfilled,
       (state, { payload }) => {
+        state.authenticated = true;
         state.user = payload.user;
       }
     );
