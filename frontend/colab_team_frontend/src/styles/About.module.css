@@ -1,8 +1,0 @@
-img {
-  filter: "grayscale(1)";
-  transition: "filter .3s ease-in-out";
-}
-
-img:hover {
-  filter: none;
-}

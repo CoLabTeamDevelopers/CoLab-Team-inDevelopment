@@ -1,6 +1,4 @@
-import React, { CSSProperties } from "react";
-
-import { Box } from "@mui/material";
+import { CSSProperties } from "react";
 
 type ImageProps = {
   src: string;

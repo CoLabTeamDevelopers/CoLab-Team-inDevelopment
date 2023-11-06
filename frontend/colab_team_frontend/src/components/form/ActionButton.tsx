@@ -10,17 +10,7 @@ export default function ActionButton({
   ...otherProps
 }: Props) {
   return (
-    <Button
-      type={type}
-      variant="contained"
-      sx={{
-        background: "#b39ddb",
-        width: "100%",
-        textTransform: "none",
-        "&:hover": { background: "#9575cd" },
-      }}
-      {...otherProps}
-    >
+    <Button type={type} variant="contained" {...otherProps}>
       {label}
     </Button>
   );

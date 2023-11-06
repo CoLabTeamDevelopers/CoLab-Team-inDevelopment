@@ -1,6 +1,4 @@
-import React from "react";
-
-import SvgCss from "../../styles/ColabSvg.module.css";
+import SvgCss from "@/styles/cssStyles/ColabSvg.module.css";
 
 const svgStyle = {
   stroke: "#311b92",
