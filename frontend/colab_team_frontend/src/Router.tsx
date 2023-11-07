@@ -1,10 +1,7 @@
-import { useEffect } from "react";
 import {
   createBrowserRouter,
-  Outlet,
   RouteObject,
   RouterProvider,
-  useNavigate,
 } from "react-router-dom";
 
 import HomePage from "@/pages/app/Home";
@@ -30,7 +27,7 @@ const appRoutes: RouteObject[] = [
 const router = createBrowserRouter([
   { index: true, element: <HomePage /> },
   { path: "*", element: <h1>404 - Not Found</h1> },
-  { children: authRoutes, element: <AuthRoutesGuard /> },
+  ...authRoutes,
   ...appRoutes,
 ]);
 

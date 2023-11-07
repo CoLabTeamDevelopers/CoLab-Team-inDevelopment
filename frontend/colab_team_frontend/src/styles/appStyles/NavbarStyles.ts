@@ -16,4 +16,4 @@ const NavigationDrawerStyle = {
   },
 };
 
-export { NavigationLinksStyle, NavigationDrawerStyle };
+export { NavigationDrawerStyle,NavigationLinksStyle };

@@ -1,11 +1,10 @@
-import { AppBar, Box, Toolbar, Typography, Button, Link } from "@mui/material/";
+import { AppBar, Box, Button, Link,Toolbar, Typography } from "@mui/material/";
 
+import { LOGIN, REGISTER } from "@/api/auth/authEndpoints";
 import NavDrawer from "@/components/navbar/NavDrawer";
 
 import { TitleStyle } from "../../styles/appStyles/TitleStyles";
-
 import NavLinks from "./NavLinks";
-import { LOGIN, REGISTER } from "@/api/auth/authEndpoints";
 
 export default function NavBar() {
   return (

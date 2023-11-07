@@ -1,4 +1,4 @@
-import { InferType } from "yup";
+import type { InferType } from "yup";
 
 import {
   forgotPasswordSchema,

@@ -1,18 +1,18 @@
-import React from "react";
+import { Box, Card, Link, Typography } from "@mui/material";
+import { Fragment } from "react";
 
-import { Box, Card, Typography, Link } from "@mui/material";
-import NavBar from "@/components/navbar/Navbar";
 import Image from "@/components/Image";
+import NavBar from "@/components/navbar/Navbar";
+import ProjectTags from "@/components/projectsList/ProjectTags";
+import AppContentLayout from "@/layouts/AppContent";
 import {
   ProjectCardContentStyle,
   ProjectListCardStyle,
 } from "@/styles/appStyles/ProjectListStyles";
-import AppContentLayout from "@/layouts/AppContent";
-import ProjectTags from "@/components/projectsList/ProjectTags";
 
 export default function ProjectsListPage() {
   return (
-    <React.Fragment>
+    <Fragment>
       <NavBar />
       <AppContentLayout>
         <Card sx={ProjectListCardStyle}>
@@ -35,6 +35,6 @@ export default function ProjectsListPage() {
           </Box>
         </Card>
       </AppContentLayout>
-    </React.Fragment>
+    </Fragment>
   );
 }

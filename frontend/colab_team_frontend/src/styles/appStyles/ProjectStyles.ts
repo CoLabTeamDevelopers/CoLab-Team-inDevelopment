@@ -41,9 +41,9 @@ const ProjectContentBoxStyle = {
 };
 
 export {
-  ThumbnailStyle,
-  ProjectBoxStyle,
-  ProjectDetailsStyle,
   ProjectBoxImageStyle,
+  ProjectBoxStyle,
   ProjectContentBoxStyle,
+  ProjectDetailsStyle,
+  ThumbnailStyle,
 };

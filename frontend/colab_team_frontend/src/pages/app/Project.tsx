@@ -1,24 +1,22 @@
-import React from "react";
+import { Box, Divider, Typography } from "@mui/material";
+import { Fragment } from "react";
 
-import { Box, Typography, Divider } from "@mui/material";
 import ColabLightLogo from "@/assets/images/Colab About Light.png";
-import NavBar from "@/components/navbar/Navbar";
 import Image from "@/components/Image";
+import NavBar from "@/components/navbar/Navbar";
+import ProjectDetails from "@/components/project/ProjectDetails";
+import RolesAndResponsiblities from "@/components/project/RolesAndResponsiblities";
+import AppContentLayout from "@/layouts/AppContent";
 import {
   ProjectBoxImageStyle,
-  ProjectContentBoxStyle,
-} from "@/styles/appStyles/ProjectStyles";
-import AppContentLayout from "@/layouts/AppContent";
-import RolesAndResponsiblities from "@/components/project/RolesAndResponsiblities";
-import {
   ProjectBoxStyle,
+  ProjectContentBoxStyle,
   ThumbnailStyle,
 } from "@/styles/appStyles/ProjectStyles";
-import ProjectDetails from "@/components/project/ProjectDetails";
 
 export default function ProjectPage() {
   return (
-    <React.Fragment>
+    <Fragment>
       <NavBar />
       <AppContentLayout>
         <Box sx={ProjectBoxStyle}>
@@ -45,6 +43,6 @@ export default function ProjectPage() {
           </Box>
         </Box>
       </AppContentLayout>
-    </React.Fragment>
+    </Fragment>
   );
 }

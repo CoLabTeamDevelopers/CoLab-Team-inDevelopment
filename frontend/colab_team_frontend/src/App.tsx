@@ -1,10 +1,15 @@
+import { ThemeProvider } from "@mui/material";
+
 import Router from "./Router";
 import { StoreProvider } from "./store";
+import { GlobalTheme } from "./styles/GlobalStyles";
 
 function App() {
   return (
     <StoreProvider>
-      <Router />
+      <ThemeProvider theme={GlobalTheme}>
+        <Router />
+      </ThemeProvider>
     </StoreProvider>
   );
 }

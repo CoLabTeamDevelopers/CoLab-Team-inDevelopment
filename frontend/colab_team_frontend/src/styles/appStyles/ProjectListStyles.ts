@@ -20,4 +20,4 @@ const ProjectCardContentStyle = {
   },
 };
 
-export { ProjectListCardStyle, ProjectCardContentStyle };
+export { ProjectCardContentStyle,ProjectListCardStyle };
