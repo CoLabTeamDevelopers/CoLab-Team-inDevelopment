@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import {
@@ -8,8 +10,6 @@ import {
   Slide,
   Typography,
 } from "@mui/material";
-import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 
 import ActionButton from "@/components/form/ActionButton";
 import BasicTextField from "@/components/form/BaseTextField";
@@ -19,6 +19,7 @@ import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
 import { registrationSchema } from "@/schemas/authSchemas";
 import { registrationTypes } from "@/typings/authTypes";
+import { LOGIN } from "@/api/auth/authEndpoints";
 
 export default function RegistrationPage() {
   const [continueForm, setContinueForm] = useState(false);
@@ -119,15 +120,9 @@ export default function RegistrationPage() {
             <NavigateBeforeIcon sx={{ fontSize: "14px" }} />
           </Button>
         ) : undefined}
-        <Typography
-          fontSize={15}
-          color="#757575"
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
+        <Typography color="#757575">
           Already a user ?&nbsp;
-          <Link href="/login" sx={{ color: "#9575cd" }}>
-            Login
-          </Link>
+          <Link href={LOGIN}>Login</Link>
         </Typography>
       </Box>
     </AuthFormLayout>

@@ -1,4 +1,7 @@
+
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 export interface loginTypes {
   email: string;
@@ -20,6 +23,19 @@ export interface resetPasswordTypes {
   password: string;
   confirmPassword: string;
 }
+
+
+export interface BasicTextFieldPropTypes {
+  id: string;
+  label: string;
+  name: string;
+  type: string;
+  control: any;
+  inputProps: any;
+  sx: any;
+}
+
+
 
 export type ReducerAppStateTypes = {
   continueRegistrationForm: boolean;

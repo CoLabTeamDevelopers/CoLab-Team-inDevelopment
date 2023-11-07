@@ -4,11 +4,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Home from "@/pages/app/Home.tsx";
-import ForgotPasswordPage from "@/pages/authentication/ForgotPassword";
-import LoginPage from "@/pages/authentication/Login";
-import RegistrationPage from "@/pages/authentication/Registration";
-import ResetPasswordPage from "@/pages/authentication/ResetPassword";
+import HomePage from "@/pages/app/Home";
+import ForgotPasswordPage from "@/pages/auth/ForgotPassword";
+import LoginPage from "@/pages/auth/Login";
+import RegistrationPage from "@/pages/auth/Registration";
+import ResetPasswordPage from "@/pages/auth/ResetPassword";
+import ProjectsListPage from "@/pages/app/ProjectsList";
+import ProjectPage from "./pages/app/Project";
 
 const authRoutes: RouteObject[] = [
   { path: "/login", element: <LoginPage /> },
@@ -17,10 +19,16 @@ const authRoutes: RouteObject[] = [
   { path: "/reset-password", element: <ResetPasswordPage /> },
 ];
 
+const appRoutes: RouteObject[] = [
+  { path: "/projects", element: <ProjectsListPage /> },
+  { path: "/projects/:project_url", element: <ProjectPage /> },
+];
+
 const router = createBrowserRouter([
-  { index: true, element: <Home /> },
+  { index: true, element: <HomePage /> },
   { path: "*", element: <h1>404 - Not Found</h1> },
   ...authRoutes,
+  ...appRoutes,
 ]);
 
 const Router = () => <RouterProvider router={router} />;
