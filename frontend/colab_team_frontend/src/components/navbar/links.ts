@@ -1,9 +1,7 @@
-import { ABOUT, DISCUSS, PROJECTS, WORKSPACE } from "@/api/app/appEndpoints";
-
 export const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Projects", href: PROJECTS },
-  { label: "Workspace", href: WORKSPACE },
-  { label: "Discuss", href: DISCUSS },
-  { label: "About", href: ABOUT },
+  { label: "Projects", href: "/projects" },
+  { label: "Workspace", href: "/workspace" },
+  { label: "Discuss", href: "/discuss" },
+  { label: "About", href: "/about" },
 ];

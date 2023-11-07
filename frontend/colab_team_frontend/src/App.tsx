@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@mui/material";
 
-import Router from "./Router";
+import Router from "./router";
 import { StoreProvider } from "./store";
 import { GlobalTheme } from "./styles/GlobalStyles";
 

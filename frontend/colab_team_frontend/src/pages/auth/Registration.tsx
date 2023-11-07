@@ -1,13 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import {
-  Box,
-  Button,
-  FormControl,
-  Link,
-  Slide,
-  Typography,
-} from "@mui/material";
+import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -16,6 +9,7 @@ import BasicTextField from "@/components/form/BaseTextField";
 import EmailField from "@/components/form/EmailField";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AppLink from "@/components/Link";
 import AuthFormLayout from "@/layouts/AuthForm";
 import { registrationSchema } from "@/schemas/auth";
 import { RegistrationSchema } from "@/types/auth";
@@ -125,9 +119,9 @@ export default function RegistrationPage() {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           Already a user ?&nbsp;
-          <Link href="/login" sx={{ color: "#9575cd" }}>
+          <AppLink href="/login" sx={{ color: "#9575cd" }}>
             Login
-          </Link>
+          </AppLink>
         </Typography>
       </Box>
     </AuthFormLayout>

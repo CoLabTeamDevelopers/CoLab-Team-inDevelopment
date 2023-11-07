@@ -15,17 +15,17 @@ import ResetPasswordPage from "@/pages/auth/ResetPassword";
 type Route = RouteObject[] | RouteObject;
 
 const authRoutes: Route = [
-  { path: "/login", element: <LoginPage /> },
-  { path: "/register", element: <RegistrationPage /> },
-  { path: "/forgot-password", element: <ForgotPasswordPage /> },
-  { path: "/reset-password", element: <ResetPasswordPage /> },
+  { path: "login", element: <LoginPage /> },
+  { path: "register", element: <RegistrationPage /> },
+  { path: "forgot-password", element: <ForgotPasswordPage /> },
+  { path: "reset-password", element: <ResetPasswordPage /> },
 ];
 
 const projectRoutes: Route = {
-  path: "/projects",
+  path: "projects",
   children: [
     { index: true, element: <ProjectsListPage /> },
-    { path: "/:project_url", element: <ProjectPage /> },
+    { path: ":project_url", element: <ProjectPage /> },
   ],
 };
 

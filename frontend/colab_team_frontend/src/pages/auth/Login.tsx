@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, FormControl, Link, Slide, Typography } from "@mui/material";
+import { Box, FormControl, Slide, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -7,6 +7,7 @@ import ActionButton from "@/components/form/ActionButton";
 import BasicTextField from "@/components/form/BaseTextField";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AppLink from "@/components/Link";
 import AuthFormLayout from "@/layouts/AuthForm";
 import { loginSchema } from "@/schemas/auth";
 import { useLoginMutation } from "@/store/api/auth";
@@ -52,9 +53,9 @@ export default function LoginPage() {
           color="#757575"
           sx={{ display: "flex", justifyContent: "center" }}
         >
-          <Link href="/forgot-password" sx={{ color: "#9575cd" }}>
+          <AppLink href="/forgot-password" sx={{ color: "#9575cd" }}>
             &nbsp;Forgot Password ?
-          </Link>
+          </AppLink>
         </Typography>
         <Typography
           fontSize={15}
@@ -62,9 +63,9 @@ export default function LoginPage() {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           Not a user ?
-          <Link href="/register" sx={{ color: "#9575cd" }}>
+          <AppLink href="/register" sx={{ color: "#9575cd" }}>
             &nbsp;Signup
-          </Link>
+          </AppLink>
         </Typography>
       </Box>
     </AuthFormLayout>
