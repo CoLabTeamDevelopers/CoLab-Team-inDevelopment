@@ -17,14 +17,14 @@ import EmailField from "@/components/form/EmailField";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
-import { registrationSchema } from "@/schemas/authSchemas";
-import { registrationTypes } from "@/typings/authTypes";
+import { registrationSchema } from "@/schemas/auth";
+import { RegistrationSchema } from "@/types/auth";
 
 export default function RegistrationPage() {
   const [continueForm, setContinueForm] = useState(false);
 
   const { handleSubmit, control, watch, setError, reset } =
-    useForm<registrationTypes>({
+    useForm<RegistrationSchema>({
       resolver: yupResolver(registrationSchema),
     });
 

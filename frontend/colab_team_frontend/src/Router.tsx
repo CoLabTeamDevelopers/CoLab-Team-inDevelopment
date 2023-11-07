@@ -12,23 +12,28 @@ import LoginPage from "@/pages/auth/Login";
 import RegistrationPage from "@/pages/auth/Registration";
 import ResetPasswordPage from "@/pages/auth/ResetPassword";
 
-const authRoutes: RouteObject[] = [
+type Route = RouteObject[] | RouteObject;
+
+const authRoutes: Route = [
   { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegistrationPage /> },
   { path: "/forgot-password", element: <ForgotPasswordPage /> },
   { path: "/reset-password", element: <ResetPasswordPage /> },
 ];
 
-const appRoutes: RouteObject[] = [
-  { path: "/projects", element: <ProjectsListPage /> },
-  { path: "/projects/:project_url", element: <ProjectPage /> },
-];
+const projectRoutes: Route = {
+  path: "/projects",
+  children: [
+    { index: true, element: <ProjectsListPage /> },
+    { path: "/:project_url", element: <ProjectPage /> },
+  ],
+};
 
 const router = createBrowserRouter([
   { index: true, element: <HomePage /> },
   { path: "*", element: <h1>404 - Not Found</h1> },
+  projectRoutes,
   ...authRoutes,
-  ...appRoutes,
 ]);
 
 const Router = () => <RouterProvider router={router} />;

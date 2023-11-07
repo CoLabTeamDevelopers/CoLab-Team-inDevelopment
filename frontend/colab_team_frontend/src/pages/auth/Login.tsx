@@ -14,17 +14,14 @@ import { LoginSchema } from "@/types/auth";
 
 export default function LoginPage() {
   const formRef = useRef<HTMLFormElement | null>(null);
-  const { handleSubmit, control, reset } = useForm<LoginSchema>({
+  const { handleSubmit, control } = useForm<LoginSchema>({
     resolver: yupResolver(loginSchema),
   });
   const [login] = useLoginMutation();
 
   async function onSubmit(data: LoginSchema) {
     try {
-      const payload = await login(data).unwrap();
-      console.log("Received data:", payload);
-      formRef.current?.reset();
-      reset();
+      await login(data).unwrap();
     } catch (error) {
       console.error(error);
     }
