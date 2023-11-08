@@ -12,28 +12,31 @@ import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AppLink from "@/components/Link";
 import AuthFormLayout from "@/layouts/AuthForm";
 import { registrationSchema } from "@/schemas/auth";
+import { useRegisterMutation } from "@/store/api/auth";
 import { RegistrationSchema } from "@/types/auth";
 
 export default function RegistrationPage() {
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [continueForm, setContinueForm] = useState(false);
-
-  const { handleSubmit, control, watch, setError, reset } =
+  const { handleSubmit, control, watch, setError } =
     useForm<RegistrationSchema>({
       resolver: yupResolver(registrationSchema),
     });
-
   const watchField = watch(["username", "email"]);
+  const [register] = useRegisterMutation();
 
-  const formRef = useRef<HTMLFormElement | null>(null);
+  async function onSubmit(data: RegistrationSchema) {
+    try {
+      await register(data).unwrap();
+      alert(
+        "An email has been sent with a verification link. Please check your inbox & activate your account."
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: Record<string, any>) => {
-    console.log(data);
-    formRef.current?.reset();
-    reset();
-  };
-
-  const handleContinue = () => {
+  function handleContinue() {
     if (watchField[0] && watchField[1]) {
       setContinueForm(true);
     } else {
@@ -50,7 +53,7 @@ export default function RegistrationPage() {
         });
       }
     }
-  };
+  }
 
   return (
     <AuthFormLayout title="Register">
