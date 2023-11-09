@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-
 import { Chip } from "@mui/material";
 
 type ChipProps = {

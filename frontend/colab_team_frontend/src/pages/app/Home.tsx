@@ -7,6 +7,7 @@ import ColabSubText from "@/styles/cssStyles/Home.module.css";
 import { Box, Typography } from "@mui/material";
 import Navbar from "@/components/navbar/Navbar";
 import AboutPage from "@/components/home/About";
+import Footer from "@/components/footer/Footer";
 
 export default function HomePage() {
   return (
@@ -37,6 +38,7 @@ export default function HomePage() {
       <Box component="section" sx={{ height: "100vh", display: "flex" }}>
         <AboutPage />
       </Box>
+      <Footer />
     </React.Fragment>
   );
 }
