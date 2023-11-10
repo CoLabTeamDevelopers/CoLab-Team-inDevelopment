@@ -5,7 +5,7 @@ import { AboutBoxStyle } from "@/styles/appStyles/HomeStyle";
 
 import Image from "../Image";
 
-export default function AboutPage() {
+export default function AboutSection() {
   return (
     <Box sx={AboutBoxStyle}>
       <Container sx={{ gap: "10px", display: "grid" }}>

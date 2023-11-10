@@ -1,16 +1,15 @@
 import { Box, Typography } from "@mui/material";
-import { Fragment } from "react";
 
 import ColabSVG from "@/assets/svg/ColabSvg";
 import TeamSVG from "@/assets/svg/TeamSvg";
-import AboutPage from "@/components/home/About";
+import AboutSection from "@/components/home/About";
 import Navbar from "@/components/navbar/Navbar";
 import { ColabLogoBoxStyle } from "@/styles/appStyles/HomeStyle";
 import ColabSubText from "@/styles/cssStyles/Home.module.css";
 
 export default function HomePage() {
   return (
-    <Fragment>
+    <>
       <Box component="section" sx={{ height: "100vh" }}>
         <Navbar />
         <Box sx={ColabLogoBoxStyle}>
@@ -35,8 +34,8 @@ export default function HomePage() {
         </Box>
       </Box>
       <Box component="section" sx={{ height: "100vh", display: "flex" }}>
-        <AboutPage />
+        <AboutSection />
       </Box>
-    </Fragment>
+    </>
   );
 }
