@@ -1,7 +1,8 @@
 import uuid
 
-from django.contrib.auth import login
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from knox.views import LoginView as KnoxLoginView
@@ -9,8 +10,8 @@ from rest_framework import decorators, permissions, status
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 
+from ..emails import send_password_reset_email, send_verification_email
 from ..models import Profile
-from ..utils import send_verification_email
 from . import serializers
 
 
@@ -77,12 +78,7 @@ def register_user(request):
 
         send_verification_email(user, profile)
 
-        result = {
-            "user": serializers.UserSerializer(instance=user).data,
-            "profile": serializers.ProfileSerializer(instance=profile).data,
-        }
-
-        return Response(result)
+        return Response(None)
 
 
 @decorators.api_view(["GET"])
@@ -97,3 +93,37 @@ def verify_user(request, token: str):
     profile.save()
 
     return redirect("http://localhost:5173/verify-email-success/")
+
+
+@decorators.api_view(["POST"])
+@decorators.permission_classes([permissions.AllowAny])
+def forgot_password(request):
+    serializer = serializers.ForgotPasswordSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    email = serializer.validated_data["email"]  # type: ignore
+    user = get_object_or_404(User, email=email)
+
+    send_password_reset_email(user)
+
+    return Response(None)
+
+
+@decorators.api_view(["POST"])
+@decorators.permission_classes([permissions.AllowAny])
+def reset_password(request, user_id: int, token: str):
+    serializer = serializers.ResetPasswordSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    user = get_object_or_404(User, pk=user_id)
+    token_exists = PasswordResetTokenGenerator().check_token(user, token)
+
+    if not token_exists:
+        return Response(data="Token has expired.", status=status.HTTP_410_GONE)
+
+    new_password = serializer.validated_data["new_password"]  # type: ignore
+    user.set_password(new_password)
+    user.save()
+    update_session_auth_hash(request, user)
+
+    return Response(None)

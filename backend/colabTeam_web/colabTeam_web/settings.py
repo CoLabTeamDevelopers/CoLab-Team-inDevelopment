@@ -16,6 +16,7 @@ from django.urls import reverse_lazy
 from environ import Env
 
 import os
+
 env = Env(DEBUG=(bool, True))
 
 
@@ -37,7 +38,7 @@ ALLOWED_HOSTS = []
 
 PASSWORD_RESET_EMAIL_TEMPLATE = "registration/custom_password_reset_email.html"
 
-LOGIN_URL = reverse_lazy('registration_app:login')
+LOGIN_URL = reverse_lazy("registration_app:login")
 
 # Application definition
 
@@ -152,6 +153,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 CORS_ALLOW_ALL_ORIGINS = True

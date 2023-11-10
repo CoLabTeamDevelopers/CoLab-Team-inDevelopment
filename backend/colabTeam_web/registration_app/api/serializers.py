@@ -32,3 +32,20 @@ class RegisterRequestSerializer(serializers.Serializer):
         if attrs["password"] != attrs["confirm_password"]:
             raise serializers.ValidationError("Passwords do not match.")
         return attrs
+
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class ResetPasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField()
+    new_password = serializers.CharField()
+    confirm_password = serializers.CharField()
+
+    def validate(self, attrs):
+        if attrs["old_password"] == attrs["new_password"]:
+            raise serializers.ValidationError("The new password must be different.")
+        if attrs["new_password"] != attrs["confirm_password"]:
+            raise serializers.ValidationError("Passwords do not match.")
+        return attrs
