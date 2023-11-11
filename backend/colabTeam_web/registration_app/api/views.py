@@ -1,7 +1,6 @@
 import uuid
 
 from django.contrib.auth import login, update_session_auth_hash
-from django.contrib.auth.models import User
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
@@ -11,7 +10,7 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 
 from ..emails import send_password_reset_email, send_verification_email
-from ..models import Profile
+from ..models import Profile, User
 from . import serializers
 
 
@@ -76,7 +75,7 @@ def register_user(request):
 
         profile = Profile.objects.create(user=user, auth_token=str(uuid.uuid4()))
 
-        send_verification_email(user, profile)
+        send_verification_email(request, user, profile)
 
         return Response(None)
 
@@ -104,7 +103,7 @@ def forgot_password(request):
     email = serializer.validated_data["email"]  # type: ignore
     user = get_object_or_404(User, email=email)
 
-    send_password_reset_email(user)
+    send_password_reset_email(request, user)
 
     return Response(None)
 
