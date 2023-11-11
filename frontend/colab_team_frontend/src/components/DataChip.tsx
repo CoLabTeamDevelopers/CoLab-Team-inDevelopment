@@ -1,13 +1,5 @@
-import { ReactElement } from "react";
+import { Chip, ChipOwnProps } from "@mui/material";
 
-import { Chip } from "@mui/material";
-
-type ChipProps = {
-  size: "small" | "medium";
-  label: string;
-  avatar?: ReactElement | undefined;
-};
-
-export default function DataChip({ size, label, avatar }: ChipProps) {
-  return <Chip size={size} label={label} variant="outlined" avatar={avatar} />;
+export default function DataChip(props: ChipOwnProps) {
+  return <Chip variant="outlined" {...props} />;
 }

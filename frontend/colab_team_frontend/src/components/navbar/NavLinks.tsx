@@ -1,27 +1,17 @@
-import {
-  ABOUT,
-  DISCUSS,
-  PROJECTS,
-  WORKSPACE,
-} from "@/api/app/appEndpoints";
-import { NavigationLinksStyle } from "@/styles/appStyles/NavbarStyles";
-import { Box, Link } from "@mui/material";
+import { Box } from "@mui/material";
 
-export const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: PROJECTS },
-  { label: "Workspace", href: WORKSPACE },
-  { label: "Discuss", href: DISCUSS },
-  { label: "About", href: ABOUT },
-];
+import { NavigationLinksStyle } from "@/styles/appStyles/NavbarStyles";
+
+import AppLink from "../Link";
+import { navLinks } from "./links";
 
 export default function NavLinks() {
   return (
     <Box sx={NavigationLinksStyle}>
       {navLinks.map((links, index) => (
-        <Link key={index} href={links.href}>
+        <AppLink key={index} href={links.href}>
           {links.label}
-        </Link>
+        </AppLink>
       ))}
     </Box>
   );

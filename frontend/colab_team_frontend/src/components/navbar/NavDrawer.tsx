@@ -1,30 +1,30 @@
-import * as React from "react";
-
-import { useNavigate } from "react-router-dom";
-
-import { styled } from "@mui/material/styles";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import DescriptionIcon from "@mui/icons-material/Description";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import HomeIcon from "@mui/icons-material/Home";
+import LogoutIcon from "@mui/icons-material/Logout";
+import MenuIcon from "@mui/icons-material/Menu";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import {
   Box,
-  Drawer,
-  List,
   Divider,
+  Drawer,
   IconButton,
+  List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
 } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
-import Diversity3Icon from "@mui/icons-material/Diversity3";
-import DescriptionIcon from "@mui/icons-material/Description";
-import LogoutIcon from "@mui/icons-material/Logout";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { styled } from "@mui/material/styles";
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
+
 import { NavigationDrawerStyle } from "@/styles/appStyles/NavbarStyles";
-import { navLinks } from "./NavLinks";
+
+import { navLinks } from "./links";
 
 const drawerWidth = 240;
 

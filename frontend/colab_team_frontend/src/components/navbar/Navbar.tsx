@@ -1,11 +1,10 @@
-import { AppBar, Box, Toolbar, Typography, Button, Link } from "@mui/material/";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material/";
 
 import NavDrawer from "@/components/navbar/NavDrawer";
 
 import { TitleStyle } from "../../styles/appStyles/TitleStyles";
-
+import AppLink from "../Link";
 import NavLinks from "./NavLinks";
-import { LOGIN, REGISTER } from "@/api/auth/authEndpoints";
 
 export default function NavBar() {
   return (
@@ -19,18 +18,13 @@ export default function NavBar() {
           </Box>
         </Box>
         <NavLinks />
-        <Box
-          sx={{
-            display: "flex",
-            gap: "10px",
-          }}
-        >
-          <Link href={LOGIN}>
+        <Box sx={{ display: "flex", gap: "10px" }}>
+          <AppLink href="/login">
             <Button variant="contained">Login</Button>
-          </Link>
-          <Link href={REGISTER}>
+          </AppLink>
+          <AppLink href="/register">
             <Button variant="contained">Register</Button>
-          </Link>
+          </AppLink>
         </Box>
       </Toolbar>
     </AppBar>

@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { Control } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { IconButton, InputAdornment } from "@mui/material";
+import { useState } from "react";
 
 import BasicTextField from "./BaseTextField";
 
 interface Props {
   name?: string;
   label?: string;
-  control: Control;
+  control: any;
 }
 
 export default function PasswordField({
