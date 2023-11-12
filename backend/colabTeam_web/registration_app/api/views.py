@@ -110,18 +110,19 @@ def forgot_password(request):
 
 @decorators.api_view(["POST"])
 @decorators.permission_classes([permissions.AllowAny])
-def reset_password(request, user_id: int, token: str):
+def reset_password(request):
     serializer = serializers.ResetPasswordSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
 
-    user = get_object_or_404(User, pk=user_id)
-    token_exists = PasswordResetTokenGenerator().check_token(user, token)
+    data: dict[str, str] = serializer.validated_data  # type: ignore
+
+    user = get_object_or_404(User, pk=data["uid"])
+    token_exists = PasswordResetTokenGenerator().check_token(user, data["token"])
 
     if not token_exists:
         return Response(data="Token has expired.", status=status.HTTP_410_GONE)
 
-    new_password = serializer.validated_data["new_password"]  # type: ignore
-    user.set_password(new_password)
+    user.set_password(data["new_password"])
     user.save()
     update_session_auth_hash(request, user)
 
