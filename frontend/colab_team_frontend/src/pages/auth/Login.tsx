@@ -1,8 +1,7 @@
-import { Box, FormControl, Slide, Typography } from "@mui/material";
-
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, FormControl, Slide, Typography, Link } from "@mui/material";
 
 import ActionButton from "@/components/form/ActionButton";
 import BasicTextField from "@/components/form/BaseTextField";
@@ -11,7 +10,6 @@ import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AppLink from "@/components/Link";
 import AuthFormLayout from "@/layouts/AuthForm";
 
-import { loginTypes } from "@/typings/authTypes";
 import { FORGOT_PASSWORD, REGISTER } from "@/api/auth/authEndpoints";
 
 import { loginSchema } from "@/schemas/auth";

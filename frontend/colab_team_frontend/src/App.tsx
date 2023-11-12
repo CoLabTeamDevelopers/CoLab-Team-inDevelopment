@@ -1,4 +1,4 @@
-import Router from "@/Router";
+import Router from "./router";
 import { ThemeProvider } from "@mui/material";
 
 import { StoreProvider } from "./store";
