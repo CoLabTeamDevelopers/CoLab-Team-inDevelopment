@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
-
+from django.urls import reverse_lazy
 from environ import Env
 
+import os
 env = Env(DEBUG=(bool, True))
 
 
@@ -33,24 +35,29 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
-PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/custom_password_reset_email.html'
+PASSWORD_RESET_EMAIL_TEMPLATE = "registration/custom_password_reset_email.html"
 
+LOGIN_URL = reverse_lazy('registration_app:login')
 
 # Application definition
 
 INSTALLED_APPS = [
-    "home_app",
-    "registration_app",
-    "api.apps.ApiConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
+    "rest_framework",
+    "knox",
+    "home_app",
+    "registration_app",
+    "api",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -128,6 +135,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
@@ -144,3 +152,19 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "knox.auth.TokenAuthentication",
+    ],
+}
+
+
+REST_KNOX = {
+    "USER_SERIALIZER": "registration_app.api.serializers.UserSerializer",
+    "TOKEN_LIMIT_PER_USER": 5,
+    "TOKEN_TTL": timedelta(days=1),
+}

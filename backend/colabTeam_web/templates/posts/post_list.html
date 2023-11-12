@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} All Posts{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <br>
+      <center>
+      <h1>All Posts</h1>
+      <hr>
+      </center>
+      <br>
+      <br>
+  
+      
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for post in posts %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://wpklik.com/wp-content/uploads/2018/10/wordpress-blog-post.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.description|truncatewords:100 }}
+              </p>
+              <a href="{% url 'home_app:post_detail' post_id=post.pk %}"><button type="button" class="btn btn-outline-warning">More →</button></a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
+
+  </div>
+  {% endblock %}
+
+
