@@ -1,16 +1,17 @@
-import React from "react";
-import { NavigationLinksStyle } from "@/styles/appStyles/NavbarStyles";
-import { Box, Link } from "@mui/material";
-import { leftNavLinks } from "./links";
+import { Box, BoxProps } from "@mui/material";
+import { PropsWithChildren } from "react";
 
-export default function NavLinks() {
+import NavBar from "@/components/navbar/Navbar";
+import { AppContentLayoutStyle } from "@/styles/appStyles/AppContentLayout";
+
+export default function AppContentLayout({
+  children,
+  ...otherProps
+}: PropsWithChildren<BoxProps>) {
   return (
-    <Box sx={NavigationLinksStyle}>
-      {leftNavLinks.map((links, index) => (
-        <Link key={index} href={links.href}>
-          {links.label}
-        </Link>
-      ))}
+    <Box component="main" sx={AppContentLayoutStyle} {...otherProps}>
+      <NavBar />
+      {children}
     </Box>
   );
 }

@@ -1,21 +1,35 @@
 import uuid
-from django.conf import settings
-from django.contrib.auth import login
-from django.http import Http404
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
 
-from rest_framework import permissions, status, decorators
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect
+from knox.views import LoginView as KnoxLoginView
+from rest_framework import decorators, permissions, status
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
-from knox.views import LoginView as KnoxLoginView
+
 from ..models import Profile
+from ..utils import send_verification_email
 from . import serializers
 
 
 class LoginView(KnoxLoginView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.LoginRequestSerializer
+
+    def get_post_response_data(self, request, token, instance):
+        user = serializers.UserSerializer(
+            instance=request.user,
+            context=self.get_context(),
+        )
+        return {
+            "user": user.data,
+            "token": {
+                "expiry_date": self.format_expiry_datetime(instance.expiry),
+                "key": token,
+            },
+        }
 
     def post(self, request, format=None):
         serializer = AuthTokenSerializer(data=request.data)
@@ -61,15 +75,7 @@ def register_user(request):
 
         profile = Profile.objects.create(user=user, auth_token=str(uuid.uuid4()))
 
-        user.email_user(
-            subject="Your Account needs to be verified",
-            message=f"""To verify your email, please click on the following link or copy and paste it into your web browser:
-
-http://127.0.0.1:8000/api/v1/user/verify/{profile.auth_token}
-
-If clicking the link doesn't work, please ensure you paste the entire URL into your browser's address bar.""",
-            from_email=settings.EMAIL_HOST_USER,  # type: ignore
-        )
+        send_verification_email(user, profile)
 
         result = {
             "user": serializers.UserSerializer(instance=user).data,
@@ -79,7 +85,7 @@ If clicking the link doesn't work, please ensure you paste the entire URL into y
         return Response(result)
 
 
-@decorators.api_view(["PUT"])
+@decorators.api_view(["GET"])
 @decorators.permission_classes([permissions.AllowAny])
 def verify_user(request, token: str):
     profile = get_object_or_404(Profile, auth_token=token)
@@ -90,4 +96,4 @@ def verify_user(request, token: str):
     profile.is_verified = True
     profile.save()
 
-    return Response(None)
+    return redirect("http://localhost:5173/verify-email-success/")

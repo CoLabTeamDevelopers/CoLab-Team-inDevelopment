@@ -1,11 +1,11 @@
-import React from "react";
-
 import { Box } from "@mui/material";
+import { Fragment } from "react";
+
 import DataChip from "@/components/DataChip";
 
 export default function ProjectTags() {
   return (
-    <React.Fragment>
+    <Fragment>
       <Box>
         <DataChip
           size="small"
@@ -33,6 +33,6 @@ export default function ProjectTags() {
           <DataChip size="small" label="6" />
         </Box>
       </Box>
-    </React.Fragment>
+    </Fragment>
   );
 }

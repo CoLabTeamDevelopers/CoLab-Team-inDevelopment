@@ -2,13 +2,16 @@ import React from "react";
 
 import { Box, Card, Typography, Link } from "@mui/material";
 import NavBar from "@/components/navbar/Navbar";
+
 import Image from "@/components/Image";
+import ProjectTags from "@/components/projectsList/ProjectTags";
+
 import {
   ProjectCardContentStyle,
   ProjectListCardStyle,
 } from "@/styles/appStyles/ProjectListStyles";
+
 import AppContentLayout from "@/layouts/AppContent";
-import ProjectTags from "@/components/projectsList/ProjectTags";
 
 export default function ProjectsListPage() {
   return (

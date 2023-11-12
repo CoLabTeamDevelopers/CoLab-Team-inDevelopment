@@ -1,29 +1,36 @@
+import { Box, FormControl, Slide, Typography } from "@mui/material";
+
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, FormControl, Link, Slide, Typography } from "@mui/material";
 
 import ActionButton from "@/components/form/ActionButton";
-import EmailField from "@/components/form/EmailField";
+import BasicTextField from "@/components/form/BaseTextField";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AppLink from "@/components/Link";
 import AuthFormLayout from "@/layouts/AuthForm";
-import { loginSchema } from "@/schemas/authSchemas";
+
 import { loginTypes } from "@/typings/authTypes";
 import { FORGOT_PASSWORD, REGISTER } from "@/api/auth/authEndpoints";
 
+import { loginSchema } from "@/schemas/auth";
+import { useLoginMutation } from "@/store/api/auth";
+import { LoginSchema } from "@/types/auth";
+
 export default function LoginPage() {
-  const { handleSubmit, control, reset } = useForm<loginTypes>({
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const { handleSubmit, control } = useForm<LoginSchema>({
     resolver: yupResolver(loginSchema),
   });
+  const [login] = useLoginMutation();
 
-  const formRef = useRef<HTMLFormElement | null>(null);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function onSubmit(data: Record<string, any>) {
-    console.log(data);
-    formRef.current?.reset();
-    reset();
+  async function onSubmit(data: LoginSchema) {
+    try {
+      await login(data).unwrap();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -36,7 +43,11 @@ export default function LoginPage() {
       >
         <Slide direction="right" in mountOnEnter unmountOnExit>
           <TextFieldContainer>
-            <EmailField control={control} />
+            <BasicTextField
+              name="username"
+              control={control}
+              fieldProps={{ label: "Username" }}
+            />
             <PasswordField control={control} />
           </TextFieldContainer>
         </Slide>
@@ -52,6 +63,19 @@ export default function LoginPage() {
         </Typography>
         <Typography color="#757575">
           Not a user ?<Link href={REGISTER}>&nbsp;Signup</Link>
+          <AppLink href="/forgot-password" sx={{ color: "#9575cd" }}>
+            &nbsp;Forgot Password ?
+          </AppLink>
+        </Typography>
+        <Typography
+          fontSize={15}
+          color="#757575"
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          Not a user ?
+          <AppLink href="/register" sx={{ color: "#9575cd" }}>
+            &nbsp;Signup
+          </AppLink>
         </Typography>
       </Box>
     </AuthFormLayout>

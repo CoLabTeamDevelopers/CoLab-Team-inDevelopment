@@ -1,6 +1,6 @@
 import React from "react";
-
 import { Box, Typography, Divider } from "@mui/material";
+
 import ColabLightLogo from "@/assets/images/Colab About Light.png";
 import NavBar from "@/components/navbar/Navbar";
 import Image from "@/components/Image";

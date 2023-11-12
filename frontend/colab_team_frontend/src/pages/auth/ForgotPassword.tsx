@@ -7,11 +7,11 @@ import ActionButton from "@/components/form/ActionButton";
 import EmailField from "@/components/form/EmailField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
-import { forgotPasswordSchema } from "@/schemas/authSchemas";
-import { forgotPasswordTypes } from "@/typings/authTypes";
+import { forgotPasswordSchema } from "@/schemas/auth";
+import { ForgotPasswordSchema } from "@/types/auth";
 
 export default function ForgotPasswordPage() {
-  const { handleSubmit, control, reset } = useForm<forgotPasswordTypes>({
+  const { handleSubmit, control, reset } = useForm<ForgotPasswordSchema>({
     resolver: yupResolver(forgotPasswordSchema),
   });
 

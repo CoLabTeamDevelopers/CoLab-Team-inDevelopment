@@ -1,12 +1,12 @@
-import React from "react";
+import { Avatar, Box, Button, Typography } from "@mui/material";
+import { Fragment } from "react";
 
-import { Box, Typography, Avatar, Button } from "@mui/material";
 import DataChip from "@/components/DataChip";
 import { ProjectDetailsStyle } from "@/styles/appStyles/ProjectStyles";
 
 export default function ProjectDetails() {
   return (
-    <React.Fragment>
+    <Fragment>
       <Box sx={ProjectDetailsStyle}>
         <Typography variant="inherit">Author</Typography>
         <DataChip
@@ -59,6 +59,6 @@ export default function ProjectDetails() {
       <Box>
         <Button variant="contained">Request Join</Button>
       </Box>
-    </React.Fragment>
+    </Fragment>
   );
 }

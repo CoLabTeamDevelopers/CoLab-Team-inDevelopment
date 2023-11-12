@@ -2,7 +2,12 @@
 
 const TitleStyle = {
   display: "flex",
+
   alignItems: "center",
+
+  marginLeft: "25px",
+  alignItems: "baseline",
+
 };
 
 export { TitleStyle };

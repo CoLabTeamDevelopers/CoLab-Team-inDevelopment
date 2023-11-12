@@ -1,7 +1,5 @@
-import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+
 import {
   Box,
   Button,
@@ -10,37 +8,45 @@ import {
   Slide,
   Typography,
 } from "@mui/material";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 import ActionButton from "@/components/form/ActionButton";
 import BasicTextField from "@/components/form/BaseTextField";
 import EmailField from "@/components/form/EmailField";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
+import AppLink from "@/components/Link";
 import AuthFormLayout from "@/layouts/AuthForm";
-import { registrationSchema } from "@/schemas/authSchemas";
-import { registrationTypes } from "@/typings/authTypes";
+
 import { LOGIN } from "@/api/auth/authEndpoints";
 
-export default function RegistrationPage() {
-  const [continueForm, setContinueForm] = useState(false);
+import { registrationSchema } from "@/schemas/auth";
+import { useRegisterMutation } from "@/store/api/auth";
+import { RegistrationSchema } from "@/types/auth";
 
-  const { handleSubmit, control, watch, setError, reset } =
-    useForm<registrationTypes>({
+export default function RegistrationPage() {
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const [continueForm, setContinueForm] = useState(false);
+  const { handleSubmit, control, watch, setError } =
+    useForm<RegistrationSchema>({
       resolver: yupResolver(registrationSchema),
     });
-
   const watchField = watch(["username", "email"]);
+  const [register] = useRegisterMutation();
 
-  const formRef = useRef<HTMLFormElement | null>(null);
+  async function onSubmit(data: RegistrationSchema) {
+    try {
+      await register(data).unwrap();
+      alert(
+        "An email has been sent with a verification link. Please check your inbox & activate your account."
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: Record<string, any>) => {
-    console.log(data);
-    formRef.current?.reset();
-    reset();
-  };
-
-  const handleContinue = () => {
+  function handleContinue() {
     if (watchField[0] && watchField[1]) {
       setContinueForm(true);
     } else {
@@ -57,7 +63,7 @@ export default function RegistrationPage() {
         });
       }
     }
-  };
+  }
 
   return (
     <AuthFormLayout title="Register">
@@ -123,6 +129,9 @@ export default function RegistrationPage() {
         <Typography color="#757575">
           Already a user ?&nbsp;
           <Link href={LOGIN}>Login</Link>
+          <AppLink href="/login" sx={{ color: "#9575cd" }}>
+            Login
+          </AppLink>
         </Typography>
       </Box>
     </AuthFormLayout>

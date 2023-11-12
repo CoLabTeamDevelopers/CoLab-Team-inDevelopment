@@ -6,13 +6,12 @@ import {
   List,
   Divider,
   IconButton,
+  Typography,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
 } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
@@ -23,6 +22,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PersonIcon from "@mui/icons-material/Person";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PendingIcon from "@mui/icons-material/Pending";
+import HomeIcon from "@mui/icons-material/Home";
 
 import { NavigationDrawerStyle } from "@/styles/appStyles/NavbarStyles";
 import { leftNavLinks, rightNavLinks } from "./links";
@@ -99,6 +99,7 @@ export default function NavDrawer({ open, onClose, direction }: DrawerProps) {
           <Typography variant="h5">Welcome, Siddhant</Typography>
           <IconButton onClick={onClose}>
             {direction === "right" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            variant="persistent" open={open}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -123,18 +124,16 @@ export default function NavDrawer({ open, onClose, direction }: DrawerProps) {
             ))}
         </List>
         <Divider />
-        {direction === "left" && (
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <LogoutIcon sx={{ color: "#9575cd" }} />
-                </ListItemIcon>
-                <ListItemText primary="Logout" />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        )}
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <LogoutIcon sx={{ color: "#9575cd" }} />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </ListItem>
+        </List>
       </Drawer>
     </Box>
   );

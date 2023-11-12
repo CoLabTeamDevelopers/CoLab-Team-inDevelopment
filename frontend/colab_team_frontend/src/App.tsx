@@ -1,7 +1,17 @@
 import Router from "@/Router";
+import { ThemeProvider } from "@mui/material";
+
+import { StoreProvider } from "./store";
+import { GlobalTheme } from "./styles/GlobalStyles";
 
 function App() {
-  return <Router />;
+  return (
+    <StoreProvider>
+      <ThemeProvider theme={GlobalTheme}>
+        <Router />
+      </ThemeProvider>
+    </StoreProvider>
+  );
 }
 
 export default App;

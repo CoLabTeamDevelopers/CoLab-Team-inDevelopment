@@ -8,6 +8,7 @@ const NavigationLinksStyle = {
 };
 
 const NavigationDrawerStyle = {
+  display: "none",
   "@media (max-width: 1024px)": {
     background: "#ede7f6",
     display: "block",
@@ -15,4 +16,4 @@ const NavigationDrawerStyle = {
   },
 };
 
-export { NavigationLinksStyle, NavigationDrawerStyle };
+export { NavigationDrawerStyle, NavigationLinksStyle };

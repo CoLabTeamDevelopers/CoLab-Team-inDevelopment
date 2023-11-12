@@ -7,11 +7,11 @@ import ActionButton from "@/components/form/ActionButton";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
-import { resetPasswordSchema } from "@/schemas/authSchemas";
-import { resetPasswordTypes } from "@/typings/authTypes";
+import { resetPasswordSchema } from "@/schemas/auth";
+import { ResetPasswordSchema } from "@/types/auth";
 
 export default function ResetPasswordPage() {
-  const { handleSubmit, control, reset } = useForm<resetPasswordTypes>({
+  const { handleSubmit, control, reset } = useForm<ResetPasswordSchema>({
     resolver: yupResolver(resetPasswordSchema),
   });
 
