@@ -1,5 +1,4 @@
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpRequest
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -11,20 +10,19 @@ from .models import Profile, User
 
 def send_email(
     request: HttpRequest,
-    absolute_url: str,
-    template_name: str,
-    subject: str,
     user: User,
+    email_subject: str,
+    template_name: str,
     template_context: dict[str, str] = {},
+    url: str | None = None,
+    absolute_url: str | None = None,
 ):
-    domain = get_current_site(request).domain
-    protocol = "https" if request.is_secure() else "http"
-    template_context["url"] = f"{protocol}://{domain}{absolute_url}"
+    template_context["url"] = url or request.build_absolute_uri(absolute_url)
 
     html_message = render_to_string(template_name, template_context)
     plain_message = strip_tags(html_message)
 
-    email = EmailMultiAlternatives(subject, plain_message, to=[user.email])
+    email = EmailMultiAlternatives(email_subject, plain_message, to=[user.email])
     email.attach_alternative(html_message, "text/html")
     email.send()
 
@@ -33,22 +31,22 @@ def send_verification_email(request: HttpRequest, user: User, profile: Profile):
     absolute_url = reverse("api:verify", args=(profile.auth_token,))
 
     send_email(
-        request,
-        absolute_url,
-        "email/verify_email.html",
-        "Your account needs to be verified.",
-        user,
+        request=request,
+        user=user,
+        email_subject="Your account needs to be verified.",
+        template_name="email/verify_email.html",
+        absolute_url=absolute_url,
     )
 
 
 def send_password_reset_email(request: HttpRequest, user: User):
     token = PasswordResetTokenGenerator().make_token(user)
-    absolute_url = reverse("api:reset-password", args=(user.pk, token))
+    url = f"http://localhost:5173/reset-password?uid={user.pk}&token={token}"
 
     send_email(
-        request,
-        absolute_url,
-        "email/password_reset.html",
-        "Reset Password",
-        user,
+        request=request,
+        user=user,
+        template_name="email/password_reset.html",
+        email_subject="Reset Password",
+        url=url,
     )
