@@ -5,8 +5,25 @@ type ChipProps = {
   size: "small" | "medium";
   label: string;
   avatar?: ReactElement | undefined;
+  sx?: any;
+  onDelete?: () => void;
 };
 
-export default function DataChip({ size, label, avatar }: ChipProps) {
-  return <Chip size={size} label={label} variant="outlined" avatar={avatar} />;
+export default function DataChip({
+  size,
+  label,
+  avatar,
+  sx,
+  ...otherProps
+}: ChipProps) {
+  return (
+    <Chip
+      {...otherProps}
+      size={size}
+      label={label}
+      variant="outlined"
+      avatar={avatar}
+      sx={sx}
+    />
+  );
 }

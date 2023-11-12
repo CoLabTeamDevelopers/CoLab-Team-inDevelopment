@@ -1,7 +1,7 @@
 const ProjectListCardStyle = {
-  width: "55%",
   display: "flex",
   margin: "auto",
+  width: "60%",
   "@media (max-width: 640px)": {
     width: "100%",
   },
