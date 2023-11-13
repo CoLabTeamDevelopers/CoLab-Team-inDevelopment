@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from knox.views import LoginView as KnoxLoginView
 from rest_framework import decorators, permissions, status
 from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
 from ..emails import send_password_reset_email, send_verification_email
@@ -16,15 +17,15 @@ from . import serializers
 
 class LoginView(KnoxLoginView):
     permission_classes = [permissions.AllowAny]
-    serializer_class = serializers.LoginRequestSerializer
+    serializer_class = serializers.LoginSerializer
 
     def get_post_response_data(self, request, token, instance):
         user = serializers.UserSerializer(
             instance=request.user,
             context=self.get_context(),
-        )
+        ).data
         return {
-            "user": user.data,
+            "user": user,
             "token": {
                 "expiry_date": self.format_expiry_datetime(instance.expiry),
                 "key": token,
@@ -47,37 +48,42 @@ class LoginView(KnoxLoginView):
         return super(LoginView, self).post(request, format=None)
 
 
-@decorators.api_view(["POST"])
-@decorators.permission_classes([permissions.AllowAny])
-def register_user(request):
-    serializer = serializers.RegisterRequestSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
+class RegistrationView(CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.RegisterSerializer
 
-    data: dict[str, str] = serializer.validated_data  # type: ignore
+    def get_validated_data(self, request) -> dict[str, str]:
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-    try:
-        if get_object_or_404(User, username=data["username"]):
-            return Response(
-                "User with this username already exists",
-                status=status.HTTP_406_NOT_ACCEPTABLE,
+        return serializer.validated_data  # type: ignore
+
+    def post(self, request, format=None):
+        data = self.get_validated_data(request)
+
+        try:
+            if get_object_or_404(User, username=data["username"]):
+                return Response(
+                    "User with this username already exists",
+                    status=status.HTTP_406_NOT_ACCEPTABLE,
+                )
+            if get_object_or_404(User, email=data["email"]):
+                return Response(
+                    "User with this email already exists",
+                    status=status.HTTP_406_NOT_ACCEPTABLE,
+                )
+        except Http404:
+            user = User.objects.create_user(
+                username=data["username"],
+                email=data["email"],
+                password=data["password"],
             )
-        if get_object_or_404(User, email=data["email"]):
-            return Response(
-                "User with this email already exists",
-                status=status.HTTP_406_NOT_ACCEPTABLE,
-            )
-    except Http404:
-        user = User.objects.create_user(
-            username=data["username"],
-            email=data["email"],
-            password=data["password"],
-        )
 
-        profile = Profile.objects.create(user=user, auth_token=str(uuid.uuid4()))
+            profile = Profile.objects.create(user=user, auth_token=str(uuid.uuid4()))
 
-        send_verification_email(request, user, profile)
+            send_verification_email(request, user, profile)
 
-        return Response(None)
+            return Response(None)
 
 
 @decorators.api_view(["GET"])
@@ -94,36 +100,47 @@ def verify_user(request, token: str):
     return redirect("http://localhost:5173/verify-email-success/")
 
 
-@decorators.api_view(["POST"])
-@decorators.permission_classes([permissions.AllowAny])
-def forgot_password(request):
-    serializer = serializers.ForgotPasswordSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
+class ForgotPasswordView(CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.ForgotPasswordSerializer
 
-    email = serializer.validated_data["email"]  # type: ignore
-    user = get_object_or_404(User, email=email)
+    def get_validated_data(self, request) -> dict[str, str]:
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-    send_password_reset_email(request, user)
+        return serializer.validated_data  # type: ignore
 
-    return Response(None)
+    def post(self, request, format=None):
+        data = self.get_validated_data(request)
+
+        user = get_object_or_404(User, email=data["email"])
+
+        send_password_reset_email(request, user)
+
+        return Response(None)
 
 
-@decorators.api_view(["POST"])
-@decorators.permission_classes([permissions.AllowAny])
-def reset_password(request):
-    serializer = serializers.ResetPasswordSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
+class ResetPasswordView(CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.ResetPasswordSerializer
 
-    data: dict[str, str] = serializer.validated_data  # type: ignore
+    def get_validated_data(self, request) -> dict[str, str]:
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-    user = get_object_or_404(User, pk=data["uid"])
-    token_exists = PasswordResetTokenGenerator().check_token(user, data["token"])
+        return serializer.validated_data  # type: ignore
 
-    if not token_exists:
-        return Response(data="Token has expired.", status=status.HTTP_410_GONE)
+    def post(self, request, format=None):
+        data = self.get_validated_data(request)
 
-    user.set_password(data["new_password"])
-    user.save()
-    update_session_auth_hash(request, user)
+        user = get_object_or_404(User, pk=data["uid"])
+        token_exists = PasswordResetTokenGenerator().check_token(user, data["token"])
 
-    return Response(None)
+        if not token_exists:
+            return Response(data="Token has expired.", status=status.HTTP_410_GONE)
+
+        user.set_password(data["new_password"])
+        user.save()
+        update_session_auth_hash(request, user)
+
+        return Response(None)

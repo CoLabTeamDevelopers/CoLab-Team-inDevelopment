@@ -17,12 +17,12 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ["auth_token", "is_verified", "created_on"]
 
 
-class LoginRequestSerializer(serializers.Serializer):
+class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
 
 
-class RegisterRequestSerializer(serializers.Serializer):
+class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField()
     email = serializers.EmailField()
     password = serializers.CharField()
