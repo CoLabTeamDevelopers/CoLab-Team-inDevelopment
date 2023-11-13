@@ -15,7 +15,6 @@ from pathlib import Path
 from django.urls import reverse_lazy
 from environ import Env
 
-import os
 
 env = Env(DEBUG=(bool, True))
 
@@ -51,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
+    "drf_standardized_errors",
     "knox",
     "home_app",
     "registration_app",
@@ -159,6 +159,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "knox.auth.TokenAuthentication",
     ],

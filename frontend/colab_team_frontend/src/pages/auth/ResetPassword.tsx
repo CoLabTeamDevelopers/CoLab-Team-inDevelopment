@@ -32,10 +32,7 @@ export default function ResetPasswordPage() {
         }
       );
 
-      const apiData = { ...queryParameters, ...data };
-      console.log(apiData);
-
-      await resetPassword(apiData).unwrap();
+      await resetPassword({ ...queryParameters, ...data });
     } catch (error) {
       console.error(error);
     }

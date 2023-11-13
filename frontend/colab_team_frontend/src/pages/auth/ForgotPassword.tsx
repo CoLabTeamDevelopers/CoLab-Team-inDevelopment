@@ -20,7 +20,7 @@ export default function ForgotPasswordPage() {
 
   async function onSubmit(data: ForgotPasswordSchema) {
     try {
-      await forgotPassword(data).unwrap();
+      await forgotPassword(data);
       alert("An email has been sent to your inbox.");
     } catch (error) {
       console.error(error);

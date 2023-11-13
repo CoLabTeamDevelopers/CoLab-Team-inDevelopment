@@ -2,10 +2,9 @@ import uuid
 
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from knox.views import LoginView as KnoxLoginView
-from rest_framework import decorators, permissions, status
+from rest_framework import decorators, exceptions, permissions, status
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
@@ -40,9 +39,7 @@ class LoginView(KnoxLoginView):
         profile = Profile.objects.get(user=user)
 
         if not profile.is_verified:
-            return Response(
-                "Your email is not verified.", status=status.HTTP_403_FORBIDDEN
-            )
+            raise exceptions.PermissionDenied("Your email is not verified.")
 
         login(request, user)
         return super(LoginView, self).post(request, format=None)
@@ -63,16 +60,12 @@ class RegistrationView(CreateAPIView):
 
         try:
             if get_object_or_404(User, username=data["username"]):
-                return Response(
-                    "User with this username already exists",
-                    status=status.HTTP_406_NOT_ACCEPTABLE,
-                )
+                raise exceptions.NotAcceptable("User with this username already exists")
             if get_object_or_404(User, email=data["email"]):
-                return Response(
+                raise exceptions.NotAcceptable(
                     "User with this email already exists",
-                    status=status.HTTP_406_NOT_ACCEPTABLE,
                 )
-        except Http404:
+        except exceptions.NotFound:
             user = User.objects.create_user(
                 username=data["username"],
                 email=data["email"],
@@ -92,7 +85,7 @@ def verify_user(request, token: str):
     profile = get_object_or_404(Profile, auth_token=token)
 
     if profile.is_verified:
-        return Response("Email is already verified", status.HTTP_403_FORBIDDEN)
+        raise exceptions.PermissionDenied("Email is already verified")
 
     profile.is_verified = True
     profile.save()

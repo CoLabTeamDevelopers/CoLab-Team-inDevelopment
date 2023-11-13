@@ -208,6 +208,28 @@ django = ">=3.0"
 pytz = "*"
 
 [[package]]
+name = "drf-standardized-errors"
+version = "0.12.6"
+description = "Standardize your API error responses."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "drf_standardized_errors-0.12.6-py3-none-any.whl", hash = "sha256:6f71d895427a5c4658c7c653ebd3755840514e0cc6a433e484808ad5191b22ee"},
+    {file = "drf_standardized_errors-0.12.6.tar.gz", hash = "sha256:f71d5fce12bca8d1ce41cc65024014efbddb35c6b51a193db9a938b57385100d"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+djangorestframework = ">=3.12"
+
+[package.extras]
+dev = ["pre-commit"]
+doc = ["myst-parser", "sphinx (!=5.2.0.post0)", "sphinx-autobuild", "sphinx-rtd-theme (>=1.1.0)"]
+openapi = ["drf-spectacular", "inflection"]
+release = ["flit", "keyring", "tbump"]
+test = ["tox", "tox-gh-actions"]
+
+[[package]]
 name = "markdown"
 version = "3.5"
 description = "Python implementation of John Gruber's Markdown."
@@ -352,4 +374,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "3ea5db557bbe4131206c656b7a6d846e5ae351ef8c8c7ec5783207941537b1b0"
+content-hash = "92cd4ec8679335d0e3a3bd56e3be4b26f6113855391236fc87d28213fecda87c"
