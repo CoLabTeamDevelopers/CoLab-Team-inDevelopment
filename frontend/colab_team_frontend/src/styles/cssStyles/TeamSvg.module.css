@@ -1,0 +1,119 @@
+/* TEAM CSS - Starts here */
+
+@keyframes animate-svg-stroke-1 {
+  0% {
+    stroke-dashoffset: 228.00619506835938px;
+    stroke-dasharray: 228.00619506835938px;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 228.00619506835938px;
+  }
+}
+
+@keyframes animate-svg-fill-1 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(149, 117, 205);
+  }
+}
+
+.svg-elem-1 {
+  animation: animate-svg-stroke-1 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0s both,
+    animate-svg-fill-1 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s both;
+}
+
+@keyframes animate-svg-stroke-2 {
+  0% {
+    stroke-dashoffset: 321.2973937988281px;
+    stroke-dasharray: 321.2973937988281px;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 321.2973937988281px;
+  }
+}
+
+@keyframes animate-svg-fill-2 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(149, 117, 205);
+  }
+}
+
+.svg-elem-2 {
+  animation: animate-svg-stroke-2 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s
+      both,
+    animate-svg-fill-2 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 0.9s both;
+}
+
+@keyframes animate-svg-stroke-3 {
+  0% {
+    stroke-dashoffset: 278.24652099609375px;
+    stroke-dasharray: 278.24652099609375px;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 278.24652099609375px;
+  }
+}
+
+@keyframes animate-svg-fill-3 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(149, 117, 205);
+  }
+}
+
+.svg-elem-3 {
+  animation: animate-svg-stroke-3 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0.24s
+      both,
+    animate-svg-fill-3 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1s both;
+}
+
+@keyframes animate-svg-stroke-4 {
+  0% {
+    stroke-dashoffset: 410.6981506347656px;
+    stroke-dasharray: 410.6981506347656px;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 410.6981506347656px;
+  }
+}
+
+@keyframes animate-svg-fill-4 {
+  0% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: rgb(149, 117, 205);
+  }
+}
+
+.svg-elem-4 {
+  animation: animate-svg-stroke-4 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0.36s
+      both,
+    animate-svg-fill-4 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.1s both;
+}
+
+@media (max-width: 1024px) {
+  .team-svg {
+    width: 110.288px;
+    height: 33.5px;
+  }
+}
