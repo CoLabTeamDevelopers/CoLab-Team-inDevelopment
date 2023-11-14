@@ -1,9 +1,0 @@
-export const HOME = "/home";
-export const PROJECTS = "/projects";
-export const WORKSPACE = "/workspace";
-export const DISCUSS = "/discuss";
-export const ABOUT = "/about";
-export const PROFILE = "/profile";
-export const MYPROJECTS = "/my-project";
-export const REQUSTS = "/requests";
-export const CREATEPROJECT = "/create-project";
