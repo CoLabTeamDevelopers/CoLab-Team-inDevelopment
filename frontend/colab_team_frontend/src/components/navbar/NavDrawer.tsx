@@ -45,11 +45,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const leftNavIcons = [
-  { icon: <HomeIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <ViewListIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <WorkspacesIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <Diversity3Icon sx={{ color: "#9575cd" }} /> },
-  { icon: <DescriptionIcon sx={{ color: "#9575cd" }} /> },
+  { icon: <HomeIcon /> },
+  { icon: <ViewListIcon /> },
+  { icon: <WorkspacesIcon /> },
+  { icon: <Diversity3Icon /> },
+  { icon: <DescriptionIcon /> },
 ];
 
 const leftDrawerLinks = leftNavLinks.map((links, index) => ({
@@ -58,10 +58,10 @@ const leftDrawerLinks = leftNavLinks.map((links, index) => ({
 }));
 
 const rightNavIcons = [
-  { icon: <PersonIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <AddCircleIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <PendingIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <ViewListIcon sx={{ color: "#9575cd" }} /> },
+  { icon: <PersonIcon /> },
+  { icon: <AddCircleIcon /> },
+  { icon: <PendingIcon /> },
+  { icon: <ViewListIcon /> },
 ];
 
 const rightDrawerLinks = rightNavLinks.map((links, index) => ({

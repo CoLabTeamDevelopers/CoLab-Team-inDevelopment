@@ -41,7 +41,7 @@ export default function ResetPasswordPage() {
             />
           </TextFieldContainer>
         </Slide>
-        <ActionButton label="Reset Password" />
+        <ActionButton type="submit" label="Reset Password" />
       </FormControl>
     </AuthFormLayout>
   );

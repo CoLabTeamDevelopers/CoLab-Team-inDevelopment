@@ -34,7 +34,7 @@ export default function ContentDialog({
       <Dialog
         open={open}
         TransitionComponent={Transition}
-        keepMounted
+        keepMounted={true}
         fullWidth
         maxWidth="sm"
         onClose={onClose}

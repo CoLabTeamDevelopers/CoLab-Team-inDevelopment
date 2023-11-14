@@ -10,9 +10,10 @@ export default function Footer() {
         justifyContent: "space-around",
         alignItems: "center",
         background: "#ede7f6",
-        height: "20vh",
+        height: "15vh",
         bottom: 0,
-        borderRadius: "30px 30px 0px 0px",
+        position: "fixed",
+        width: "100%",
         "@media (max-width:640px)": {
           display: "grid",
         },

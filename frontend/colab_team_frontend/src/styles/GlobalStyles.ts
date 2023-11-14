@@ -113,6 +113,17 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: "#9575cd",
+          cursor: "pointer",
+          "&:hover": {
+            color: "#673ab7",
+          },
+        },
+      },
+    },
   },
   palette: {
     primary: {
