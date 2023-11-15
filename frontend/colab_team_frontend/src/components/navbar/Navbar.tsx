@@ -10,12 +10,12 @@ import {
   IconButton,
 } from "@mui/material/";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import NavDrawer from "@/components/navbar/NavDrawer";
 import { TitleStyle } from "@/styles/appStyles/TitleStyles";
 import NavLinks from "@/components/navbar/NavLinks";
 import { drawerReducer } from "@/reducers/drawerReducer";
 import { navDrawerInitialState } from "@/states/navDrawerState";
+import AppLink from "../Link";
 
 export default function NavBar() {
   const [state, dispatch] = useReducer(drawerReducer, navDrawerInitialState);
@@ -71,12 +71,12 @@ export default function NavBar() {
             alignItems: "center",
           }}
         >
-          <Link href="">
+          <AppLink href="/login">
             <Button variant="contained">Login</Button>
-          </Link>
-          <Link href="">
+          </AppLink>
+          <AppLink href="/register">
             <Button variant="contained">Register</Button>
-          </Link>
+          </AppLink>
           <Avatar
             onClick={() => dispatch({ type: "OPEN_RIGHT_DRAWER" })}
             sx={{ cursor: "pointer" }}

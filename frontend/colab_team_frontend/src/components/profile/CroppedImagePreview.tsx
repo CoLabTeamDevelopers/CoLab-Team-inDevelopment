@@ -4,9 +4,14 @@ import { Avatar, Box } from "@mui/material";
 interface CropImageProps {
   croppedArea: any;
   image: any;
+  rotation: any;
 }
 
-export default function CroppedImage({ croppedArea, image }: CropImageProps) {
+export default function CroppedImagPreview({
+  croppedArea,
+  image,
+  rotation,
+}: CropImageProps) {
   const scale = 100 / croppedArea.width;
 
   const transform = {
@@ -38,6 +43,8 @@ export default function CroppedImage({ croppedArea, image }: CropImageProps) {
         overflow: "hidden",
         borderRadius: "100px",
         paddingBottom: "100%",
+        border: "1px solid #b39ddb",
+        transform: `rotate(${rotation}deg)`,
       }}
     >
       <Avatar src={image} sx={imageStyle} alt="User Image" />

@@ -117,6 +117,13 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    MuiSlider: {
+      styleOverrides: {
+        root: {
+          color: "#9575cd",
+        },
+      },
+    },
   },
   palette: {
     primary: {

@@ -31,6 +31,7 @@ export default function LoginPage() {
   return (
     <AuthFormLayout title="Login">
       <FormControl
+        sx={{ gap: "10px" }}
         component="form"
         ref={formRef}
         onSubmit={handleSubmit(onSubmit)}
