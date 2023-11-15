@@ -83,6 +83,7 @@ export const GlobalTheme = createTheme({
       styleOverrides: {
         root: {
           textDecoration: "none",
+          cursor: "pointer",
           color: "#9575cd",
           "&:hover": {
             color: "#673ab7",
@@ -93,7 +94,26 @@ export const GlobalTheme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          width: "100%",
           letterSpacing: "1px",
+          ".MuiFormLabel-root.Mui-focused": {
+            color: "#9575cd",
+          },
+          ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "#9575cd",
+            },
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: "#9575cd",
+          cursor: "pointer",
+          "&:hover": {
+            color: "#673ab7",
+          },
         },
       },
     },

@@ -12,6 +12,7 @@ import ForgotPasswordPage from "@/pages/auth/ForgotPassword";
 import LoginPage from "@/pages/auth/Login";
 import RegistrationPage from "@/pages/auth/Registration";
 import ResetPasswordPage from "@/pages/auth/ResetPassword";
+import ProfilePage from "@/pages/app/Profile";
 
 type Route = RouteObject[] | RouteObject;
 
@@ -31,11 +32,14 @@ const projectRoutes: Route = {
   ],
 };
 
+const appRoutes: Route = [{ path: "profile", element: <ProfilePage /> }];
+
 const router = createBrowserRouter([
   { index: true, element: <HomePage /> },
   { path: "*", element: <h1>404 - Not Found</h1> },
   projectRoutes,
   ...authRoutes,
+  ...appRoutes,
 ]);
 
 const Router = () => <RouterProvider router={router} />;
