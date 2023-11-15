@@ -6,6 +6,7 @@ import AboutSection from "@/components/home/About";
 import Navbar from "@/components/navbar/Navbar";
 import { ColabLogoBoxStyle } from "@/styles/appStyles/HomeStyle";
 import ColabSubText from "@/styles/cssStyles/Home.module.css";
+import Footer from "@/components/footer/Footer";
 
 export default function HomePage() {
   return (
@@ -36,6 +37,7 @@ export default function HomePage() {
       <Box component="section" sx={{ height: "100vh", display: "flex" }}>
         <AboutSection />
       </Box>
+      <Footer />
     </>
   );
 }

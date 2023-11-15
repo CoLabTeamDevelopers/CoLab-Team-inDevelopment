@@ -7,6 +7,7 @@ import NavBar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import EditUserDetails from "@/components/profile/EditUserDetails";
 import EditUserImage from "@/components/profile/EditUserImage";
+import ChangeEmail from "@/components/profile/ChangeEmail";
 
 export default function ProfilePage() {
   return (
@@ -83,7 +84,8 @@ export default function ProfilePage() {
                 }}
               >
                 {/* This link is displayed only to the users not to the viewers */}
-                <Link>Change</Link>
+                <ChangeEmail />
+                {/* <Link>Change</Link> */}
                 <Typography variant="h2">
                   siddhanttotade.1994@gmail.com
                 </Typography>

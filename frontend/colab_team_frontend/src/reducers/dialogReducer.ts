@@ -1,7 +1,7 @@
 import { dialogInitialState } from "@/states/dialogState";
 
 type dialogActions =
-  | { type: "EDIT_BANNER_IMAGE_DIALOG" }
+  | { type: "EDIT_CHANGE_EMAIL_DIALOG" }
   | { type: "EDIT_PROFILE_IMAGE_DIALOG" }
   | { type: "EDIT_USER_DETAILS_DIALOG" };
 
@@ -10,10 +10,10 @@ export const dialogReducer = (
   action: dialogActions
 ): typeof dialogInitialState => {
   switch (action.type) {
-    case "EDIT_BANNER_IMAGE_DIALOG": {
+    case "EDIT_CHANGE_EMAIL_DIALOG": {
       return {
         ...state,
-        openEditBannerImageDialog: !state.openEditBannerImageDialog,
+        openEditEmailDialog: !state.openEditEmailDialog,
       };
     }
     case "EDIT_PROFILE_IMAGE_DIALOG": {
