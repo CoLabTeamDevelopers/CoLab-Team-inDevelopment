@@ -10,7 +10,7 @@ import { dialogInitialState } from "@/states/dialogState";
 import FileField from "../form/FileField";
 import { userProfileTypes } from "@/typings/userProfileTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { userProfile } from "@/schemas/profileSchema";
+import { userProfile } from "@/schemas/profile";
 import ActionButton from "../form/ActionButton";
 import ImageCropper from "./ImageCropper";
 

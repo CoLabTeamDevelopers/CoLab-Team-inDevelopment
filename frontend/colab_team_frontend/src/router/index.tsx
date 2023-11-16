@@ -13,6 +13,7 @@ import LoginPage from "@/pages/auth/Login";
 import RegistrationPage from "@/pages/auth/Registration";
 import ResetPasswordPage from "@/pages/auth/ResetPassword";
 import ProfilePage from "@/pages/app/Profile";
+import CreateProjectPage from "@/pages/app/CreateProject";
 
 type Route = RouteObject[] | RouteObject;
 
@@ -32,7 +33,10 @@ const projectRoutes: Route = {
   ],
 };
 
-const appRoutes: Route = [{ path: "profile", element: <ProfilePage /> }];
+const appRoutes: Route = [
+  { path: "profile", element: <ProfilePage /> },
+  { path: "create-project", element: <CreateProjectPage /> },
+];
 
 const router = createBrowserRouter([
   { index: true, element: <HomePage /> },

@@ -11,7 +11,7 @@ import { dialogInitialState } from "@/states/dialogState";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { userProfileTypes } from "@/typings/userProfileTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { userProfile } from "@/schemas/profileSchema";
+import { userProfile } from "@/schemas/profile";
 import LocationField from "../form/LocationField";
 
 export default function EditUserDetails() {

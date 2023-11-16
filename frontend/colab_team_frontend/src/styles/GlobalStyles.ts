@@ -106,6 +106,26 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          letterSpacing: "1px",
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#9575cd",
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          letterSpacing: "1px",
+          "&.Mui-focused": {
+            color: "#9575cd",
+          },
+        },
+      },
+    },
     MuiSvgIcon: {
       styleOverrides: {
         root: {
