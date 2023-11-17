@@ -30,7 +30,7 @@ export default function RolesAndResponsibilitiesField({
         multiline: true,
         rows: 5,
         placeholder:
-          "Write roles and responsibilities here... (New point Shift + Enter)",
+          "Write here... (New point Shift + Enter)",
         onKeyDown: handleKeyPress,
         value: value,
         onChange: (e) => setValue(e.target.value),
