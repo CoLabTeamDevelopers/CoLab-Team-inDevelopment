@@ -1,4 +1,4 @@
-import { SxProps, TextField, TextFieldProps, Theme } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 import { Controller, ControllerRenderProps } from "react-hook-form";
 
 export interface Props {
@@ -9,16 +9,6 @@ export interface Props {
 }
 
 export default function BasicTextField({ fieldProps, ...props }: Props) {
-  const styles: SxProps<Theme> = {
-    width: "100%",
-    ".MuiFormLabel-root.Mui-focused": {
-      color: "#9575cd",
-    },
-    ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#9575cd",
-    },
-  };
-
   return (
     <Controller
       {...props}
@@ -30,7 +20,6 @@ export default function BasicTextField({ fieldProps, ...props }: Props) {
           error={!!error}
           helperText={error ? error.message : undefined}
           variant="outlined"
-          sx={styles}
         />
       )}
     />

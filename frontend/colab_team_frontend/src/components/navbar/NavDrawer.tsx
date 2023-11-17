@@ -1,30 +1,37 @@
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import DescriptionIcon from "@mui/icons-material/Description";
-import Diversity3Icon from "@mui/icons-material/Diversity3";
-import HomeIcon from "@mui/icons-material/Home";
-import LogoutIcon from "@mui/icons-material/Logout";
-import MenuIcon from "@mui/icons-material/Menu";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import {
   Box,
-  Divider,
   Drawer,
-  IconButton,
   List,
+  Divider,
+  IconButton,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import DescriptionIcon from "@mui/icons-material/Description";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import PersonIcon from "@mui/icons-material/Person";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import PendingIcon from "@mui/icons-material/Pending";
 
 import { NavigationDrawerStyle } from "@/styles/appStyles/NavbarStyles";
+import { leftNavLinks, rightNavLinks } from "./links";
 
-import { navLinks } from "./links";
+interface DrawerProps {
+  open: boolean;
+  onClose: () => void;
+  direction: "left" | "right";
+}
 
 const drawerWidth = 240;
 
@@ -37,41 +44,41 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const navIcons = [
-  { icon: <HomeIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <ViewListIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <WorkspacesIcon sx={{ color: "#9575cd" }} /> },
-  { icon: <Diversity3Icon sx={{ color: "#9575cd" }} /> },
-  { icon: <DescriptionIcon sx={{ color: "#9575cd" }} /> },
+const leftNavIcons = [
+  { icon: <HomeIcon /> },
+  { icon: <ViewListIcon /> },
+  { icon: <WorkspacesIcon /> },
+  { icon: <Diversity3Icon /> },
+  { icon: <DescriptionIcon /> },
 ];
 
-const drawerLinks = navLinks.map((links, index) => ({
+const leftDrawerLinks = leftNavLinks.map((links, index) => ({
   ...links,
-  ...navIcons[index],
+  ...leftNavIcons[index],
 }));
 
-export default function NavDrawer() {
-  const [open, setOpen] = React.useState(false);
+const rightNavIcons = [
+  { icon: <PersonIcon /> },
+  { icon: <AddCircleIcon /> },
+  { icon: <PendingIcon /> },
+  { icon: <ViewListIcon /> },
+];
 
+const rightDrawerLinks = rightNavLinks.map((links, index) => ({
+  ...links,
+  ...rightNavIcons[index],
+}));
+
+export default function NavDrawer({ open, onClose, direction }: DrawerProps) {
   const navigate = useNavigate();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
-    <Box sx={NavigationDrawerStyle}>
-      <IconButton
-        aria-label="open drawer"
-        onClick={handleDrawerOpen}
-        sx={{ ...(open && { display: "none" }) }}
-      >
-        <MenuIcon />
-      </IconButton>
+    <Box
+      sx={[
+        NavigationDrawerStyle,
+        { display: direction === "right" ? "flex" : "none", width: "0%" },
+      ]}
+    >
       <Drawer
         sx={{
           width: drawerWidth,
@@ -80,37 +87,54 @@ export default function NavDrawer() {
             width: drawerWidth,
           },
         }}
-        variant="persistent"
+        anchor={direction}
         open={open}
       >
-        <DrawerHeader sx={{ justifyContent: "space-between" }}>
-          <Typography>Colab</Typography>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+        <DrawerHeader
+          sx={{
+            justifyContent: "space-between",
+            flexDirection: direction === "right" ? "row-reverse" : "",
+          }}
+        >
+          <Typography variant="h5">Welcome, Siddhant</Typography>
+          <IconButton onClick={onClose}>
+            {direction === "right" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {drawerLinks.map((item, index) => (
-            <ListItem key={index} disablePadding>
-              <ListItemButton onClick={() => navigate(item.href)}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.label} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {direction === "left" &&
+            leftDrawerLinks.map((item, index) => (
+              <ListItem key={index} disablePadding>
+                <ListItemButton onClick={() => navigate(item.href)}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          {direction === "right" &&
+            rightDrawerLinks.map((item, index) => (
+              <ListItem key={index} disablePadding>
+                <ListItemButton onClick={() => navigate(item.href)}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
         </List>
         <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon sx={{ color: "#9575cd" }} />
-              </ListItemIcon>
-              <ListItemText primary="Logout" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+        {direction === "left" && (
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LogoutIcon sx={{ color: "#9575cd" }} />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        )}
       </Drawer>
     </Box>
   );

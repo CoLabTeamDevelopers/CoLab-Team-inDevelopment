@@ -1,17 +1,15 @@
-import { Box } from "@mui/material";
-
+import React from "react";
 import { NavigationLinksStyle } from "@/styles/appStyles/NavbarStyles";
-
-import AppLink from "../Link";
-import { navLinks } from "./links";
+import { Box, Link } from "@mui/material";
+import { leftNavLinks } from "./links";
 
 export default function NavLinks() {
   return (
     <Box sx={NavigationLinksStyle}>
-      {navLinks.map((links, index) => (
-        <AppLink key={index} href={links.href}>
+      {leftNavLinks.map((links, index) => (
+        <Link key={index} href={links.href}>
           {links.label}
-        </AppLink>
+        </Link>
       ))}
     </Box>
   );
