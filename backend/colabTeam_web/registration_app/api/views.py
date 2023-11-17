@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from .. import emails
 from ..models import Profile, User
 from ..tokens import email_verification_token_generator, password_reset_token_generator
+from ..utils import TypedHttpRequest
 from . import serializers
 
 
@@ -17,7 +18,7 @@ class LoginView(KnoxLoginView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.LoginSerializer
 
-    def get_post_response_data(self, request, token, instance):
+    def get_post_response_data(self, request: TypedHttpRequest, token, instance):
         user = serializers.UserSerializer(
             instance=request.user,
             context=self.get_context(),
@@ -30,31 +31,31 @@ class LoginView(KnoxLoginView):
             },
         }
 
-    def post(self, request, format=None):
+    def post(self, request: TypedHttpRequest, format=None):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         user = serializer.validated_data["user"]  # type: ignore
-        profile = Profile.objects.get(user=user)
+        profile = get_object_or_404(Profile, user=user)
 
         if not profile.is_verified:
             raise exceptions.PermissionDenied("Your email is not verified.")
 
         login(request, user)
-        return super(LoginView, self).post(request, format=None)
+        return super(LoginView, self).post(request, format)
 
 
 class RegistrationView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.RegisterSerializer
 
-    def get_validated_data(self, request) -> dict[str, str]:
+    def get_validated_data(self, request: TypedHttpRequest) -> dict[str, str]:
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data  # type: ignore
 
-    def post(self, request, format=None):
+    def post(self, request: TypedHttpRequest, format=None):
         data = self.get_validated_data(request)
 
         try:
@@ -80,13 +81,13 @@ class ResendVerificationEmailView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.ResendVerificationEmailSerializer
 
-    def get_validated_data(self, request) -> dict[str, str]:
+    def get_validated_data(self, request: TypedHttpRequest) -> dict[str, str]:
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data  # type: ignore
 
-    def post(self, request, format=None):
+    def post(self, request: TypedHttpRequest, format=None):
         data = self.get_validated_data(request)
 
         user = get_object_or_404(User, email=data["email"])
@@ -101,7 +102,7 @@ class ResendVerificationEmailView(CreateAPIView):
 def verify_user(request, uid: int, token: str):
     user = get_object_or_404(User, pk=uid)
 
-    profile = get_object_or_404(Profile, user=user)
+    profile: Profile = user.profile  # type: ignore
     if profile.is_verified:
         raise exceptions.PermissionDenied("Email is already verified")
 
@@ -119,13 +120,13 @@ class ForgotPasswordView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.ForgotPasswordSerializer
 
-    def get_validated_data(self, request) -> dict[str, str]:
+    def get_validated_data(self, request: TypedHttpRequest) -> dict[str, str]:
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data  # type: ignore
 
-    def post(self, request, format=None):
+    def post(self, request: TypedHttpRequest, format=None):
         data = self.get_validated_data(request)
 
         user = get_object_or_404(User, email=data["email"])
@@ -139,13 +140,13 @@ class ResetPasswordView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.ResetPasswordSerializer
 
-    def get_validated_data(self, request) -> dict[str, str]:
+    def get_validated_data(self, request: TypedHttpRequest) -> dict[str, str]:
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data  # type: ignore
 
-    def post(self, request, format=None):
+    def post(self, request: TypedHttpRequest, format=None):
         data = self.get_validated_data(request)
 
         user = get_object_or_404(User, pk=data["uid"])
