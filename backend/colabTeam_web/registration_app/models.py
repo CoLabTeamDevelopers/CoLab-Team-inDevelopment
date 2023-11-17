@@ -1,31 +1,18 @@
-import uuid
-
 from django.contrib.auth.models import User
 from django.db import models
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE
-    )  # One-to-one relationship with the User model
-    fName = models.CharField(default="Rex", max_length=200, null=True)
-    lName = models.CharField(default="alem", max_length=200, null=True)
-    profilePic = models.ImageField(
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(
         default="media/users/default.jpg",
         upload_to="media/users",
         null=True,
         blank=True,
     )
-    bioText = models.TextField(max_length=500, default="Enter your bio", null=True)
-    auth_token = models.CharField(
-        max_length=100, default=str(uuid.uuid4())
-    )  # A field to store an authentication token
-    is_verified = models.BooleanField(
-        default=False
-    )  # A boolean field to track user verification status
-    created_on = models.DateTimeField(
-        auto_now=True
-    )  # A field to store the creation timestamp
+    bio = models.TextField(max_length=500, null=True, blank=True)
+    is_verified = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         """A human-readable representation of the Profile instance.
