@@ -34,6 +34,10 @@ class RegisterSerializer(serializers.Serializer):
         return attrs
 
 
+class ResendVerificationEmailSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
 class ForgotPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField()
 

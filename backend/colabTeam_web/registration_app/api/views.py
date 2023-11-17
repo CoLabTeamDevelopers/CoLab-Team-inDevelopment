@@ -1,6 +1,5 @@
-import uuid
-
 from django.contrib.auth import login, update_session_auth_hash
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from knox.views import LoginView as KnoxLoginView
 from rest_framework import decorators, exceptions, permissions, status
@@ -8,9 +7,9 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
-from ..emails import send_password_reset_email, send_verification_email
+from .. import emails
 from ..models import Profile, User
-from ..tokens import password_reset_token_generator
+from ..tokens import email_verification_token_generator, password_reset_token_generator
 from . import serializers
 
 
@@ -65,27 +64,50 @@ class RegistrationView(CreateAPIView):
                 raise exceptions.NotAcceptable(
                     "User with this email already exists",
                 )
-        except exceptions.NotFound:
+        except Http404:
             user = User.objects.create_user(
                 username=data["username"],
                 email=data["email"],
                 password=data["password"],
             )
 
-            profile = Profile.objects.create(user=user, auth_token=str(uuid.uuid4()))
-
-            send_verification_email(request, user, profile)
+            emails.send_verification_email(request, user)
 
             return Response(None)
 
 
+class ResendVerificationEmailView(CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.ResendVerificationEmailSerializer
+
+    def get_validated_data(self, request) -> dict[str, str]:
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        return serializer.validated_data  # type: ignore
+
+    def post(self, request, format=None):
+        data = self.get_validated_data(request)
+
+        user = get_object_or_404(User, email=data["email"])
+
+        emails.send_verification_email(request, user)
+
+        return Response(None)
+
+
 @decorators.api_view(["GET"])
 @decorators.permission_classes([permissions.AllowAny])
-def verify_user(request, token: str):
-    profile = get_object_or_404(Profile, auth_token=token)
+def verify_user(request, uid: int, token: str):
+    user = get_object_or_404(User, pk=uid)
 
+    profile = get_object_or_404(Profile, user=user)
     if profile.is_verified:
         raise exceptions.PermissionDenied("Email is already verified")
+
+    token_exists = email_verification_token_generator.check_token(user, token)
+    if not token_exists:
+        return Response(data="Token has expired.", status=status.HTTP_410_GONE)
 
     profile.is_verified = True
     profile.save()
@@ -108,7 +130,7 @@ class ForgotPasswordView(CreateAPIView):
 
         user = get_object_or_404(User, email=data["email"])
 
-        send_password_reset_email(request, user)
+        emails.send_password_reset_email(request, user)
 
         return Response(None)
 

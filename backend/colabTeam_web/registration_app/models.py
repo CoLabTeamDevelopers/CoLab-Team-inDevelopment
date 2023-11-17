@@ -1,5 +1,7 @@
-from django.db import models
+import uuid
+
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Profile(models.Model):
@@ -16,7 +18,7 @@ class Profile(models.Model):
     )
     bioText = models.TextField(max_length=500, default="Enter your bio", null=True)
     auth_token = models.CharField(
-        max_length=100
+        max_length=100, default=str(uuid.uuid4())
     )  # A field to store an authentication token
     is_verified = models.BooleanField(
         default=False
