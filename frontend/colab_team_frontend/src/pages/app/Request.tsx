@@ -12,10 +12,9 @@ import {
   RequestButtonSectionStyle,
 } from "@/styles/appStyles/RequestStyles";
 
-export default function Request() {
+export default function RequestPage() {
   return (
     <React.Fragment>
-      <NavBar />
       <AppContentLayout>
         <Divider sx={{ width: "60%", margin: "auto" }} textAlign="right">
           Today
