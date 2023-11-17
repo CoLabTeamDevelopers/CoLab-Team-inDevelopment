@@ -1,4 +1,3 @@
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.http import HttpRequest
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -6,6 +5,7 @@ from django.urls import reverse
 from django.utils.html import strip_tags
 
 from .models import Profile, User
+from .tokens import password_reset_token_generator
 
 
 def send_email(
@@ -40,7 +40,7 @@ def send_verification_email(request: HttpRequest, user: User, profile: Profile):
 
 
 def send_password_reset_email(request: HttpRequest, user: User):
-    token = PasswordResetTokenGenerator().make_token(user)
+    token = password_reset_token_generator.make_token(user)
     url = f"http://localhost:5173/reset-password?uid={user.pk}&token={token}"
 
     send_email(

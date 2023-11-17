@@ -1,7 +1,6 @@
 import uuid
 
 from django.contrib.auth import login, update_session_auth_hash
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.shortcuts import get_object_or_404, redirect
 from knox.views import LoginView as KnoxLoginView
 from rest_framework import decorators, exceptions, permissions, status
@@ -11,6 +10,7 @@ from rest_framework.response import Response
 
 from ..emails import send_password_reset_email, send_verification_email
 from ..models import Profile, User
+from ..tokens import password_reset_token_generator
 from . import serializers
 
 
@@ -127,7 +127,7 @@ class ResetPasswordView(CreateAPIView):
         data = self.get_validated_data(request)
 
         user = get_object_or_404(User, pk=data["uid"])
-        token_exists = PasswordResetTokenGenerator().check_token(user, data["token"])
+        token_exists = password_reset_token_generator.check_token(user, data["token"])
 
         if not token_exists:
             return Response(data="Token has expired.", status=status.HTTP_410_GONE)
