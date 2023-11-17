@@ -13,6 +13,7 @@ import ProjectPositionField from "@/components/form/ProjectPositionField";
 import SelectField from "@/components/form/SelectField";
 import RolesAndResponsibilitiesField from "@/components/form/RolesAndResponsibilitiesField";
 import ActionButton from "@/components/form/ActionButton";
+import { CreateProjectFormStyle } from "@/styles/appStyles/CreateProjectStyles";
 
 export default function CreateProjectPage() {
   const { handleSubmit, control, reset } = useForm<CreateProject>({
@@ -31,16 +32,7 @@ export default function CreateProjectPage() {
     <AppContentLayout>
       <Slide direction="right" in mountOnEnter unmountOnExit>
         <FormControl
-          sx={{
-            width: "40%",
-            margin: "auto",
-            gap: "15px",
-            justifyContent: "center",
-            display: "flex",
-            "@media(max-width:1024px)": {
-              width: "90%",
-            },
-          }}
+          sx={CreateProjectFormStyle}
           component="form"
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}

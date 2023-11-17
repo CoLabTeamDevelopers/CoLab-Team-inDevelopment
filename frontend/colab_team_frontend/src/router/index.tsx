@@ -14,6 +14,7 @@ import RegistrationPage from "@/pages/auth/Registration";
 import ResetPasswordPage from "@/pages/auth/ResetPassword";
 import ProfilePage from "@/pages/app/Profile";
 import CreateProjectPage from "@/pages/app/CreateProject";
+import Request from "@/pages/app/Request";
 
 type Route = RouteObject[] | RouteObject;
 
@@ -36,6 +37,7 @@ const projectRoutes: Route = {
 const appRoutes: Route = [
   { path: "profile", element: <ProfilePage /> },
   { path: "create-project", element: <CreateProjectPage /> },
+  { path: "requests", element: <Request /> },
 ];
 
 const router = createBrowserRouter([

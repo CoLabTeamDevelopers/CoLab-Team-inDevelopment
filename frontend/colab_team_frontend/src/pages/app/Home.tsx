@@ -4,7 +4,7 @@ import ColabSVG from "@/assets/svg/ColabSvg";
 import TeamSVG from "@/assets/svg/TeamSvg";
 import AboutSection from "@/components/home/About";
 import Navbar from "@/components/navbar/Navbar";
-import { ColabLogoBoxStyle } from "@/styles/appStyles/HomeStyle";
+import { ColabLogoBoxStyle } from "@/styles/appStyles/HomeStyles";
 import ColabSubText from "@/styles/cssStyles/Home.module.css";
 import Footer from "@/components/footer/Footer";
 

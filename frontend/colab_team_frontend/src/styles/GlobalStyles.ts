@@ -91,6 +91,7 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    // TextField styling
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -106,6 +107,7 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    // Select (Dropdown) styling
     MuiSelect: {
       styleOverrides: {
         root: {
@@ -116,6 +118,7 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    // Inputlabel (Dropdown header) styling
     MuiInputLabel: {
       styleOverrides: {
         root: {
@@ -126,6 +129,7 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    // SVG Icon styling
     MuiSvgIcon: {
       styleOverrides: {
         root: {
@@ -137,10 +141,19 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    // SLider styling
     MuiSlider: {
       styleOverrides: {
         root: {
           color: "#9575cd",
+        },
+      },
+    },
+    // SLider styling
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          color: "#673ab7",
         },
       },
     },
