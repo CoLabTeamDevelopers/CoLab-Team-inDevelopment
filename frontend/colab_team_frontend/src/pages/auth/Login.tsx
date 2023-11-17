@@ -22,7 +22,7 @@ export default function LoginPage() {
 
   async function onSubmit(data: LoginSchema) {
     try {
-      await login(data).unwrap();
+      await login(data);
     } catch (error) {
       console.error(error);
     }

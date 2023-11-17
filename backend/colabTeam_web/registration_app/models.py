@@ -31,4 +31,4 @@ class Profile(models.Model):
         Returns:
             username (str): the username of the associated User
         """
-        return self.user.username
+        return self.user.get_username()
