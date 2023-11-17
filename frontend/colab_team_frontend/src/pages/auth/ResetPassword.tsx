@@ -2,25 +2,45 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormControl, Slide } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router-dom";
 
 import ActionButton from "@/components/form/ActionButton";
 import PasswordField from "@/components/form/PasswordField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
-import { resetPasswordSchema } from "@/schemas/auth";
-import { ResetPasswordSchema } from "@/types/auth";
+import {
+  resetPasswordFormSchema,
+  resetPasswordQueryParametersSchema,
+} from "@/schemas/auth";
+import { useResetPasswordMutation } from "@/store/api/auth";
+import { ResetPasswordFormSchema } from "@/types/auth";
 
 export default function ResetPasswordPage() {
-  const { handleSubmit, control, reset } = useForm<ResetPasswordSchema>({
-    resolver: yupResolver(resetPasswordSchema),
-  });
-
   const formRef = useRef<HTMLFormElement | null>(null);
+  const { handleSubmit, control } = useForm<ResetPasswordFormSchema>({
+    resolver: yupResolver(resetPasswordFormSchema),
+  });
+  const [resetPassword] = useResetPasswordMutation();
+  const [searchParameters] = useSearchParams();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function onSubmit(data: Record<string, any>) {
-    console.log(data);
-    reset();
+  async function onSubmit(data: ResetPasswordFormSchema) {
+    try {
+      const queryParameters = await resetPasswordQueryParametersSchema.validate(
+        {
+          uid: searchParameters.get("uid"),
+          token: searchParameters.get("token"),
+        }
+      );
+
+      await resetPassword({ ...queryParameters, ...data });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  if (searchParameters.size <= 0) {
+    // TODO: Display an unauthorized error here.
+    return; // <-- placeholder for now.
   }
 
   return (
@@ -29,14 +49,23 @@ export default function ResetPasswordPage() {
         sx={{ gap: "10px" }}
         component="form"
         ref={formRef}
-        onSubmit={handleSubmit((data) => onSubmit(data))}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Slide direction="right" in mountOnEnter unmountOnExit>
           <TextFieldContainer>
-            <PasswordField control={control} label="New Password" />
             <PasswordField
               control={control}
-              name="confirmPassword"
+              name="oldPassword"
+              label="Old Password"
+            />
+            <PasswordField
+              control={control}
+              name="newPassword"
+              label="New Password"
+            />
+            <PasswordField
+              control={control}
+              name="confirmNewPassword"
               label="Confirm New Password"
             />
           </TextFieldContainer>

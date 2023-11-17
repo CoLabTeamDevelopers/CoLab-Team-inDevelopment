@@ -8,20 +8,23 @@ import EmailField from "@/components/form/EmailField";
 import TextFieldContainer from "@/components/form/TextFieldContainer";
 import AuthFormLayout from "@/layouts/AuthForm";
 import { forgotPasswordSchema } from "@/schemas/auth";
+import { useForgotPasswordMutation } from "@/store/api/auth";
 import { ForgotPasswordSchema } from "@/types/auth";
 
 export default function ForgotPasswordPage() {
-  const { handleSubmit, control, reset } = useForm<ForgotPasswordSchema>({
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const { handleSubmit, control } = useForm<ForgotPasswordSchema>({
     resolver: yupResolver(forgotPasswordSchema),
   });
+  const [forgotPassword] = useForgotPasswordMutation();
 
-  const formRef = useRef<HTMLFormElement | null>(null);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function onSubmit(data: Record<string, any>) {
-    console.log(data);
-    formRef.current?.reset();
-    reset();
+  async function onSubmit(data: ForgotPasswordSchema) {
+    try {
+      await forgotPassword(data);
+      alert("An email has been sent to your inbox.");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -30,7 +33,7 @@ export default function ForgotPasswordPage() {
         sx={{ gap: "10px" }}
         component="form"
         ref={formRef}
-        onSubmit={handleSubmit((data) => onSubmit(data))}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Slide direction="right" in mountOnEnter unmountOnExit>
           <TextFieldContainer>

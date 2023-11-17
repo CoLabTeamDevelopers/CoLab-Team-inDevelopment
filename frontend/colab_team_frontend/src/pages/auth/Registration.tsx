@@ -27,7 +27,7 @@ export default function RegistrationPage() {
 
   async function onSubmit(data: RegistrationSchema) {
     try {
-      await register(data).unwrap();
+      await register(data);
       alert(
         "An email has been sent with a verification link. Please check your inbox & activate your account."
       );
