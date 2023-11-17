@@ -12,6 +12,11 @@ import ForgotPasswordPage from "@/pages/auth/ForgotPassword";
 import LoginPage from "@/pages/auth/Login";
 import RegistrationPage from "@/pages/auth/Registration";
 import ResetPasswordPage from "@/pages/auth/ResetPassword";
+import ProfilePage from "@/pages/app/Profile";
+import CreateProjectPage from "@/pages/app/CreateProject";
+import Request from "@/pages/app/Request";
+import RequestPage from "@/pages/app/Request";
+import MyProjectsPage from "@/pages/app/MyProjects";
 
 type Route = RouteObject[] | RouteObject;
 
@@ -31,11 +36,19 @@ const projectRoutes: Route = {
   ],
 };
 
+const appRoutes: Route = [
+  { path: "profile", element: <ProfilePage /> },
+  { path: "create-project", element: <CreateProjectPage /> },
+  { path: "requests", element: <RequestPage /> },
+  { path: "my-projects", element: <MyProjectsPage /> },
+];
+
 const router = createBrowserRouter([
   { index: true, element: <HomePage /> },
   { path: "*", element: <h1>404 - Not Found</h1> },
   projectRoutes,
   ...authRoutes,
+  ...appRoutes,
 ]);
 
 const Router = () => <RouterProvider router={router} />;

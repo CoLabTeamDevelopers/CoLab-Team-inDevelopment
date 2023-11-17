@@ -83,6 +83,7 @@ export const GlobalTheme = createTheme({
       styleOverrides: {
         root: {
           textDecoration: "none",
+          cursor: "pointer",
           color: "#9575cd",
           "&:hover": {
             color: "#673ab7",
@@ -90,10 +91,69 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    // TextField styling
     MuiTextField: {
       styleOverrides: {
         root: {
+          width: "100%",
           letterSpacing: "1px",
+          ".MuiFormLabel-root.Mui-focused": {
+            color: "#9575cd",
+          },
+          ".MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              borderColor: "#9575cd",
+            },
+        },
+      },
+    },
+    // Select (Dropdown) styling
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          letterSpacing: "1px",
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#9575cd",
+          },
+        },
+      },
+    },
+    // Inputlabel (Dropdown header) styling
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          letterSpacing: "1px",
+          "&.Mui-focused": {
+            color: "#9575cd",
+          },
+        },
+      },
+    },
+    // SVG Icon styling
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: "#9575cd",
+          cursor: "pointer",
+          "&:hover": {
+            color: "#673ab7",
+          },
+        },
+      },
+    },
+    // SLider styling
+    MuiSlider: {
+      styleOverrides: {
+        root: {
+          color: "#9575cd",
+        },
+      },
+    },
+    // SLider styling
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          color: "#673ab7",
         },
       },
     },

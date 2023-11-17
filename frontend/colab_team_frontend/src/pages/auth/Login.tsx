@@ -22,7 +22,7 @@ export default function LoginPage() {
 
   async function onSubmit(data: LoginSchema) {
     try {
-      await login(data).unwrap();
+      await login(data);
     } catch (error) {
       console.error(error);
     }
@@ -31,6 +31,7 @@ export default function LoginPage() {
   return (
     <AuthFormLayout title="Login">
       <FormControl
+        sx={{ gap: "10px" }}
         component="form"
         ref={formRef}
         onSubmit={handleSubmit(onSubmit)}
