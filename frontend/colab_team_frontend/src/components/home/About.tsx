@@ -1,7 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
 
 import ColabAbout from "@/assets/images/Colab About Light.png";
-import { AboutBoxStyle } from "@/styles/appStyles/HomeStyle";
+import { AboutBoxStyle } from "@/styles/appStyles/HomeStyles";
 
 import Image from "../Image";
 
