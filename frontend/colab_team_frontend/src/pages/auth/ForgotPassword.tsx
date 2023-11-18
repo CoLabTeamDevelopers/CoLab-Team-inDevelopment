@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormControl, Slide } from "@mui/material";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import ActionButton from "@/components/form/ActionButton";
@@ -10,6 +10,7 @@ import AuthFormLayout from "@/layouts/AuthForm";
 import { forgotPasswordSchema } from "@/schemas/auth";
 import { useForgotPasswordMutation } from "@/store/api/auth";
 import { ForgotPasswordSchema } from "@/types/auth";
+import AppAlerts from "@/components/AppAlerts";
 
 export default function ForgotPasswordPage() {
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -28,6 +29,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
+<<<<<<< HEAD
     <AuthFormLayout title="Forgot Password">
       <FormControl
         sx={{ gap: "10px" }}
@@ -43,5 +45,26 @@ export default function ForgotPasswordPage() {
         <ActionButton label="Send Link" type="submit" variant="contained" />
       </FormControl>
     </AuthFormLayout>
+=======
+    <React.Fragment>
+      {/* Only appear when some error is occured */}
+      <AppAlerts severity="error" title="Write your error message here." />
+      <AuthFormLayout title="Forgot Password">
+        <FormControl
+          sx={{ gap: "10px" }}
+          component="form"
+          ref={formRef}
+          onSubmit={handleSubmit((data) => onSubmit(data))}
+        >
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
+              <EmailField control={control} />
+            </TextFieldContainer>
+          </Slide>
+          <ActionButton label="Send Link" type="submit" variant="contained" />
+        </FormControl>
+      </AuthFormLayout>
+    </React.Fragment>
+>>>>>>> feature/ST#161123
   );
 }

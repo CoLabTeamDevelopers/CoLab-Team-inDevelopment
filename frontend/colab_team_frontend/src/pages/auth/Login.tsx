@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, FormControl, Slide, Typography } from "@mui/material";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import ActionButton from "@/components/form/ActionButton";
@@ -12,6 +12,7 @@ import AuthFormLayout from "@/layouts/AuthForm";
 import { loginSchema } from "@/schemas/auth";
 import { useLoginMutation } from "@/store/api/auth";
 import { LoginSchema } from "@/types/auth";
+import AppAlerts from "@/components/AppAlerts";
 
 export default function LoginPage() {
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -29,46 +30,50 @@ export default function LoginPage() {
   }
 
   return (
-    <AuthFormLayout title="Login">
-      <FormControl
-        sx={{ gap: "10px" }}
-        component="form"
-        ref={formRef}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <Slide direction="right" in mountOnEnter unmountOnExit>
-          <TextFieldContainer>
-            <BasicTextField
-              name="username"
-              control={control}
-              fieldProps={{ label: "Username" }}
-            />
-            <PasswordField control={control} />
-          </TextFieldContainer>
-        </Slide>
-        <ActionButton type="submit" variant="contained" label="Login" />
-      </FormControl>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography
-          fontSize={15}
-          color="#757575"
-          sx={{ display: "flex", justifyContent: "center" }}
+    <React.Fragment>
+      {/* Only appear when some error is occured */}
+      <AppAlerts severity="error" title="Write your error message here." />
+      <AuthFormLayout title="Login">
+        <FormControl
+          sx={{ gap: "10px" }}
+          component="form"
+          ref={formRef}
+          onSubmit={handleSubmit(onSubmit)}
         >
-          <AppLink href="/forgot-password" sx={{ color: "#9575cd" }}>
-            &nbsp;Forgot Password ?
-          </AppLink>
-        </Typography>
-        <Typography
-          fontSize={15}
-          color="#757575"
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
-          Not a user ?
-          <AppLink href="/register" sx={{ color: "#9575cd" }}>
-            &nbsp;Signup
-          </AppLink>
-        </Typography>
-      </Box>
-    </AuthFormLayout>
+          <Slide direction="right" in mountOnEnter unmountOnExit>
+            <TextFieldContainer>
+              <BasicTextField
+                name="username"
+                control={control}
+                fieldProps={{ label: "Username" }}
+              />
+              <PasswordField control={control} />
+            </TextFieldContainer>
+          </Slide>
+          <ActionButton type="submit" variant="contained" label="Login" />
+        </FormControl>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography
+            fontSize={15}
+            color="#757575"
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
+            <AppLink href="/forgot-password" sx={{ color: "#9575cd" }}>
+              &nbsp;Forgot Password ?
+            </AppLink>
+          </Typography>
+          <Typography
+            fontSize={15}
+            color="#757575"
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
+            Not a user ?
+            <AppLink href="/register" sx={{ color: "#9575cd" }}>
+              &nbsp;Signup
+            </AppLink>
+          </Typography>
+        </Box>
+      </AuthFormLayout>
+    </React.Fragment>
   );
 }
