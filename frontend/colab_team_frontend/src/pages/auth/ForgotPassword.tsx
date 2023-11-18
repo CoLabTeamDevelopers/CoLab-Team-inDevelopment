@@ -29,23 +29,6 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-<<<<<<< HEAD
-    <AuthFormLayout title="Forgot Password">
-      <FormControl
-        sx={{ gap: "10px" }}
-        component="form"
-        ref={formRef}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <Slide direction="right" in mountOnEnter unmountOnExit>
-          <TextFieldContainer>
-            <EmailField control={control} />
-          </TextFieldContainer>
-        </Slide>
-        <ActionButton label="Send Link" type="submit" variant="contained" />
-      </FormControl>
-    </AuthFormLayout>
-=======
     <React.Fragment>
       {/* Only appear when some error is occured */}
       <AppAlerts severity="error" title="Write your error message here." />
@@ -65,6 +48,5 @@ export default function ForgotPasswordPage() {
         </FormControl>
       </AuthFormLayout>
     </React.Fragment>
->>>>>>> feature/ST#161123
   );
 }

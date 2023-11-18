@@ -18,6 +18,7 @@ import Request from "@/pages/app/Request";
 import RequestPage from "@/pages/app/Request";
 import MyProjectsPage from "@/pages/app/MyProjects";
 import DiscussPage from "@/pages/app/Discuss";
+import WorkspacePage from "@/pages/app/Workspace";
 
 type Route = RouteObject[] | RouteObject;
 
@@ -42,6 +43,7 @@ const appRoutes: Route = [
   { path: "create-project", element: <CreateProjectPage /> },
   { path: "requests", element: <RequestPage /> },
   { path: "my-projects", element: <MyProjectsPage /> },
+  { path: "workspace", element: <WorkspacePage /> },
   { path: "discuss", element: <DiscussPage /> },
 ];
 
