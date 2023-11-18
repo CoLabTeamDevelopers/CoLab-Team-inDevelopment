@@ -27,7 +27,11 @@ class LoginView(CreateAPIView):
     def post(self, request: TypedHttpRequest, format=None):
         data = self.get_validated_data(request)
 
-        user = authenticate(request, **data)
+        user = authenticate(
+            request,
+            username=data["username"],
+            password=data["password"],
+        )
         if not user:
             raise exceptions.NotFound("User not found")
         if not user.profile.is_verified:  # type: ignore
@@ -35,7 +39,10 @@ class LoginView(CreateAPIView):
 
         login(request, user)
 
-        token, _ = AuthToken.objects.get_or_create(user=user)
+        token, _ = AuthToken.objects.get_or_create(
+            user=user,
+            ip_address=data["ip_address"],
+        )
 
         user_data = serializers.UserSerializer(instance=user).data
         token_data = serializers.AuthTokenSerializer(instance=token).data

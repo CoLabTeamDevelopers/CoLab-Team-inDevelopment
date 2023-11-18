@@ -24,6 +24,7 @@ class AuthTokenSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(style={"input_type": "password"})
+    ip_address = serializers.CharField()
 
 
 class RegisterSerializer(serializers.Serializer):

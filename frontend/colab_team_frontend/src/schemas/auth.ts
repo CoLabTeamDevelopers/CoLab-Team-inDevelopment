@@ -22,7 +22,11 @@ const confirmPassword = basePassword
 const uid = Yup.number().required("User id is required");
 const token = Yup.string().required("Token is required");
 
-export const loginSchema = Yup.object().shape({ username, password });
+export const loginSchema = Yup.object().shape({
+  username,
+  password,
+  ipAddress: Yup.string(),
+});
 
 export const registrationSchema = Yup.object().shape({
   username,
