@@ -17,6 +17,7 @@ import CreateProjectPage from "@/pages/app/CreateProject";
 import Request from "@/pages/app/Request";
 import RequestPage from "@/pages/app/Request";
 import MyProjectsPage from "@/pages/app/MyProjects";
+import DiscussPage from "@/pages/app/Discuss";
 
 type Route = RouteObject[] | RouteObject;
 
@@ -41,6 +42,7 @@ const appRoutes: Route = [
   { path: "create-project", element: <CreateProjectPage /> },
   { path: "requests", element: <RequestPage /> },
   { path: "my-projects", element: <MyProjectsPage /> },
+  { path: "discuss", element: <DiscussPage /> },
 ];
 
 const router = createBrowserRouter([

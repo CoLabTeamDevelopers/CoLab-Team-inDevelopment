@@ -14,6 +14,7 @@ import SelectField from "@/components/form/SelectField";
 import RolesAndResponsibilitiesField from "@/components/form/RolesAndResponsibilitiesField";
 import ActionButton from "@/components/form/ActionButton";
 import { CreateProjectFormStyle } from "@/styles/appStyles/CreateProjectStyles";
+import AppAlerts from "@/components/AppAlerts";
 
 export default function CreateProjectPage() {
   const { handleSubmit, control, reset } = useForm<CreateProject>({
@@ -52,6 +53,8 @@ export default function CreateProjectPage() {
           </DialogActions>
         </FormControl>
       </Slide>
+      <AppAlerts title="Project created." severity="success" />
+      <AppAlerts title="Some error occured." severity="error" />
     </AppContentLayout>
   );
 }
