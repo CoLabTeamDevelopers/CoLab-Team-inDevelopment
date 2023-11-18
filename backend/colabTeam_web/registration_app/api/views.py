@@ -1,48 +1,46 @@
-from django.contrib.auth import login, update_session_auth_hash
+from typing import Any
+
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
-from knox.views import LoginView as KnoxLoginView
 from rest_framework import decorators, exceptions, permissions, status
-from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
 from .. import emails
-from ..models import Profile, User
+from ..models import AuthToken, Profile, User
 from ..tokens import email_verification_token_generator, password_reset_token_generator
 from ..utils import TypedHttpRequest
 from . import serializers
 
 
-class LoginView(KnoxLoginView):
+class LoginView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.LoginSerializer
 
-    def get_post_response_data(self, request: TypedHttpRequest, token, instance):
-        user = serializers.UserSerializer(
-            instance=request.user,
-            context=self.get_context(),
-        ).data
-        return {
-            "user": user,
-            "token": {
-                "expiry_date": self.format_expiry_datetime(instance.expiry),
-                "key": token,
-            },
-        }
-
-    def post(self, request: TypedHttpRequest, format=None):
-        serializer = AuthTokenSerializer(data=request.data)
+    def get_validated_data(self, request: TypedHttpRequest) -> dict[str, Any]:
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        user = serializer.validated_data["user"]  # type: ignore
-        profile = get_object_or_404(Profile, user=user)
+        return serializer.validated_data  # type: ignore
 
-        if not profile.is_verified:
+    def post(self, request: TypedHttpRequest, format=None):
+        data = self.get_validated_data(request)
+
+        user = authenticate(request, **data)
+        if not user:
+            raise exceptions.NotFound("User not found")
+        if not user.profile.is_verified:  # type: ignore
             raise exceptions.PermissionDenied("Your email is not verified.")
 
         login(request, user)
-        return super(LoginView, self).post(request, format)
+
+        token, _ = AuthToken.objects.get_or_create(user=user)
+
+        user_data = serializers.UserSerializer(instance=user).data
+        token_data = serializers.AuthTokenSerializer(instance=token).data
+
+        return Response({"user": user_data, "token": token_data})
 
 
 class RegistrationView(CreateAPIView):

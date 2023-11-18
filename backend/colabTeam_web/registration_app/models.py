@@ -1,5 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
+from rest_framework.authtoken.models import Token
+
+
+class AuthToken(Token):
+    ip_address = models.CharField(max_length=100, default="0.0.0.0")
 
 
 class Profile(models.Model):
