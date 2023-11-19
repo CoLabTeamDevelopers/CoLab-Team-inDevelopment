@@ -1,17 +1,17 @@
-import React, { useReducer, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Box, Avatar, DialogActions, FormControl } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { Avatar, Box, DialogActions } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useReducer, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { dialogReducer } from "@/reducers/dialogReducer";
+import { userProfileSchema } from "@/schemas/profile";
+import { dialogInitialState } from "@/states/dialogState";
 
 import ContentDialog from "../ContentDialog";
-import { dialogReducer } from "@/reducers/dialogReducer";
-import { dialogInitialState } from "@/states/dialogState";
-import FileField from "../form/FileField";
-import { userProfileTypes } from "@/typings/userProfileTypes";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { userProfile } from "@/schemas/profile";
 import ActionButton from "../form/ActionButton";
+import FileField from "../form/FileField";
 import ImageCropper from "./ImageCropper";
 
 const CameraIconButton = styled(Avatar)(({ theme }) => ({
@@ -21,21 +21,21 @@ const CameraIconButton = styled(Avatar)(({ theme }) => ({
 }));
 
 export default function EditUserImage() {
-  const { handleSubmit, control } = useForm<userProfileTypes>({
-    resolver: yupResolver(userProfile),
+  const { control } = useForm({
+    resolver: yupResolver(userProfileSchema),
   });
 
   const [state, dispatch] = useReducer(dialogReducer, dialogInitialState);
 
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
 
-  const imageFileRef = useRef(null);
-  const triggerImageFile = () => imageFileRef.current.click();
+  const imageFileRef = useRef();
+  const triggerImageFile = () => imageFileRef.current?.click();
 
   const saveImageRef = useRef();
-  const saveImage = () => saveImageRef.current.cropProfileImage();
+  const saveImage = () => saveImageRef.current?.cropProfileImage();
 
-  const onSelectFile = (event: any) => {
+  const onSelectFile = (event: unknown) => {
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -46,7 +46,7 @@ export default function EditUserImage() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Avatar>
         <CameraIconButton
           onClick={() => dispatch({ type: "EDIT_PROFILE_IMAGE_DIALOG" })}
@@ -78,6 +78,6 @@ export default function EditUserImage() {
           </DialogActions>
         )}
       </ContentDialog>
-    </React.Fragment>
+    </>
   );
 }

@@ -1,36 +1,36 @@
-import React, { useReducer, useRef } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { DialogActions, FormControl } from "@mui/material";
+import { useReducer, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { FormControl, DialogActions } from "@mui/material";
+
+import { dialogReducer } from "@/reducers/dialogReducer";
+import { userProfileSchema } from "@/schemas/profile";
+import { dialogInitialState } from "@/states/dialogState";
 
 import ContentDialog from "../ContentDialog";
-import NameField from "../form/NameField";
-import SkillsField from "../form/SkillsField";
 import AboutField from "../form/AboutField";
 import ActionButton from "../form/ActionButton";
-import { dialogInitialState } from "@/states/dialogState";
-import { dialogReducer } from "@/reducers/dialogReducer";
-import { userProfileTypes } from "@/typings/userProfileTypes";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { userProfile } from "@/schemas/profile";
 import LocationField from "../form/LocationField";
+import NameField from "../form/NameField";
+import SkillsField from "../form/SkillsField";
 
 export default function EditUserDetails() {
-  const { handleSubmit, control, reset } = useForm<userProfileTypes>({
-    resolver: yupResolver(userProfile),
+  const { handleSubmit, control, reset } = useForm({
+    resolver: yupResolver(userProfileSchema),
   });
 
   const [state, dispatch] = useReducer(dialogReducer, dialogInitialState);
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  function onSubmit(data: Record<string, any>) {
+  function onSubmit(data: unknown) {
     console.log(data);
     formRef.current?.reset();
     reset();
   }
 
   return (
-    <React.Fragment>
+    <>
       <ActionButton
         label="Edit"
         onClick={() => dispatch({ type: "EDIT_USER_DETAILS_DIALOG" })}
@@ -64,6 +64,6 @@ export default function EditUserDetails() {
           </DialogActions>
         </FormControl>
       </ContentDialog>
-    </React.Fragment>
+    </>
   );
 }

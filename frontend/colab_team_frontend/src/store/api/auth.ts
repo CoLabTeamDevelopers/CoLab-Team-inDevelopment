@@ -1,12 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { camelCase, snakeCase } from "change-case/keys";
 
 import type {
   ForgotPasswordSchema,
-  LoginResponse,
   LoginSchema,
   RegistrationSchema,
   ResetPasswordSchema,
-} from "@/types/auth";
+} from "@/schemas/auth";
+import type { LoginResponse } from "@/types/api/responses";
 
 const authApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/v1/user/" }),
@@ -15,17 +16,15 @@ const authApi = createApi({
       query: (body) => ({
         url: "login/",
         method: "POST",
-        body: { ...body, ip_address: body.ipAddress },
+        body: snakeCase(body),
       }),
+      transformResponse: (response) => camelCase(response) as LoginResponse,
     }),
     register: builder.mutation<unknown, RegistrationSchema>({
       query: (body) => ({
         url: "register/",
         method: "POST",
-        body: {
-          ...body,
-          confirm_password: body.confirmPassword,
-        },
+        body: snakeCase(body),
       }),
     }),
     forgotPassword: builder.mutation<unknown, ForgotPasswordSchema>({
@@ -35,12 +34,7 @@ const authApi = createApi({
       query: (body) => ({
         url: "reset-password/",
         method: "POST",
-        body: {
-          ...body,
-          old_password: body.oldPassword,
-          new_password: body.newPassword,
-          confirm_password: body.confirmNewPassword,
-        },
+        body: snakeCase(body),
       }),
     }),
   }),

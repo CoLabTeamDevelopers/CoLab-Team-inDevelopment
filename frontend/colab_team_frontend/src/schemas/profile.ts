@@ -10,7 +10,7 @@ const skills = Yup.string().required("Add atleast one skill");
 
 const about = Yup.string().required("Add about you");
 
-export const userProfile = Yup.object().shape({
+export const userProfileSchema = Yup.object().shape({
   firstName,
   lastName,
   location,

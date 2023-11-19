@@ -1,20 +1,21 @@
-import React, { useImperativeHandle, useState } from "react";
 import { Box, Slider } from "@mui/material";
+import { ForwardedRef, useImperativeHandle, useState } from "react";
 import Cropper from "react-easy-crop";
 
-import CroppedImagePreview from "./CroppedImagePreview";
 import getCroppedImg from "@/utils/cropImage";
 
+import CroppedImagePreview from "./CroppedImagePreview";
+
 interface ImageCropperProps {
-  image: any;
-  forwardedRef?: any;
+  image: string;
+  forwardedRef?: ForwardedRef<unknown>;
 }
 
 const ImageCropper = ({ image, forwardedRef }: ImageCropperProps) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [croppedArea, setCroppedArea] = useState(null);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
+  const [croppedArea, setCroppedArea] = useState(0);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(0);
+  const [croppedImage, setCroppedImage] = useState(0);
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
 
@@ -31,8 +32,8 @@ const ImageCropper = ({ image, forwardedRef }: ImageCropperProps) => {
       );
       console.log(croppedImage);
       setCroppedImage(croppedImage);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -41,7 +42,7 @@ const ImageCropper = ({ image, forwardedRef }: ImageCropperProps) => {
   }));
 
   return (
-    <React.Fragment>
+    <>
       <Box
         component="div"
         sx={{
@@ -77,7 +78,7 @@ const ImageCropper = ({ image, forwardedRef }: ImageCropperProps) => {
       >
         <Box component="div">
           {croppedArea && (
-            <React.Fragment>
+            <>
               <Slider
                 value={rotation}
                 min={0}
@@ -95,11 +96,11 @@ const ImageCropper = ({ image, forwardedRef }: ImageCropperProps) => {
                 croppedArea={croppedArea}
                 image={image}
               />
-            </React.Fragment>
+            </>
           )}
         </Box>
       </Box>
-    </React.Fragment>
+    </>
   );
 };
 

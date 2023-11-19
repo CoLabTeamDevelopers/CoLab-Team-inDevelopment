@@ -1,10 +1,13 @@
-import React from "react";
 import { Avatar, Box } from "@mui/material";
 
 interface CropImageProps {
-  croppedArea: any;
-  image: any;
-  rotation: any;
+  croppedArea: {
+    width: number;
+    x: number;
+    y: number;
+  };
+  image: string;
+  rotation: number;
 }
 
 export default function CroppedImagPreview({
