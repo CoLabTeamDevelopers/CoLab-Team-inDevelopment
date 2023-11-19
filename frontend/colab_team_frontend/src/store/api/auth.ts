@@ -12,7 +12,11 @@ const authApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/v1/user/" }),
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginSchema>({
-      query: (body) => ({ url: "login/", method: "POST", body }),
+      query: (body) => ({
+        url: "login/",
+        method: "POST",
+        body: { ...body, ip_address: body.ipAddress },
+      }),
     }),
     register: builder.mutation<unknown, RegistrationSchema>({
       query: (body) => ({

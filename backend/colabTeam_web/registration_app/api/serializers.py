@@ -1,8 +1,6 @@
-from django.contrib.auth.models import User
-
 from rest_framework import serializers
 
-from ..models import Profile
+from ..models import AuthToken, Profile, User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,21 +15,32 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ["auth_token", "is_verified", "created_on"]
 
 
+class AuthTokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthToken
+        fields = ["key", "created_at", "expired_at"]
+
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
-    password = serializers.CharField()
+    password = serializers.CharField(style={"input_type": "password"})
+    ip_address = serializers.CharField()
 
 
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField()
     email = serializers.EmailField()
-    password = serializers.CharField()
-    confirm_password = serializers.CharField()
+    password = serializers.CharField(style={"input_type": "password"})
+    confirm_password = serializers.CharField(style={"input_type": "password"})
 
     def validate(self, attrs):
         if attrs["password"] != attrs["confirm_password"]:
             raise serializers.ValidationError("Passwords do not match.")
         return attrs
+
+
+class ResendVerificationEmailSerializer(serializers.Serializer):
+    email = serializers.EmailField()
 
 
 class ForgotPasswordSerializer(serializers.Serializer):
@@ -41,9 +50,9 @@ class ForgotPasswordSerializer(serializers.Serializer):
 class ResetPasswordSerializer(serializers.Serializer):
     uid = serializers.IntegerField()
     token = serializers.CharField()
-    old_password = serializers.CharField()
-    new_password = serializers.CharField()
-    confirm_password = serializers.CharField()
+    old_password = serializers.CharField(style={"input_type": "password"})
+    new_password = serializers.CharField(style={"input_type": "password"})
+    confirm_password = serializers.CharField(style={"input_type": "password"})
 
     def validate(self, attrs):
         if attrs["old_password"] == attrs["new_password"]:
