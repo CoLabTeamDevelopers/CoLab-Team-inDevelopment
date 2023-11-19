@@ -1,8 +1,7 @@
-import React from "react";
-import { Box, Link } from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import RedditIcon from "@mui/icons-material/Reddit";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import { Box, Link } from "@mui/material";
 
 const footerLinks = [
   { icon: <GitHubIcon />, href: "" },

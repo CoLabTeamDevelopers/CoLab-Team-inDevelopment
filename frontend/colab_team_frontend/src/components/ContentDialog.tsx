@@ -1,48 +1,33 @@
-import * as React from "react";
 import {
   Dialog,
   DialogContent,
+  DialogProps,
   DialogTitle,
   Slide,
-  TransitionProps,
+  SlideProps,
 } from "@mui/material";
+import { forwardRef, PropsWithChildren } from "react";
 
-interface DialogProps {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  children: React.ReactNode;
-}
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="right" ref={ref} {...props} />;
-});
+const Transition = forwardRef<unknown, PropsWithChildren<SlideProps>>(
+  (props, ref) => <Slide direction="right" ref={ref} {...props} />
+);
 
 export default function ContentDialog({
-  open,
-  onClose,
   title,
   children,
+  ...otherProps
 }: DialogProps) {
   return (
-    <React.Fragment>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted={true}
-        fullWidth
-        maxWidth="sm"
-        onClose={onClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>{children}</DialogContent>
-      </Dialog>
-    </React.Fragment>
+    <Dialog
+      aria-describedby="alert-dialog-slide-description"
+      TransitionComponent={Transition}
+      maxWidth="sm"
+      fullWidth
+      keepMounted
+      {...otherProps}
+    >
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>{children}</DialogContent>
+    </Dialog>
   );
 }

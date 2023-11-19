@@ -1,12 +1,11 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
-import { Fragment } from "react";
 
 import DataChip from "@/components/DataChip";
 import { ProjectDetailsStyle } from "@/styles/appStyles/ProjectStyles";
 
 export default function ProjectDetails() {
   return (
-    <Fragment>
+    <>
       <Box sx={ProjectDetailsStyle}>
         <Typography variant="inherit">Author</Typography>
         <DataChip
@@ -59,6 +58,6 @@ export default function ProjectDetails() {
       <Box>
         <Button variant="contained">Request Join</Button>
       </Box>
-    </Fragment>
+    </>
   );
 }

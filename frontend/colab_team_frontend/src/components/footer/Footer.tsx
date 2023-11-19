@@ -1,5 +1,5 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
+
 import FooterLinks from "./FooterLinks";
 
 export default function Footer() {
