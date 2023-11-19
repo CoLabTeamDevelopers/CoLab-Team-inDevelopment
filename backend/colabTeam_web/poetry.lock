@@ -178,22 +178,6 @@ docs = ["furo (>=2021.8.17b43,<2021.9.dev0)", "sphinx (>=3.5.0)", "sphinx-notfou
 testing = ["coverage[toml] (>=5.0a4)", "pytest (>=4.6.11)"]
 
 [[package]]
-name = "django-rest-knox"
-version = "4.2.0"
-description = "Authentication for django rest framework"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "django-rest-knox-4.2.0.tar.gz", hash = "sha256:4595f1dc23d6e41af7939e5f2d8fdaf6ade0a74a656218e7b56683db5566fcc9"},
-    {file = "django_rest_knox-4.2.0-py3-none-any.whl", hash = "sha256:62b8e374a44cd4e9617eaefe27c915b301bf224fa6550633d3013d3f9f415113"},
-]
-
-[package.dependencies]
-cryptography = "*"
-django = ">=3.2"
-djangorestframework = "*"
-
-[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -386,4 +370,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "ef776d041d2516023d30989dcf2d440b08f6085c2f13c3737a608e73b5a02efb"
+content-hash = "40b14db86b3778a866f8771006b3d444e773f0575bdc3af69f17ea7a66606e80"

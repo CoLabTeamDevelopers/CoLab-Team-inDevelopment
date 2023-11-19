@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "drf_standardized_errors",
-    "knox",
     "home_app",
     "registration_app",
     "api",

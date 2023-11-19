@@ -1,6 +1,6 @@
 from typing import Any
 
-from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from rest_framework import decorators, exceptions, permissions, status
@@ -48,6 +48,15 @@ class LoginView(CreateAPIView):
         token_data = serializers.AuthTokenSerializer(instance=token).data
 
         return Response({"user": user_data, "token": token_data})
+
+
+class LogoutView(CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request: TypedHttpRequest, format=None):
+        request.auth.delete()
+        logout(request)
+        return Response(None)
 
 
 class RegistrationView(CreateAPIView):

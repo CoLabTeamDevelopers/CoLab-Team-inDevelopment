@@ -17,14 +17,12 @@ class TokenAuthentication(BaseAuthentication):
     - `request.user` will be an instance of `User` model.
     """
 
-    def authenticate_header(self, request):
-        return "Token"
+    model = AuthToken
 
     def get_token(self, request):
         header = get_authorization_header(request).split()
-        prefix = self.authenticate_header(request).encode()
 
-        if not header or header[0] != prefix.lower():
+        if not header or header[0].lower() != b"Token".lower():
             return None
         if len(header) == 1:
             raise AuthenticationFailed("Invalid token header. Token is missing.")
@@ -49,21 +47,24 @@ class TokenAuthentication(BaseAuthentication):
         return self.expire_token(token)
 
     def authenticate(self, request):
-        if token := self.get_token(request):
-            auth_tokens = AuthToken.objects.filter(key=token[:8])
+        token = self.get_token(request)
+        if not token:
+            return None
 
-            for auth_token in auth_tokens:
-                if self.validate_token(auth_token):
-                    continue
+        auth_tokens = AuthToken.objects.filter(key=token)
 
-                try:
-                    hash = hash_token(token)
-                except (TypeError, binascii.Error):
-                    raise AuthenticationFailed("Invalid token")
+        for auth_token in auth_tokens:
+            if self.validate_token(auth_token):
+                continue
 
-                if compare_digest(hash, auth_token.hash):
-                    user = auth_token.user
-                    if not user.profile.is_verified:  # type: ignore
-                        raise AuthenticationFailed("User is not verified.")
+            try:
+                hash = hash_token(token)
+            except (TypeError, binascii.Error):
+                raise AuthenticationFailed("Invalid token")
 
-                    return user, auth_token
+            if compare_digest(hash, auth_token.hash):
+                user = auth_token.user
+                if not user.profile.is_verified:  # type: ignore
+                    raise AuthenticationFailed("User is not verified.")
+
+                return user, auth_token

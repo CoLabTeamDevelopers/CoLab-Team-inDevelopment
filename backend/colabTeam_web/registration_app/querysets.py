@@ -13,7 +13,7 @@ class AuthTokenQueryset(QuerySet):
             expired_at = timezone.now() + timezone.timedelta(days=30)
 
         return super().create(
-            key=token[:8],
+            key=token,
             hash=crypto.hash_token(token),
             expired_at=expired_at,
             **kwargs,
