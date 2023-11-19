@@ -1,9 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
-from rest_framework.authtoken.models import Token
+
+from .querysets import AuthTokenQueryset
 
 
-class AuthToken(Token):
+class AuthToken(models.Model):
+    objects = AuthTokenQueryset.as_manager()
+
+    key = models.CharField(max_length=8, db_index=True)
+    hash = models.CharField(max_length=128, primary_key=True)
     user = models.ForeignKey(
         User,
         related_name="auth_token",
@@ -11,6 +16,11 @@ class AuthToken(Token):
         verbose_name="User",
     )
     ip_address = models.CharField(max_length=100, default="0.0.0.0")
+    created_at = models.DateTimeField(auto_now_add=True)
+    expired_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f"{self.ip_address} - {self.user.username}"
 
 
 class Profile(models.Model):

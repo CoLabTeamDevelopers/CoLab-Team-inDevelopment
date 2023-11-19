@@ -1,9 +1,10 @@
 from typing import Any
 from django.http import HttpRequest
 
-from .models import User
+from .models import AuthToken, User
 
 
 class TypedHttpRequest(HttpRequest):
-    user: User
+    auth: AuthToken
     data: dict[str, Any]
+    user: User

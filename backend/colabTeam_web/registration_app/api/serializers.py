@@ -18,7 +18,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class AuthTokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthToken
-        fields = ["key", "created", "ip_address"]
+        fields = ["key", "created_at", "expired_at"]
 
 
 class LoginSerializer(serializers.Serializer):
