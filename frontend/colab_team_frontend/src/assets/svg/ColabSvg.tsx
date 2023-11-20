@@ -1,4 +1,4 @@
-import SvgCss from "@/styles/cssStyles/ColabSvg.module.css";
+import SvgCss from "@/common/styles/ColabSvg.module.css";
 
 const svgStyle = {
   stroke: "#311b92",
