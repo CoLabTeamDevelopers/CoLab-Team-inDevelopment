@@ -4,15 +4,14 @@ import { useReducer, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import ContentDialog from "@/common/components/ContentDialog";
-import ActionButton from "@/common/components/form/ActionButton";
-import EmailField from "@/common/components/form/EmailField";
+import ActionButton from "@/common/form/ActionButton";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { dialogInitialState } from "@/states/dialogState";
 
 import { userProfileSchema } from "../schemas";
 
 export default function ChangeEmail() {
-  const { handleSubmit, control, reset } = useForm({
+  const { handleSubmit, reset } = useForm({
     resolver: yupResolver(userProfileSchema),
   });
 
@@ -42,7 +41,7 @@ export default function ChangeEmail() {
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <EmailField control={control} />
+          {/* <EmailField name="email" control={control} /> */}
           <DialogActions>
             <ActionButton
               onClick={() => {

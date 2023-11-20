@@ -1,20 +1,17 @@
 import { Autocomplete } from "@mui/material";
 import { useState } from "react";
+import { FieldValues } from "react-hook-form";
 
-import DataChip from "../DataChip";
-import BasicTextField from "./BaseTextField";
+import DataChip from "../components/DataChip";
+import BasicTextField, { BasicFieldProps } from "./BaseTextField";
 
-interface Props {
-  name?: string;
-  label?: string;
-  control: any;
-}
+interface Props<T extends FieldValues> extends BasicFieldProps<T> {}
 
-export default function SkillField({
-  name = "skills",
-  label = "Skills",
+export default function SkillField<T extends FieldValues>({
+  name,
+  label,
   ...otherProps
-}: Props) {
+}: Props<T>) {
   // Chip array - Controls the chip data (skills)
   const [chipData, setChipData] = useState<string[]>([]);
 
@@ -46,7 +43,8 @@ export default function SkillField({
       renderInput={(parameters) => (
         <BasicTextField
           name={name}
-          fieldProps={{ type: "text", label, ...parameters }}
+          label={label}
+          fieldProps={parameters}
           {...otherProps}
         />
       )}

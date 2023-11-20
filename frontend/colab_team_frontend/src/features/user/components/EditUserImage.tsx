@@ -6,8 +6,7 @@ import { useReducer, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import ContentDialog from "@/common/components/ContentDialog";
-import ActionButton from "@/common/components/form/ActionButton";
-import FileField from "@/common/components/form/FileField";
+import ActionButton from "@/common/form/ActionButton";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { dialogInitialState } from "@/states/dialogState";
 
@@ -61,11 +60,12 @@ export default function EditUserImage() {
       >
         <Box sx={{ display: "grid", gap: "10px" }}>
           <ActionButton label="Choose Image File" onClick={triggerImageFile} />
-          <FileField
+          {/* <FileField
+            name=""
             control={control}
             forwardedRef={imageFileRef}
             onChange={onSelectFile}
-          />
+          /> */}
           <ImageCropper forwardedRef={saveImageRef} image={image} />
         </Box>
         {image && (

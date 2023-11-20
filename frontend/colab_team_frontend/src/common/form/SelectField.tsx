@@ -3,18 +3,23 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Controller } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 
-interface SelectProps {
-  label: string;
+import { BasicFieldProps } from "./BaseTextField";
+
+interface SelectProps<T extends FieldValues> extends BasicFieldProps<T> {
   items?: string[];
-  control: any;
 }
 
-export default function SelectField({ label, items, control }: SelectProps) {
+export default function SelectField<T extends FieldValues>({
+  label,
+  items,
+  ...otherProps
+}: SelectProps<T>) {
   const [item, setItem] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -25,9 +30,6 @@ export default function SelectField({ label, items, control }: SelectProps) {
     <FormControl>
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Controller
-        name="projectLevel"
-        control={control}
-        defaultValue=""
         render={({ field, fieldState: { error } }) => (
           <>
             <Select
@@ -55,6 +57,7 @@ export default function SelectField({ label, items, control }: SelectProps) {
             </Typography>
           </>
         )}
+        {...otherProps}
       />
     </FormControl>
   );

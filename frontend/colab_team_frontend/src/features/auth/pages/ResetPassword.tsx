@@ -4,9 +4,9 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 
-import ActionButton from "@/common/components/form/ActionButton";
-import PasswordField from "@/common/components/form/PasswordField";
-import TextFieldContainer from "@/common/components/form/TextFieldContainer";
+import ActionButton from "@/common/form/ActionButton";
+import PasswordField from "@/common/form/PasswordField";
+import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useResetPasswordMutation } from "../api";
 import AuthFormLayout from "../layout";

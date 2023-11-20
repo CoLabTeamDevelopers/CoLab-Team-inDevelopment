@@ -4,12 +4,12 @@ import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import ActionButton from "@/common/components/form/ActionButton";
-import BasicTextField from "@/common/components/form/BaseTextField";
-import EmailField from "@/common/components/form/EmailField";
-import PasswordField from "@/common/components/form/PasswordField";
-import TextFieldContainer from "@/common/components/form/TextFieldContainer";
 import AppLink from "@/common/components/Link";
+import ActionButton from "@/common/form/ActionButton";
+import BasicTextField from "@/common/form/BaseTextField";
+import EmailField from "@/common/form/EmailField";
+import PasswordField from "@/common/form/PasswordField";
+import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useRegisterMutation } from "../api";
 import AuthFormLayout from "../layout";
@@ -71,14 +71,14 @@ export default function RegistrationPage() {
                 control={control}
                 fieldProps={{ label: "Username" }}
               />
-              <EmailField control={control} />
+              <EmailField name="email" control={control} />
             </TextFieldContainer>
           </Slide>
         )}
         {continueForm ? (
           <Slide direction="right" in mountOnEnter unmountOnExit>
             <TextFieldContainer>
-              <PasswordField control={control} />
+              <PasswordField name="password" control={control} />
               <PasswordField
                 control={control}
                 label="Confirm Password"

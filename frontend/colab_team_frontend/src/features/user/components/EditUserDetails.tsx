@@ -4,11 +4,10 @@ import { useReducer, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import ContentDialog from "@/common/components/ContentDialog";
-import AboutField from "@/common/components/form/AboutField";
-import ActionButton from "@/common/components/form/ActionButton";
-import LocationField from "@/common/components/form/LocationField";
-import NameField from "@/common/components/form/NameField";
-import SkillsField from "@/common/components/form/SkillsField";
+import ActionButton from "@/common/form/ActionButton";
+import BasicTextField from "@/common/form/BaseTextField";
+import LocationField from "@/common/form/LocationField";
+import SkillsField from "@/common/form/SkillsField";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { dialogInitialState } from "@/states/dialogState";
 
@@ -46,11 +45,15 @@ export default function EditUserDetails() {
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <NameField name="firstName" control={control} label="First name" />
-          <NameField name="lastName" control={control} label="Last name" />
-          <LocationField control={control} />
+          <BasicTextField
+            name="firstName"
+            control={control}
+            label="First name"
+          />
+          <BasicTextField name="lastName" control={control} label="Last name" />
+          <LocationField name="location" control={control} />
           <SkillsField control={control} />
-          <AboutField control={control} />
+          <BasicTextField name="about" control={control} label="About Me" />
           <DialogActions>
             <ActionButton
               onClick={() => {

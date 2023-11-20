@@ -3,13 +3,12 @@ import { DialogActions, FormControl, Slide } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
-import ActionButton from "@/common/components/form/ActionButton";
-import ProjectDescriptionField from "@/common/components/form/ProjectDescriptionField";
-import ProjectPositionField from "@/common/components/form/ProjectPositionField";
-import ProjectTitleField from "@/common/components/form/ProjectTitleField";
-import RolesAndResponsibilitiesField from "@/common/components/form/RolesAndResponsibilitiesField";
-import SelectField from "@/common/components/form/SelectField";
-import SkillField from "@/common/components/form/SkillsField";
+import ActionButton from "@/common/form/ActionButton";
+import BasicTextField from "@/common/form/BaseTextField";
+import NumberField from "@/common/form/NumberField";
+import RolesAndResponsibilitiesField from "@/common/form/RolesAndResponsibilitiesField";
+import SelectField from "@/common/form/SelectField";
+import SkillField from "@/common/form/SkillsField";
 import AppContentLayout from "@/common/layouts/AppContent";
 import { CreateProjectFormStyle } from "@/common/styles/CreateProjectStyles";
 
@@ -37,15 +36,31 @@ export default function CreateProjectPage() {
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <ProjectTitleField control={control} />
-          <ProjectDescriptionField control={control} />
-          <SkillField control={control} />
-          <ProjectPositionField control={control} />
+          <BasicTextField
+            name="projectTitle"
+            label="Project Title"
+            control={control}
+          />
+          <BasicTextField
+            label="Description"
+            name="projectDescription"
+            control={control}
+          />
+          {/* TODO: Make a multiselect field */}
+          <SkillField label="Skills" name="skills" control={control} />
+          <NumberField
+            type="number"
+            name="projectPosition"
+            label="Open Positions"
+            control={control}
+          />
           <SelectField
+            name="projectLevel"
             label="Project Level"
             control={control}
             items={["Beginner", "Intermediate", "Professional"]}
           />
+          {/* TODO: Replace with a wysiwyg editor */}
           <RolesAndResponsibilitiesField control={control} />
           <DialogActions>
             <ActionButton label="Save" />

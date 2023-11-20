@@ -3,11 +3,11 @@ import { Box, FormControl, Slide, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
-import ActionButton from "@/common/components/form/ActionButton";
-import BasicTextField from "@/common/components/form/BaseTextField";
-import PasswordField from "@/common/components/form/PasswordField";
-import TextFieldContainer from "@/common/components/form/TextFieldContainer";
 import AppLink from "@/common/components/Link";
+import ActionButton from "@/common/form/ActionButton";
+import BasicTextField from "@/common/form/BaseTextField";
+import PasswordField from "@/common/form/PasswordField";
+import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useLoginMutation } from "../api";
 import AuthFormLayout from "../layout";
@@ -48,7 +48,7 @@ export default function LoginPage() {
               control={control}
               fieldProps={{ label: "Username" }}
             />
-            <PasswordField control={control} />
+            <PasswordField name="password" control={control} />
           </TextFieldContainer>
         </Slide>
         <ActionButton type="submit" variant="contained" label="Login" />

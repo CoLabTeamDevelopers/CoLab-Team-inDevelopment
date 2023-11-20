@@ -2,20 +2,16 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { IconButton, InputAdornment } from "@mui/material";
 import { useState } from "react";
+import { FieldValues } from "react-hook-form";
 
-import BasicTextField from "./BaseTextField";
+import BasicTextField, { BasicTextFieldProps } from "./BaseTextField";
 
-interface Props {
-  name?: string;
-  label?: string;
-  control: any;
-}
+interface Props<T extends FieldValues> extends BasicTextFieldProps<T> {}
 
-export default function PasswordField({
-  name = "password",
+export default function PasswordField<T extends FieldValues>({
   label = "Password",
   ...otherProps
-}: Props) {
+}: Props<T>) {
   const [show, setShow] = useState(false);
 
   const endAdornment = (
@@ -28,10 +24,9 @@ export default function PasswordField({
 
   return (
     <BasicTextField
-      name={name}
+      label={label}
+      type={show ? "text" : "password"}
       fieldProps={{
-        type: show ? "text" : "password",
-        label,
         InputProps: { endAdornment },
       }}
       {...otherProps}

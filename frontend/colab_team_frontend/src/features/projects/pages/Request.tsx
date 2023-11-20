@@ -1,8 +1,8 @@
 import { Box, Card, Divider } from "@mui/material";
 
 import DataChip from "@/common/components/DataChip";
-import ActionButton from "@/common/components/form/ActionButton";
 import AppLink from "@/common/components/Link";
+import ActionButton from "@/common/form/ActionButton";
 import AppContentLayout from "@/common/layouts/AppContent";
 import {
   RequestButtonSectionStyle,

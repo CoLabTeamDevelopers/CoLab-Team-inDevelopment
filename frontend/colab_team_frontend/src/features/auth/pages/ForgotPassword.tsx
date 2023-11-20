@@ -3,9 +3,9 @@ import { FormControl, Slide } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
-import ActionButton from "@/common/components/form/ActionButton";
-import EmailField from "@/common/components/form/EmailField";
-import TextFieldContainer from "@/common/components/form/TextFieldContainer";
+import ActionButton from "@/common/form/ActionButton";
+import EmailField from "@/common/form/EmailField";
+import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useForgotPasswordMutation } from "../api";
 import AuthFormLayout from "../layout";
@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
       >
         <Slide direction="right" in mountOnEnter unmountOnExit>
           <TextFieldContainer>
-            <EmailField control={control} />
+            <EmailField name="email" control={control} />
           </TextFieldContainer>
         </Slide>
         <ActionButton label="Send Link" type="submit" variant="contained" />

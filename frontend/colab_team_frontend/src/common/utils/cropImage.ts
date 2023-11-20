@@ -33,7 +33,7 @@ export function rotateSize(
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  */
 export default async function getCroppedImg(
-  imageSrc: string,
+  imageSource: string,
   pixelCrop: {
     x: number;
     y: number;
@@ -46,11 +46,11 @@ export default async function getCroppedImg(
     vertical: false,
   }
 ): Promise<string | null> {
-  const image = await createImage(imageSrc);
+  const image = await createImage(imageSource);
   const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const context = canvas.getContext("2d");
 
-  if (!ctx) {
+  if (!context) {
     return null;
   }
 
@@ -68,19 +68,19 @@ export default async function getCroppedImg(
   canvas.height = bBoxHeight;
 
   // translate canvas context to a central location to allow rotating and flipping around the center
-  ctx.translate(bBoxWidth / 2, bBoxHeight / 2);
-  ctx.rotate(rotRad);
-  ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
-  ctx.translate(-image.width / 2, -image.height / 2);
+  context.translate(bBoxWidth / 2, bBoxHeight / 2);
+  context.rotate(rotRad);
+  context.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
+  context.translate(-image.width / 2, -image.height / 2);
 
   // draw rotated image
-  ctx.drawImage(image, 0, 0);
+  context.drawImage(image, 0, 0);
 
   const croppedCanvas = document.createElement("canvas");
 
-  const croppedCtx = croppedCanvas.getContext("2d");
+  const croppedContext = croppedCanvas.getContext("2d");
 
-  if (!croppedCtx) {
+  if (!croppedContext) {
     return null;
   }
 
@@ -89,7 +89,7 @@ export default async function getCroppedImg(
   croppedCanvas.height = pixelCrop.height;
 
   // Draw the cropped image onto the new canvas
-  croppedCtx.drawImage(
+  croppedContext.drawImage(
     canvas,
     pixelCrop.x,
     pixelCrop.y,
