@@ -9,7 +9,7 @@ interface Props<T extends FieldValues> extends BasicFieldProps<T> {
   options?: string[];
 }
 
-export default function MultiSelectField<T extends FieldValues>({
+export default function TagsField<T extends FieldValues>({
   name,
   label,
   options = [],

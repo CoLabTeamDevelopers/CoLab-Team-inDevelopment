@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 
 import ActionButton from "@/common/form/ActionButton";
 import EmailField from "@/common/form/EmailField";
-import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useForgotPasswordMutation } from "../api";
+import TextFieldContainer from "../components/TextFieldContainer";
 import AuthFormLayout from "../layout";
 import { ForgotPasswordSchema, forgotPasswordSchema } from "../schemas";
 

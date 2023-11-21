@@ -1,14 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormControl, Slide } from "@mui/material";
 import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import {
+  PasswordElement,
+  PasswordRepeatElement,
+  useForm,
+} from "react-hook-form-mui";
 import { useSearchParams } from "react-router-dom";
 
 import ActionButton from "@/common/form/ActionButton";
-import PasswordField from "@/common/form/PasswordField";
-import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useResetPasswordMutation } from "../api";
+import TextFieldContainer from "../components/TextFieldContainer";
 import AuthFormLayout from "../layout";
 import {
   ResetPasswordFormSchema,
@@ -54,20 +57,21 @@ export default function ResetPasswordPage() {
       >
         <Slide direction="right" in mountOnEnter unmountOnExit>
           <TextFieldContainer>
-            <PasswordField
+            <PasswordElement
               control={control}
               name="oldPassword"
               label="Old Password"
             />
-            <PasswordField
+            <PasswordElement
               control={control}
               name="newPassword"
               label="New Password"
             />
-            <PasswordField
+            <PasswordRepeatElement
               control={control}
               name="confirmNewPassword"
               label="Confirm New Password"
+              passwordFieldName="newPassword"
             />
           </TextFieldContainer>
         </Slide>

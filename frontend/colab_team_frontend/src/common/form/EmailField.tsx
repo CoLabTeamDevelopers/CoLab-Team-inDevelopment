@@ -1,12 +1,12 @@
-import { FieldValues } from "react-hook-form";
-
-import BasicTextField, { BasicTextFieldProps } from "./BaseTextField";
-
-interface Props<T extends FieldValues> extends BasicTextFieldProps<T> {}
+import {
+  FieldValues,
+  TextFieldElement,
+  TextFieldElementProps,
+} from "react-hook-form-mui";
 
 export default function EmailField<T extends FieldValues>({
   label = "Email Address",
   ...otherProps
-}: Props<T>) {
-  return <BasicTextField label={label} type="email" {...otherProps} />;
+}: TextFieldElementProps<T>) {
+  return <TextFieldElement label={label} type="email" {...otherProps} />;
 }

@@ -2,16 +2,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { Box, Button, FormControl, Slide, Typography } from "@mui/material";
 import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import {
+  PasswordElement,
+  PasswordRepeatElement,
+  useForm,
+} from "react-hook-form-mui";
 
 import AppLink from "@/common/components/Link";
 import ActionButton from "@/common/form/ActionButton";
 import BasicTextField from "@/common/form/BaseTextField";
 import EmailField from "@/common/form/EmailField";
-import PasswordField from "@/common/form/PasswordField";
-import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useRegisterMutation } from "../api";
+import TextFieldContainer from "../components/TextFieldContainer";
 import AuthFormLayout from "../layout";
 import { RegistrationSchema, registrationSchema } from "../schemas";
 
@@ -78,8 +81,13 @@ export default function RegistrationPage() {
         {continueForm ? (
           <Slide direction="right" in mountOnEnter unmountOnExit>
             <TextFieldContainer>
-              <PasswordField name="password" control={control} />
-              <PasswordField
+              <PasswordElement
+                name="password"
+                label="Password"
+                control={control}
+              />
+              <PasswordRepeatElement
+                passwordFieldName="password"
                 control={control}
                 label="Confirm Password"
                 name="confirmPassword"

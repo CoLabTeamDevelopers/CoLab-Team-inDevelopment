@@ -1,15 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, FormControl, Slide, Typography } from "@mui/material";
 import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { PasswordElement, useForm } from "react-hook-form-mui";
 
 import AppLink from "@/common/components/Link";
 import ActionButton from "@/common/form/ActionButton";
 import BasicTextField from "@/common/form/BaseTextField";
-import PasswordField from "@/common/form/PasswordField";
-import TextFieldContainer from "@/common/form/TextFieldContainer";
 
 import { useLoginMutation } from "../api";
+import TextFieldContainer from "../components/TextFieldContainer";
 import AuthFormLayout from "../layout";
 import { LoginSchema, loginSchema } from "../schemas";
 
@@ -48,7 +47,11 @@ export default function LoginPage() {
               control={control}
               fieldProps={{ label: "Username" }}
             />
-            <PasswordField name="password" control={control} />
+            <PasswordElement
+              name="password"
+              label="Password"
+              control={control}
+            />
           </TextFieldContainer>
         </Slide>
         <ActionButton type="submit" variant="contained" label="Login" />

@@ -1,13 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DialogActions, FormControl, Slide } from "@mui/material";
 import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { TextFieldElement, useForm } from "react-hook-form-mui";
 
 import ActionButton from "@/common/form/ActionButton";
-import BasicTextField from "@/common/form/BaseTextField";
-import MultiSelectField from "@/common/form/MultiSelectField";
 import NumberField from "@/common/form/NumberField";
 import SelectField from "@/common/form/SelectField";
+import TagsField from "@/common/form/TagsField";
 import AppContentLayout from "@/common/layouts/AppContent";
 import { CreateProjectFormStyle } from "@/common/styles/CreateProjectStyles";
 
@@ -35,19 +34,23 @@ export default function CreateProjectPage() {
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <BasicTextField
+          <TextFieldElement
             name="projectTitle"
             label="Project Title"
             control={control}
           />
-          <BasicTextField
+          <TextFieldElement
             label="Description"
             name="projectDescription"
             control={control}
           />
-          <MultiSelectField label="Skills" name="skills" control={control} />
+          <TagsField
+            label="Skills"
+            name="skills"
+            control={control}
+            options={[]}
+          />
           <NumberField
-            type="number"
             name="projectPosition"
             label="Open Positions"
             control={control}
@@ -59,15 +62,12 @@ export default function CreateProjectPage() {
             defaultValue=""
             options={["Beginner", "Intermediate", "Professional"]}
           />
-          <BasicTextField
+          <TextFieldElement
             name="projectRolesAndResponsiblities"
             label="Roles & Responsibilities"
             control={control}
-            fieldProps={{
-              multiline: true,
-              rows: 5,
-              placeholder: "Write here... (New point Shift + Enter)",
-            }}
+            multiline
+            rows={5}
           />
           <DialogActions>
             <ActionButton label="Save" />

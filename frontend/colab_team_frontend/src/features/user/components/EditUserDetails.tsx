@@ -2,12 +2,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { DialogActions, FormControl } from "@mui/material";
 import { useReducer, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { TextFieldElement } from "react-hook-form-mui";
 
 import ContentDialog from "@/common/components/ContentDialog";
 import ActionButton from "@/common/form/ActionButton";
-import BasicTextField from "@/common/form/BaseTextField";
-import LocationField from "@/common/form/LocationField";
-import MultiSelectField from "@/common/form/MultiSelectField";
+import TagsField from "@/common/form/TagsField";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { dialogInitialState } from "@/states/dialogState";
 
@@ -45,15 +44,28 @@ export default function EditUserDetails() {
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <BasicTextField
+          <TextFieldElement
             name="firstName"
             control={control}
             label="First name"
           />
-          <BasicTextField name="lastName" control={control} label="Last name" />
-          <LocationField name="location" control={control} />
-          <MultiSelectField label="Skills" name="skills" control={control} />
-          <BasicTextField name="about" control={control} label="About Me" />
+          <TextFieldElement
+            name="lastName"
+            control={control}
+            label="Last name"
+          />
+          <TextFieldElement
+            name="location"
+            label="Location"
+            control={control}
+          />
+          <TagsField
+            label="Skills"
+            name="skills"
+            control={control}
+            options={[]}
+          />
+          <TextFieldElement name="about" control={control} label="About Me" />
           <DialogActions>
             <ActionButton
               onClick={() => {

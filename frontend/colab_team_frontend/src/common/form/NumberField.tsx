@@ -1,8 +1,10 @@
-import { FieldValues } from "react-hook-form";
+import {
+  FieldValues,
+  TextFieldElement,
+  TextFieldElementProps,
+} from "react-hook-form-mui";
 
-import BasicTextField, { BasicTextFieldProps } from "./BaseTextField";
-
-interface Props<T extends FieldValues> extends BasicTextFieldProps<T> {
+interface Props<T extends FieldValues> extends TextFieldElementProps<T> {
   min?: number;
   step?: number;
 }
@@ -13,9 +15,9 @@ export default function NumberField<T extends FieldValues>({
   ...otherProps
 }: Props<T>) {
   return (
-    <BasicTextField
+    <TextFieldElement
       type="number"
-      fieldProps={{ inputProps: { min, step } }}
+      inputProps={{ min, step }}
       {...otherProps}
     />
   );

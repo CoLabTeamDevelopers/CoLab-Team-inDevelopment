@@ -1,28 +1,18 @@
-import { ChangeEventHandler } from "react";
-import { FieldValues } from "react-hook-form";
+import {
+  FieldValues,
+  TextFieldElement,
+  TextFieldElementProps,
+} from "react-hook-form-mui";
 
-import BasicTextField, { BasicTextFieldProps } from "./BaseTextField";
+interface Props<T extends FieldValues> extends TextFieldElementProps<T> {}
 
-interface Props<T extends FieldValues, R> extends BasicTextFieldProps<T> {
-  fieldRef?: React.MutableRefObject<R>;
-  onChange?: ChangeEventHandler;
-}
-
-export default function FileField<T extends FieldValues, R>({
-  fieldRef,
-  onChange,
-  ...otherProps
-}: Props<T, R>) {
+export default function FileField<T extends FieldValues>(props: Props<T>) {
   return (
-    <BasicTextField
+    <TextFieldElement
       type="file"
-      fieldProps={{
-        inputProps: { accept: "image/*" },
-        inputRef: fieldRef,
-        onChange: onChange,
-        sx: { display: "none" },
-      }}
-      {...otherProps}
+      inputProps={{ accept: "image/*" }}
+      sx={{ display: "none" }}
+      {...props}
     />
   );
 }
