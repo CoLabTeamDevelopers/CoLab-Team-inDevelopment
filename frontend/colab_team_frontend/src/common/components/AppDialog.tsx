@@ -12,7 +12,7 @@ const Transition = forwardRef<unknown, PropsWithChildren<SlideProps>>(
   (props, ref) => <Slide direction="right" ref={ref} {...props} />
 );
 
-export default function ContentDialog({
+export default function AppDialog({
   title,
   children,
   ...otherProps
@@ -26,8 +26,8 @@ export default function ContentDialog({
       keepMounted
       {...otherProps}
     >
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogTitle children={title} />
+      <DialogContent children={children} />
     </Dialog>
   );
 }

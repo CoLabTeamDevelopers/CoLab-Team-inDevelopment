@@ -4,7 +4,7 @@ import { useReducer, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { TextFieldElement } from "react-hook-form-mui";
 
-import ContentDialog from "@/common/components/ContentDialog";
+import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
 import TagsField from "@/common/form/TagsField";
 import { dialogReducer } from "@/reducers/dialogReducer";
@@ -33,7 +33,7 @@ export default function EditUserDetails() {
         label="Edit"
         onClick={() => dispatch({ type: "EDIT_USER_DETAILS_DIALOG" })}
       />
-      <ContentDialog
+      <AppDialog
         title="Edit User"
         open={state.openEditUserDialog}
         onClose={() => dispatch({ type: "EDIT_USER_DETAILS_DIALOG" })}
@@ -78,7 +78,7 @@ export default function EditUserDetails() {
             <ActionButton type="submit" label="Save" />
           </DialogActions>
         </FormControl>
-      </ContentDialog>
+      </AppDialog>
     </>
   );
 }

@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import { useReducer, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import ContentDialog from "@/common/components/ContentDialog";
+import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { dialogInitialState } from "@/states/dialogState";
@@ -26,7 +26,7 @@ export default function EditUserImage() {
 
   const [state, dispatch] = useReducer(dialogReducer, dialogInitialState);
 
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
 
   const imageFileRef = useRef();
   const triggerImageFile = () => imageFileRef.current?.click();
@@ -53,7 +53,7 @@ export default function EditUserImage() {
           <CameraAltIcon />
         </CameraIconButton>
       </Avatar>
-      <ContentDialog
+      <AppDialog
         title="Upload Image"
         open={state.openEditUserImageDialog}
         onClose={() => dispatch({ type: "EDIT_PROFILE_IMAGE_DIALOG" })}
@@ -77,7 +77,7 @@ export default function EditUserImage() {
             <ActionButton label="Save" onClick={saveImage} />
           </DialogActions>
         )}
-      </ContentDialog>
+      </AppDialog>
     </>
   );
 }

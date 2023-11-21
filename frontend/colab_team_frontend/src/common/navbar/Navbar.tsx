@@ -8,17 +8,22 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material/";
-import { useReducer } from "react";
 
-import { drawerReducer } from "@/reducers/drawerReducer";
-import { navDrawerInitialState } from "@/states/navDrawerState";
-
-import AppLink from "../Link";
+import AppLink from "../components/Link";
 import NavDrawer from "./NavDrawer";
 import NavLinks from "./NavLinks";
+import useNavDrawer from "./useNavDrawer";
 
 export default function NavBar() {
-  const [state, dispatch] = useReducer(drawerReducer, navDrawerInitialState);
+  const {
+    closeLeftDrawer,
+    closeRightDrawer,
+    leftDrawerOpen,
+    openLeftDrawer,
+    openRightDrawer,
+    rightDrawerOpen,
+  } = useNavDrawer();
+
   return (
     <AppBar sx={{ background: "#ede7f6" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -33,13 +38,13 @@ export default function NavBar() {
           }}
         >
           <NavDrawer
-            open={state.openLeftDrawer}
-            onClose={() => dispatch({ type: "CLOSE_LEFT_DRAWER" })}
+            open={leftDrawerOpen}
+            onClose={closeLeftDrawer}
             direction="left"
           />
           <NavDrawer
-            open={state.openRightDrawer}
-            onClose={() => dispatch({ type: "CLOSE_RIGHT_DRAWER" })}
+            open={rightDrawerOpen}
+            onClose={closeRightDrawer}
             direction="right"
           />
           <Box
@@ -47,7 +52,7 @@ export default function NavBar() {
           >
             <IconButton
               aria-label="open drawer"
-              onClick={() => dispatch({ type: "OPEN_LEFT_DRAWER" })}
+              onClick={openLeftDrawer}
               sx={{ "@media (min-width:1024px)": { display: "none" } }}
             >
               <MenuIcon />
@@ -80,7 +85,7 @@ export default function NavBar() {
             <Button variant="contained">Register</Button>
           </AppLink>
           <Avatar
-            onClick={() => dispatch({ type: "OPEN_RIGHT_DRAWER" })}
+            onClick={openRightDrawer}
             sx={{ cursor: "pointer" }}
             alt="User Logo"
           />

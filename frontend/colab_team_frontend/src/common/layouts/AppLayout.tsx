@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Outlet } from "react-router-dom";
 
-import NavBar from "../components/navbar/Navbar";
+import NavBar from "../navbar/Navbar";
 
 const Main = styled("main")({
   marginTop: "6rem",

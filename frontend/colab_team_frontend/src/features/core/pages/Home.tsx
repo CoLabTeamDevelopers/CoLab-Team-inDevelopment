@@ -6,7 +6,7 @@ import ColabAbout from "@/assets/images/Colab About Light.png";
 import ColabSVG from "@/assets/svg/ColabSvg";
 import TeamSVG from "@/assets/svg/TeamSvg";
 import Footer from "@/common/components/Footer";
-import Navbar from "@/common/components/navbar/Navbar";
+import Navbar from "@/common/navbar/Navbar";
 
 export function Component() {
   return (

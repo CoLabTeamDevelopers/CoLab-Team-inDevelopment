@@ -3,7 +3,7 @@ import { DialogActions, FormControl, Link } from "@mui/material";
 import { useReducer, useRef } from "react";
 import { useForm } from "react-hook-form";
 
-import ContentDialog from "@/common/components/ContentDialog";
+import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { dialogInitialState } from "@/states/dialogState";
@@ -30,7 +30,7 @@ export default function ChangeEmail() {
       <Link onClick={() => dispatch({ type: "EDIT_CHANGE_EMAIL_DIALOG" })}>
         Change
       </Link>
-      <ContentDialog
+      <AppDialog
         title="Change Email"
         open={state.openEditEmailDialog}
         onClose={() => dispatch({ type: "EDIT_CHANGE_EMAIL_DIALOG" })}
@@ -54,7 +54,7 @@ export default function ChangeEmail() {
             <ActionButton type="submit" label="Save" />
           </DialogActions>
         </FormControl>
-      </ContentDialog>
+      </AppDialog>
     </>
   );
 }
