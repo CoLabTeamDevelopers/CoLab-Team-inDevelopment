@@ -3,46 +3,32 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { Controller, FieldValues } from "react-hook-form";
+import { Controller, FieldValues, Path, PathValue } from "react-hook-form";
 
 import { BasicFieldProps } from "./BaseTextField";
 
 interface SelectProps<T extends FieldValues> extends BasicFieldProps<T> {
-  items?: string[];
+  options?: string[];
+  defaultValue?: PathValue<T, Path<T>>;
 }
 
 export default function SelectField<T extends FieldValues>({
   label,
-  items,
+  options,
+  defaultValue,
   ...otherProps
 }: SelectProps<T>) {
-  const [item, setItem] = useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setItem(event.target.value as string);
-  };
-
   return (
     <FormControl>
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Controller
+        defaultValue={defaultValue}
         render={({ field, fieldState: { error } }) => (
           <>
-            <Select
-              {...field}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label={label}
-              value={item}
-              name="projectLevel"
-              error={!!error}
-              onChange={handleChange}
-            >
-              {items?.map((item, key) => (
+            <Select {...field} label={label} error={!!error}>
+              {options?.map((item, key) => (
                 <MenuItem key={key} value={item}>
                   {item}
                 </MenuItem>

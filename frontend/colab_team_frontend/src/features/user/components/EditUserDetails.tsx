@@ -7,7 +7,7 @@ import ContentDialog from "@/common/components/ContentDialog";
 import ActionButton from "@/common/form/ActionButton";
 import BasicTextField from "@/common/form/BaseTextField";
 import LocationField from "@/common/form/LocationField";
-import SkillsField from "@/common/form/SkillsField";
+import MultiSelectField from "@/common/form/MultiSelectField";
 import { dialogReducer } from "@/reducers/dialogReducer";
 import { dialogInitialState } from "@/states/dialogState";
 
@@ -52,7 +52,7 @@ export default function EditUserDetails() {
           />
           <BasicTextField name="lastName" control={control} label="Last name" />
           <LocationField name="location" control={control} />
-          <SkillsField control={control} />
+          <MultiSelectField label="Skills" name="skills" control={control} />
           <BasicTextField name="about" control={control} label="About Me" />
           <DialogActions>
             <ActionButton

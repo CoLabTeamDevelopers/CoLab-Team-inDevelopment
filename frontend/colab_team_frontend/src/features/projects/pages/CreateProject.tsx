@@ -5,10 +5,9 @@ import { useForm } from "react-hook-form";
 
 import ActionButton from "@/common/form/ActionButton";
 import BasicTextField from "@/common/form/BaseTextField";
+import MultiSelectField from "@/common/form/MultiSelectField";
 import NumberField from "@/common/form/NumberField";
-import RolesAndResponsibilitiesField from "@/common/form/RolesAndResponsibilitiesField";
 import SelectField from "@/common/form/SelectField";
-import SkillField from "@/common/form/SkillsField";
 import AppContentLayout from "@/common/layouts/AppContent";
 import { CreateProjectFormStyle } from "@/common/styles/CreateProjectStyles";
 
@@ -46,8 +45,7 @@ export default function CreateProjectPage() {
             name="projectDescription"
             control={control}
           />
-          {/* TODO: Make a multiselect field */}
-          <SkillField label="Skills" name="skills" control={control} />
+          <MultiSelectField label="Skills" name="skills" control={control} />
           <NumberField
             type="number"
             name="projectPosition"
@@ -58,10 +56,19 @@ export default function CreateProjectPage() {
             name="projectLevel"
             label="Project Level"
             control={control}
-            items={["Beginner", "Intermediate", "Professional"]}
+            defaultValue=""
+            options={["Beginner", "Intermediate", "Professional"]}
           />
-          {/* TODO: Replace with a wysiwyg editor */}
-          <RolesAndResponsibilitiesField control={control} />
+          <BasicTextField
+            name="projectRolesAndResponsiblities"
+            label="Roles & Responsibilities"
+            control={control}
+            fieldProps={{
+              multiline: true,
+              rows: 5,
+              placeholder: "Write here... (New point Shift + Enter)",
+            }}
+          />
           <DialogActions>
             <ActionButton label="Save" />
           </DialogActions>
