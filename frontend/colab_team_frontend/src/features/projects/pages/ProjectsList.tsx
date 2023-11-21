@@ -8,7 +8,7 @@ import {
 
 import ProjectTags from "../components/ProjectTags";
 
-export default function ProjectsListPage() {
+export function Component() {
   return (
     <AppContentLayout>
       <Card sx={ProjectListCardStyle}>

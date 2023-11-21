@@ -9,7 +9,7 @@ import {
   MyProjectsCardStyle,
 } from "@/common/styles/MyProjectsStyle";
 
-export default function MyProjectsPage() {
+export function Component() {
   return (
     <>
       <AppContentLayout>

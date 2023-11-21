@@ -17,7 +17,7 @@ import ChangeEmail from "../components/ChangeEmail";
 import EditUserDetails from "../components/EditUserDetails";
 import EditUserImage from "../components/EditUserImage";
 
-export default function ProfilePage() {
+export function Component() {
   return (
     <>
       <NavBar />

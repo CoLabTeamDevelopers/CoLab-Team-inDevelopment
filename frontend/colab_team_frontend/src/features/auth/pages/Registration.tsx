@@ -18,7 +18,7 @@ import TextFieldContainer from "../components/TextFieldContainer";
 import AuthFormLayout from "../layout";
 import { RegistrationSchema, registrationSchema } from "../schemas";
 
-export default function RegistrationPage() {
+export function Component() {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [continueForm, setContinueForm] = useState(false);
   const { handleSubmit, control, watch, setError } =

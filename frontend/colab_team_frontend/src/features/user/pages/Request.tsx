@@ -11,7 +11,7 @@ import {
   RequestUserSectionStyle,
 } from "@/common/styles/RequestStyles";
 
-export default function RequestPage() {
+export function Component() {
   return (
     <AppContentLayout>
       <Divider sx={{ width: "60%", margin: "auto" }} textAlign="right">

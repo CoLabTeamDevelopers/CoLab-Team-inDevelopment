@@ -12,7 +12,7 @@ import TextFieldContainer from "../components/TextFieldContainer";
 import AuthFormLayout from "../layout";
 import { LoginSchema, loginSchema } from "../schemas";
 
-export default function LoginPage() {
+export function Component() {
   const formRef = useRef<HTMLFormElement | null>(null);
   const { handleSubmit, control, setValue } = useForm<LoginSchema>({
     resolver: yupResolver(loginSchema),

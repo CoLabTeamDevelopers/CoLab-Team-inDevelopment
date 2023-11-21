@@ -10,7 +10,7 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+        <RouterProvider router={router} fallbackElement={<>Loading...</>} />
       </ThemeProvider>
     </Provider>
   );

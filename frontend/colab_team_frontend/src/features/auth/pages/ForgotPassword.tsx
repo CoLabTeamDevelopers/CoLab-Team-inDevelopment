@@ -11,7 +11,7 @@ import TextFieldContainer from "../components/TextFieldContainer";
 import AuthFormLayout from "../layout";
 import { ForgotPasswordSchema, forgotPasswordSchema } from "../schemas";
 
-export default function ForgotPasswordPage() {
+export function Component() {
   const formRef = useRef<HTMLFormElement | null>(null);
   const { handleSubmit, control } = useForm<ForgotPasswordSchema>({
     resolver: yupResolver(forgotPasswordSchema),

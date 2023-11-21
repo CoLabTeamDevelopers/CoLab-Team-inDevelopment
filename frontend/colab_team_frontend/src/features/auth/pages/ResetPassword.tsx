@@ -19,7 +19,7 @@ import {
   resetPasswordQueryParametersSchema,
 } from "../schemas";
 
-export default function ResetPasswordPage() {
+export function Component() {
   const formRef = useRef<HTMLFormElement | null>(null);
   const { handleSubmit, control } = useForm<ResetPasswordFormSchema>({
     resolver: yupResolver(resetPasswordFormSchema),

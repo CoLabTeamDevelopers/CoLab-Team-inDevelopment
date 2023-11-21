@@ -1,6 +1,6 @@
 import AppLink from "@/common/components/Link";
 
-export default function EmailVerificationSuccessPage() {
+export function Component() {
   return (
     <div>
       Your email has been successfully verified.

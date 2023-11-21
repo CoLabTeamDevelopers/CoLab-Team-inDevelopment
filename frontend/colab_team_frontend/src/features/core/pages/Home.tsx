@@ -9,7 +9,7 @@ import { ColabLogoBoxStyle } from "@/common/styles/HomeStyles";
 
 import AboutSection from "./About";
 
-export default function HomePage() {
+export function Component() {
   return (
     <>
       <Box component="section" sx={{ height: "100vh" }}>

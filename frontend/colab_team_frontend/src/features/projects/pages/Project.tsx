@@ -12,7 +12,7 @@ import {
 import ProjectDetails from "../components/ProjectDetails";
 import RolesAndResponsiblities from "../components/RolesAndResponsiblities";
 
-export default function ProjectPage() {
+export function Component() {
   return (
     <AppContentLayout>
       <Box sx={ProjectBoxStyle}>

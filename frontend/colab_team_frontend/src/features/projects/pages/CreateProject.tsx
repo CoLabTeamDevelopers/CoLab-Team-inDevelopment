@@ -12,7 +12,7 @@ import { CreateProjectFormStyle } from "@/common/styles/CreateProjectStyles";
 
 import { createProject } from "../schema";
 
-export default function CreateProjectPage() {
+export function Component() {
   const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(createProject),
   });
