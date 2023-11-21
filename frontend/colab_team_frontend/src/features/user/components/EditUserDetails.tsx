@@ -1,25 +1,22 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DialogActions, FormControl } from "@mui/material";
-import { useReducer, useRef } from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { TextFieldElement } from "react-hook-form-mui";
+import { useToggle } from "usehooks-ts";
 
 import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
 import TagsField from "@/common/form/TagsField";
-import { dialogReducer } from "@/reducers/dialogReducer";
-import { dialogInitialState } from "@/states/dialogState";
 
 import { userProfileSchema } from "../schemas";
 
 export default function EditUserDetails() {
+  const [open, toggle] = useToggle();
+  const formRef = useRef<HTMLFormElement | null>(null);
   const { handleSubmit, control, reset } = useForm({
     resolver: yupResolver(userProfileSchema),
   });
-
-  const [state, dispatch] = useReducer(dialogReducer, dialogInitialState);
-
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   function onSubmit(data: unknown) {
     console.log(data);
@@ -29,15 +26,8 @@ export default function EditUserDetails() {
 
   return (
     <>
-      <ActionButton
-        label="Edit"
-        onClick={() => dispatch({ type: "EDIT_USER_DETAILS_DIALOG" })}
-      />
-      <AppDialog
-        title="Edit User"
-        open={state.openEditUserDialog}
-        onClose={() => dispatch({ type: "EDIT_USER_DETAILS_DIALOG" })}
-      >
+      <ActionButton label="Edit" onClick={toggle} />
+      <AppDialog title="Edit User" open={open} onClose={toggle}>
         <FormControl
           sx={{ gap: "10px", width: "100%", marginTop: "5px" }}
           component="form"
@@ -69,7 +59,7 @@ export default function EditUserDetails() {
           <DialogActions>
             <ActionButton
               onClick={() => {
-                dispatch({ type: "EDIT_USER_DETAILS_DIALOG" });
+                toggle();
                 formRef.current?.reset();
                 reset();
               }}

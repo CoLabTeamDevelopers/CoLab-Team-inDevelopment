@@ -2,13 +2,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { Avatar, Box, DialogActions } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useReducer, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useToggle } from "usehooks-ts";
 
 import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
-import { dialogReducer } from "@/reducers/dialogReducer";
-import { dialogInitialState } from "@/states/dialogState";
 
 import { userProfileSchema } from "../schemas";
 import ImageCropper from "./ImageCropper";
@@ -20,11 +19,10 @@ const CameraIconButton = styled(Avatar)(({ theme }) => ({
 }));
 
 export default function EditUserImage() {
+  const [open, toggle] = useToggle();
   const { control } = useForm({
     resolver: yupResolver(userProfileSchema),
   });
-
-  const [state, dispatch] = useReducer(dialogReducer, dialogInitialState);
 
   const [image, setImage] = useState("");
 
@@ -47,17 +45,11 @@ export default function EditUserImage() {
   return (
     <>
       <Avatar>
-        <CameraIconButton
-          onClick={() => dispatch({ type: "EDIT_PROFILE_IMAGE_DIALOG" })}
-        >
+        <CameraIconButton onClick={toggle}>
           <CameraAltIcon />
         </CameraIconButton>
       </Avatar>
-      <AppDialog
-        title="Upload Image"
-        open={state.openEditUserImageDialog}
-        onClose={() => dispatch({ type: "EDIT_PROFILE_IMAGE_DIALOG" })}
-      >
+      <AppDialog title="Upload Image" open={open} onClose={toggle}>
         <Box sx={{ display: "grid", gap: "10px" }}>
           <ActionButton label="Choose Image File" onClick={triggerImageFile} />
           {/* <FileField
@@ -70,10 +62,7 @@ export default function EditUserImage() {
         </Box>
         {image && (
           <DialogActions>
-            <ActionButton
-              label="Cancel"
-              onClick={() => dispatch({ type: "EDIT_PROFILE_IMAGE_DIALOG" })}
-            />
+            <ActionButton label="Cancel" onClick={toggle} />
             <ActionButton label="Save" onClick={saveImage} />
           </DialogActions>
         )}

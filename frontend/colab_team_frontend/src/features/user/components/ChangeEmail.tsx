@@ -1,23 +1,20 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DialogActions, FormControl, Link } from "@mui/material";
-import { useReducer, useRef } from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useToggle } from "usehooks-ts";
 
 import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
-import { dialogReducer } from "@/reducers/dialogReducer";
-import { dialogInitialState } from "@/states/dialogState";
 
 import { userProfileSchema } from "../schemas";
 
 export default function ChangeEmail() {
+  const [open, toggle] = useToggle();
+  const formRef = useRef<HTMLFormElement | null>(null);
   const { handleSubmit, reset } = useForm({
     resolver: yupResolver(userProfileSchema),
   });
-
-  const [state, dispatch] = useReducer(dialogReducer, dialogInitialState);
-
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   function onSubmit(data: unknown) {
     console.log(data);
@@ -27,14 +24,8 @@ export default function ChangeEmail() {
 
   return (
     <>
-      <Link onClick={() => dispatch({ type: "EDIT_CHANGE_EMAIL_DIALOG" })}>
-        Change
-      </Link>
-      <AppDialog
-        title="Change Email"
-        open={state.openEditEmailDialog}
-        onClose={() => dispatch({ type: "EDIT_CHANGE_EMAIL_DIALOG" })}
-      >
+      <Link onClick={toggle}>Change</Link>
+      <AppDialog title="Change Email" open={open} onClose={toggle}>
         <FormControl
           sx={{ gap: "10px", width: "100%", marginTop: "5px" }}
           component="form"
@@ -45,7 +36,7 @@ export default function ChangeEmail() {
           <DialogActions>
             <ActionButton
               onClick={() => {
-                dispatch({ type: "EDIT_CHANGE_EMAIL_DIALOG" });
+                toggle();
                 formRef.current?.reset();
                 reset();
               }}
