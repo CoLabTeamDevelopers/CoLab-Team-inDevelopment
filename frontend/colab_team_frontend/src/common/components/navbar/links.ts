@@ -8,7 +8,7 @@ export const leftNavLinks = [
 
 export const rightNavLinks = [
   { label: "Profile", href: "/profile" },
-  { label: "Create", href: "/create-project" },
-  { label: "Requests", href: "/requests" },
-  { label: "My Projects", href: "/my-projects" },
+  { label: "Create", href: "/projects/create" },
+  { label: "Requests", href: "/profile/requests" },
+  { label: "My Projects", href: "/profile/projects" },
 ];

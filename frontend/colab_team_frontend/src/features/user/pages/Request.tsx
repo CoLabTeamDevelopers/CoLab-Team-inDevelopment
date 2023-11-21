@@ -3,7 +3,6 @@ import { Box, Card, Divider } from "@mui/material";
 import DataChip from "@/common/components/DataChip";
 import AppLink from "@/common/components/Link";
 import ActionButton from "@/common/form/ActionButton";
-import AppContentLayout from "@/common/layouts/AppContent";
 import {
   RequestButtonSectionStyle,
   RequestCardStyle,
@@ -13,7 +12,7 @@ import {
 
 export function Component() {
   return (
-    <AppContentLayout>
+    <>
       <Divider sx={{ width: "60%", margin: "auto" }} textAlign="right">
         Today
       </Divider>
@@ -51,6 +50,6 @@ export function Component() {
           <ActionButton label="Decline" />
         </Box>
       </Card>
-    </AppContentLayout>
+    </>
   );
 }
