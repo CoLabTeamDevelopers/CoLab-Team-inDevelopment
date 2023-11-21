@@ -7,7 +7,6 @@ import ActionButton from "@/common/form/ActionButton";
 import NumberField from "@/common/form/NumberField";
 import SelectField from "@/common/form/SelectField";
 import TagsField from "@/common/form/TagsField";
-import { CreateProjectFormStyle } from "@/common/styles/CreateProjectStyles";
 
 import { createProject } from "../schema";
 
@@ -27,7 +26,16 @@ export function Component() {
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
       <FormControl
-        sx={CreateProjectFormStyle}
+        sx={{
+          width: "40%",
+          margin: "auto",
+          gap: "15px",
+          justifyContent: "center",
+          display: "flex",
+          "@media(max-width:1024px)": {
+            width: "90%",
+          },
+        }}
         component="form"
         ref={formRef}
         onSubmit={handleSubmit(onSubmit)}

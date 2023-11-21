@@ -24,8 +24,6 @@ import {
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
-import { NavigationDrawerStyle } from "@/common/styles/NavbarStyles";
-
 import { leftNavLinks, rightNavLinks } from "./links";
 
 interface DrawerProps {
@@ -75,10 +73,15 @@ export default function NavDrawer({ open, onClose, direction }: DrawerProps) {
 
   return (
     <Box
-      sx={[
-        NavigationDrawerStyle,
-        { display: direction === "right" ? "flex" : "none", width: "0%" },
-      ]}
+      sx={{
+        display: direction === "right" ? "flex" : "none",
+        width: "0%",
+        "@media (max-width: 1024px)": {
+          background: "#ede7f6",
+          display: "block",
+          width: "10%",
+        },
+      }}
     >
       <Drawer
         sx={{

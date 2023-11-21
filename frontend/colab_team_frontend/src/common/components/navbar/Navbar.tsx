@@ -10,7 +10,6 @@ import {
 } from "@mui/material/";
 import { useReducer } from "react";
 
-import { TitleStyle } from "@/common/styles/TitleStyles";
 import { drawerReducer } from "@/reducers/drawerReducer";
 import { navDrawerInitialState } from "@/states/navDrawerState";
 
@@ -43,7 +42,9 @@ export default function NavBar() {
             onClose={() => dispatch({ type: "CLOSE_RIGHT_DRAWER" })}
             direction="right"
           />
-          <Box sx={TitleStyle}>
+          <Box
+            sx={{ display: "flex", marginLeft: "0px", alignItems: "center" }}
+          >
             <IconButton
               aria-label="open drawer"
               onClick={() => dispatch({ type: "OPEN_LEFT_DRAWER" })}

@@ -3,12 +3,13 @@ import { Box, Card, Divider } from "@mui/material";
 import DataChip from "@/common/components/DataChip";
 import AppLink from "@/common/components/Link";
 import ActionButton from "@/common/form/ActionButton";
-import {
-  RequestButtonSectionStyle,
-  RequestCardStyle,
-  RequestProjectSectionStyle,
-  RequestUserSectionStyle,
-} from "@/common/styles/RequestStyles";
+
+const SectionStyle = {
+  display: "grid",
+  gap: "10px",
+  justifyItems: "center",
+  alignContent: "center",
+};
 
 export function Component() {
   return (
@@ -22,8 +23,24 @@ export function Component() {
       <Divider sx={{ width: "60%", margin: "auto" }} textAlign="right">
         14/11/2023
       </Divider>
-      <Card sx={RequestCardStyle}>
-        <Box sx={RequestUserSectionStyle}>
+      <Card
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          gap: "20px",
+          width: "60%",
+          margin: "auto",
+          padding: "10px",
+          marginTop: "10px",
+          "@media(max-width:640px)": {
+            width: "90%",
+            display: "grid",
+            gap: "10px",
+          },
+        }}
+      >
+        <Box sx={SectionStyle}>
           <AppLink>Siddhant Totade</AppLink>
           <Box sx={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
             <DataChip label="Dajngo" size="small" />
@@ -33,7 +50,7 @@ export function Component() {
           </Box>
         </Box>
         <Divider orientation="vertical" flexItem />
-        <Box sx={RequestProjectSectionStyle}>
+        <Box sx={SectionStyle}>
           <AppLink href="/projects/colab">
             Colab Team - Collaborative platform for developers
           </AppLink>
@@ -45,7 +62,14 @@ export function Component() {
           </Box>
         </Box>
         <Divider orientation="vertical" flexItem />
-        <Box sx={RequestButtonSectionStyle}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           <ActionButton label="Approve" />
           <ActionButton label="Decline" />
         </Box>

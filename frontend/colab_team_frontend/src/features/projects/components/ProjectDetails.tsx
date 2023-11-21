@@ -1,7 +1,13 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 
 import DataChip from "@/common/components/DataChip";
-import { ProjectDetailsStyle } from "@/common/styles/ProjectStyles";
+
+const ProjectDetailsStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "5px",
+  overflow: "auto",
+};
 
 export default function ProjectDetails() {
   return (
