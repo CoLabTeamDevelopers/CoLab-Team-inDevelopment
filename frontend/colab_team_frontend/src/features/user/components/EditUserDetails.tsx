@@ -1,28 +1,27 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { DialogActions, FormControl } from "@mui/material";
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
-import { TextFieldElement } from "react-hook-form-mui";
+import { ReactEventHandler, useRef } from "react";
+import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import { useToggle } from "usehooks-ts";
 
 import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
 import TagsField from "@/common/form/TagsField";
 
-import { userProfileSchema } from "../schemas";
-
 export default function EditUserDetails() {
   const [open, toggle] = useToggle();
   const formRef = useRef<HTMLFormElement | null>(null);
-  const { handleSubmit, control, reset } = useForm({
-    resolver: yupResolver(userProfileSchema),
-  });
+  const { handleSubmit, control, reset } = useFormContext();
 
   function onSubmit(data: unknown) {
     console.log(data);
     formRef.current?.reset();
     reset();
   }
+  const onCancel: ReactEventHandler<HTMLButtonElement> = () => {
+    toggle();
+    formRef.current?.reset();
+    reset();
+  };
 
   return (
     <>
@@ -57,14 +56,7 @@ export default function EditUserDetails() {
           />
           <TextFieldElement name="about" control={control} label="About Me" />
           <DialogActions>
-            <ActionButton
-              onClick={() => {
-                toggle();
-                formRef.current?.reset();
-                reset();
-              }}
-              label="Cancel"
-            />
+            <ActionButton onClick={onCancel} label="Cancel" />
             <ActionButton type="submit" label="Save" />
           </DialogActions>
         </FormControl>

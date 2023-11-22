@@ -1,4 +1,6 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Badge, Box, Link, Typography } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form-mui";
 
 import DataChip from "@/common/components/DataChip";
 import Footer from "@/common/components/Footer";
@@ -6,8 +8,11 @@ import Footer from "@/common/components/Footer";
 import ChangeEmail from "../components/ChangeEmail";
 import EditUserDetails from "../components/EditUserDetails";
 import EditUserImage from "../components/EditUserImage";
+import { userProfileSchema } from "../schemas";
 
 export function Component() {
+  const formMethods = useForm({ resolver: yupResolver(userProfileSchema) });
+
   return (
     <>
       <Box
@@ -50,48 +55,50 @@ export function Component() {
               />
             </Badge>
           </Box>
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "end",
-              gap: "10px",
-              marginTop: "1rem",
-              "@media(max-width:1024px)": {
-                display: "grid",
-                alignItems: "start",
-              },
-            }}
-          >
-            <EditUserDetails />
-            <Typography variant="h2">SimpSid</Typography>
+          <FormProvider {...formMethods}>
             <Box
               sx={{
+                width: "100%",
                 display: "flex",
-                gap: "20px",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "end",
+                gap: "10px",
+                marginTop: "1rem",
                 "@media(max-width:1024px)": {
-                  flexDirection: "row-reverse",
+                  display: "grid",
+                  alignItems: "start",
                 },
               }}
             >
-              {/* This link is displayed only to the users not to the viewers */}
-              <ChangeEmail />
-              {/* <Link>Change</Link> */}
-              <Typography variant="h2">
-                siddhanttotade.1994@gmail.com
-              </Typography>
+              <EditUserDetails />
+              <Typography variant="h2">SimpSid</Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "20px",
+                  "@media(max-width:1024px)": {
+                    flexDirection: "row-reverse",
+                  },
+                }}
+              >
+                {/* This link is displayed only to the users not to the viewers */}
+                <ChangeEmail />
+                {/* <Link>Change</Link> */}
+                <Typography variant="h2">
+                  siddhanttotade.1994@gmail.com
+                </Typography>
+              </Box>
+              <Typography variant="h2">Raipur, Chhattisgarh</Typography>
+              <Typography variant="h3">Siddhant Totade</Typography>
+              <Box sx={{ display: "flex", gap: "5px" }}>
+                <DataChip size="small" label="Django" />
+                <DataChip size="small" label="React" />
+                <DataChip size="small" label="Material UI" />
+                <DataChip size="small" label="Rest Api" />
+              </Box>
             </Box>
-            <Typography variant="h2">Raipur, Chhattisgarh</Typography>
-            <Typography variant="h3">Siddhant Totade</Typography>
-            <Box sx={{ display: "flex", gap: "5px" }}>
-              <DataChip size="small" label="Django" />
-              <DataChip size="small" label="React" />
-              <DataChip size="small" label="Material UI" />
-              <DataChip size="small" label="Rest Api" />
-            </Box>
-          </Box>
+          </FormProvider>
         </Box>
         <Box sx={{ display: "grid", gap: "5px", marginTop: "10px" }}>
           <Typography variant="h2">About Me</Typography>

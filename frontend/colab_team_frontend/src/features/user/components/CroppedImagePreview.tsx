@@ -1,11 +1,8 @@
 import { Avatar, Box } from "@mui/material";
+import { Area } from "react-easy-crop";
 
 interface CropImageProps {
-  croppedArea: {
-    width: number;
-    x: number;
-    y: number;
-  };
+  croppedArea: Area;
   image: string;
   rotation: number;
 }

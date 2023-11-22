@@ -1,15 +1,11 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import { Avatar, Box, DialogActions } from "@mui/material";
+import { Avatar, Button, DialogActions } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { ChangeEvent, useRef, useState } from "react";
 import { useToggle } from "usehooks-ts";
 
 import AppDialog from "@/common/components/AppDialog";
-import ActionButton from "@/common/form/ActionButton";
 
-import { userProfileSchema } from "../schemas";
 import ImageCropper from "./ImageCropper";
 
 const CameraIconButton = styled(Avatar)(({ theme }) => ({
@@ -19,54 +15,53 @@ const CameraIconButton = styled(Avatar)(({ theme }) => ({
 }));
 
 export default function EditUserImage() {
-  const [open, toggle] = useToggle();
-  const { control } = useForm({
-    resolver: yupResolver(userProfileSchema),
-  });
+  const [open, toggle, setOpen] = useToggle();
+  const [img, setImg] = useState<File>();
+  const imgRef = useRef<HTMLInputElement | null>(null);
+  const forwardedRef = useRef();
 
-  const [image, setImage] = useState("");
+  function onCancel() {
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    setImg(undefined);
+    setOpen(false);
+  }
 
-  const imageFileRef = useRef();
-  const triggerImageFile = () => imageFileRef.current?.click();
+  function openImgSelector() {
+    if (imgRef.current) imgRef.current.click();
+  }
+  function onImgSelect(event: ChangeEvent<HTMLInputElement>) {
+    const files = event.target.files;
 
-  const saveImageRef = useRef();
-  const saveImage = () => saveImageRef.current?.cropProfileImage();
-
-  const onSelectFile = (event: unknown) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.addEventListener("load", () => {
-        setImage(reader.result);
-      });
-    }
-  };
+    if (files) setImg(files[0]);
+    toggle();
+  }
 
   return (
     <>
       <Avatar>
-        <CameraIconButton onClick={toggle}>
+        <CameraIconButton onClick={openImgSelector}>
+          <input
+            name="file"
+            type="file"
+            accept="image/*"
+            hidden
+            ref={imgRef}
+            onChange={onImgSelect}
+          />
           <CameraAltIcon />
         </CameraIconButton>
       </Avatar>
-      <AppDialog title="Upload Image" open={open} onClose={toggle}>
-        <Box sx={{ display: "grid", gap: "10px" }}>
-          <ActionButton label="Choose Image File" onClick={triggerImageFile} />
-          {/* <FileField
-            name=""
-            control={control}
-            forwardedRef={imageFileRef}
-            onChange={onSelectFile}
-          /> */}
-          <ImageCropper forwardedRef={saveImageRef} image={image} />
-        </Box>
-        {image && (
+      {img ? (
+        <AppDialog title="Upload Image" open={open} onClose={onCancel}>
+          <ImageCropper image={URL.createObjectURL(img)} ref={forwardedRef} />
           <DialogActions>
-            <ActionButton label="Cancel" onClick={toggle} />
-            <ActionButton label="Save" onClick={saveImage} />
+            <Button onClick={onCancel} variant="contained">
+              Cancel
+            </Button>
+            <Button variant="contained">Save</Button>
           </DialogActions>
-        )}
-      </AppDialog>
+        </AppDialog>
+      ) : undefined}
     </>
   );
 }

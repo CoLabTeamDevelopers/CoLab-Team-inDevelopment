@@ -1,26 +1,28 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { DialogActions, FormControl, Link } from "@mui/material";
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { ReactEventHandler, useRef } from "react";
+import { useFormContext } from "react-hook-form";
 import { useToggle } from "usehooks-ts";
 
 import AppDialog from "@/common/components/AppDialog";
 import ActionButton from "@/common/form/ActionButton";
-
-import { userProfileSchema } from "../schemas";
+import EmailField from "@/common/form/EmailField";
 
 export default function ChangeEmail() {
   const [open, toggle] = useToggle();
   const formRef = useRef<HTMLFormElement | null>(null);
-  const { handleSubmit, reset } = useForm({
-    resolver: yupResolver(userProfileSchema),
-  });
+  const { reset, handleSubmit, control } = useFormContext();
 
   function onSubmit(data: unknown) {
     console.log(data);
     formRef.current?.reset();
     reset();
   }
+
+  const onCancel: ReactEventHandler<HTMLButtonElement> = () => {
+    toggle();
+    formRef.current?.reset();
+    reset();
+  };
 
   return (
     <>
@@ -32,16 +34,9 @@ export default function ChangeEmail() {
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
         >
-          {/* <EmailField name="email" control={control} /> */}
+          <EmailField name="email" control={control} />
           <DialogActions>
-            <ActionButton
-              onClick={() => {
-                toggle();
-                formRef.current?.reset();
-                reset();
-              }}
-              label="Cancel"
-            />
+            <ActionButton onClick={onCancel} label="Cancel" />
             <ActionButton type="submit" label="Save" />
           </DialogActions>
         </FormControl>
