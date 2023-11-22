@@ -1,5 +1,5 @@
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import { Avatar, Button, DialogActions } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { ChangeEvent, useRef, useState } from "react";
 import { useToggle } from "usehooks-ts";
@@ -54,12 +54,12 @@ export default function EditUserImage() {
       {img ? (
         <AppDialog title="Upload Image" open={open} onClose={onCancel}>
           <ImageCropper image={URL.createObjectURL(img)} ref={forwardedRef} />
-          <DialogActions>
+          <AppDialog.Actions>
             <Button onClick={onCancel} variant="contained">
               Cancel
             </Button>
             <Button variant="contained">Save</Button>
-          </DialogActions>
+          </AppDialog.Actions>
         </AppDialog>
       ) : undefined}
     </>

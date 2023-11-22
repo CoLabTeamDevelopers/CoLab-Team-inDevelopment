@@ -1,4 +1,4 @@
-import { DialogActions, FormControl, Link } from "@mui/material";
+import { FormControl, Link } from "@mui/material";
 import { ReactEventHandler, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { useToggle } from "usehooks-ts";
@@ -35,10 +35,10 @@ export default function ChangeEmail() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <EmailField name="email" control={control} />
-          <DialogActions>
+          <AppDialog.Actions>
             <ActionButton onClick={onCancel} label="Cancel" />
             <ActionButton type="submit" label="Save" />
-          </DialogActions>
+          </AppDialog.Actions>
         </FormControl>
       </AppDialog>
     </>

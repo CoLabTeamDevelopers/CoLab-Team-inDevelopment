@@ -1,4 +1,4 @@
-import { DialogActions, FormControl } from "@mui/material";
+import { FormControl } from "@mui/material";
 import { ReactEventHandler, useRef } from "react";
 import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import { useToggle } from "usehooks-ts";
@@ -55,10 +55,10 @@ export default function EditUserDetails() {
             options={[]}
           />
           <TextFieldElement name="about" control={control} label="About Me" />
-          <DialogActions>
+          <AppDialog.Actions>
             <ActionButton onClick={onCancel} label="Cancel" />
             <ActionButton type="submit" label="Save" />
-          </DialogActions>
+          </AppDialog.Actions>
         </FormControl>
       </AppDialog>
     </>

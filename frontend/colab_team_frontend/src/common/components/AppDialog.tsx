@@ -1,14 +1,15 @@
 import {
   Dialog,
+  DialogActions,
   DialogContent,
   DialogProps,
   DialogTitle,
   Slide,
   SlideProps,
 } from "@mui/material";
-import { forwardRef, PropsWithChildren } from "react";
+import { forwardRef } from "react";
 
-const Transition = forwardRef<unknown, PropsWithChildren<SlideProps>>(
+const Transition = forwardRef<unknown, React.PropsWithChildren<SlideProps>>(
   (props, ref) => <Slide direction="right" ref={ref} {...props} />
 );
 
@@ -19,15 +20,17 @@ export default function AppDialog({
 }: DialogProps) {
   return (
     <Dialog
-      aria-describedby="alert-dialog-slide-description"
       TransitionComponent={Transition}
       maxWidth="sm"
       fullWidth
       keepMounted
       {...otherProps}
     >
-      <DialogTitle children={title} />
+      {title ? <DialogTitle children={title} /> : undefined}
       <DialogContent children={children} />
     </Dialog>
   );
 }
+
+AppDialog.Title = DialogTitle;
+AppDialog.Actions = DialogActions;
