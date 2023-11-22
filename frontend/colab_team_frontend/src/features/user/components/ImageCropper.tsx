@@ -7,7 +7,7 @@ import getCroppedImg from "@/common/utils/cropImage";
 import CroppedImagePreview from "./CroppedImagePreview";
 
 interface ImageCropperProps {
-  image: string;
+  image?: string;
 }
 
 const ImageCropper = forwardRef(
@@ -15,19 +15,19 @@ const ImageCropper = forwardRef(
     const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
     const [croppedArea, setCroppedArea] = useState<Area>();
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
-    const [_croppedImage, setCroppedImage] = useState<string>();
+    const [croppedImage, setCroppedImage] = useState(image);
     const [rotation, setRotation] = useState<number>();
     const [zoom, setZoom] = useState(1);
 
     useImperativeHandle(forwardedRef, async () => {
       try {
-        const croppedImage = await getCroppedImg(
-          image,
-          croppedAreaPixels,
-          rotation
-        );
-        console.log(croppedImage);
-        setCroppedImage(croppedImage);
+        const img = await getCroppedImg({
+          imageSource: croppedImage,
+          pixelCrop: croppedAreaPixels,
+          rotation,
+        });
+        console.log(img);
+        setCroppedImage(img);
       } catch (error) {
         console.error(error);
       }

@@ -1,13 +1,15 @@
 import { Area } from "react-easy-crop";
 
-export const createImage = (url: string): Promise<HTMLImageElement> =>
-  new Promise((resolve, reject) => {
+export function createImage(url?: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
     const image = new Image();
     image.addEventListener("load", () => resolve(image));
     image.addEventListener("error", (error) => reject(error));
     image.setAttribute("crossOrigin", "anonymous"); // needed to avoid cross-origin issues
-    image.src = url;
+    if (url) image.src = url;
+    else reject();
   });
+}
 
 export function getRadianAngle(degreeValue: number): number {
   return (degreeValue * Math.PI) / 180;
@@ -21,7 +23,7 @@ export function rotateSize(
   height: number,
   rotation: number
 ): { width: number; height: number } {
-  const rotRad = getRadianAngle(rotation);
+  const rotRad = (rotation * Math.PI) / 180;
 
   return {
     width:
@@ -31,28 +33,30 @@ export function rotateSize(
   };
 }
 
-const flipOptions = { horizontal: false, vertical: false };
-const defaultPixelCrop = {
-  width: 0,
-  height: 0,
-  x: 0,
-  y: 0,
-};
+interface Props {
+  imageSource?: string;
+  pixelCrop?: Area;
+  rotation?: number;
+  flip?: {
+    horizontal: boolean;
+    vertical: boolean;
+  };
+}
 
 /**
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  */
-export default async function getCroppedImg(
-  imageSource: string,
-  pixelCrop: Area = defaultPixelCrop,
+export default async function getCroppedImg({
+  imageSource,
+  pixelCrop,
   rotation = 0,
-  flip = flipOptions
-): Promise<string | undefined> {
+  flip = { horizontal: false, vertical: false },
+}: Props) {
   const image = await createImage(imageSource);
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
-  if (!context) return undefined;
+  if (!context) return;
 
   const rotRad = getRadianAngle(rotation);
 
@@ -80,7 +84,7 @@ export default async function getCroppedImg(
 
   const croppedContext = croppedCanvas.getContext("2d");
 
-  if (!croppedContext) return undefined;
+  if (!croppedContext || !pixelCrop) return;
 
   // Set the size of the cropped canvas
   croppedCanvas.width = pixelCrop.width;
@@ -103,13 +107,13 @@ export default async function getCroppedImg(
   // return croppedCanvas.toDataURL('image/jpeg');
 
   // As a blob
-  return new Promise<string | undefined>((resolve, reject) => {
+  return new Promise<string>((resolve, reject) =>
     croppedCanvas.toBlob((file) => {
       if (file) {
         resolve(URL.createObjectURL(file));
       } else {
         reject(new Error("Failed to create blob."));
       }
-    }, "image/jpeg");
-  });
+    }, "image/jpeg")
+  );
 }

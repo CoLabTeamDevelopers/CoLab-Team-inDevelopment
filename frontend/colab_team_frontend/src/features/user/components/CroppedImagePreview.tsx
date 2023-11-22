@@ -3,7 +3,7 @@ import { Area } from "react-easy-crop";
 
 interface CropImageProps {
   croppedArea: Area;
-  image: string;
+  image?: string;
   rotation: number;
 }
 
