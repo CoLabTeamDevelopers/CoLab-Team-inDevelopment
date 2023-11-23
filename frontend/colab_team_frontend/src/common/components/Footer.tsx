@@ -1,9 +1,9 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import RedditIcon from "@mui/icons-material/Reddit";
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
-import { LogoContainer, LogoSection, SocialContainer } from "./Footer.styles";
+import Containers from "./Footer.styles";
 import AppLink from "./Link";
 
 const footerLinks = [
@@ -14,21 +14,21 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <Container>
-      <LogoSection>
-        <LogoContainer>
+    <Containers.Footer>
+      <Containers.LogoSection>
+        <Containers.LogoContainer>
           <Typography variant="h3">COLAB</Typography>
           <Typography variant="h5">TEAM</Typography>
-        </LogoContainer>
+        </Containers.LogoContainer>
         <Typography variant="caption">
           All rights reserved by COLAB TEAM
         </Typography>
-      </LogoSection>
-      <SocialContainer
+      </Containers.LogoSection>
+      <Containers.SocialLinks
         children={footerLinks.map((links, index) => (
           <AppLink href={links.href} key={index} children={links.icon} />
         ))}
       />
-    </Container>
+    </Containers.Footer>
   );
 }

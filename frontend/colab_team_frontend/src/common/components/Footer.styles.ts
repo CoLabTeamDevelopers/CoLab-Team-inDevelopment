@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-export const Container = styled("footer")({
+const Footer = styled("footer")({
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",
@@ -14,22 +14,29 @@ export const Container = styled("footer")({
   },
 });
 
-export const LogoSection = styled("section")({
+const LogoSection = styled("section")({
   width: "100%",
   display: "grid",
   alignItems: "baseline",
   justifyContent: "center",
 });
 
-export const LogoContainer = styled("div")({
+const LogoContainer = styled("div")({
   display: "flex",
   alignItems: "baseline",
   justifyContent: "center",
 });
 
-export const SocialContainer = styled("section")({
+const SocialLinks = styled("section")({
   width: "100%",
   display: "flex",
   justifyContent: "center",
   gap: "30px",
 });
+
+export default {
+  Footer,
+  LogoContainer,
+  LogoSection,
+  SocialLinks,
+};

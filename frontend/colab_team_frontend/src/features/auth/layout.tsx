@@ -15,7 +15,7 @@ export default function AuthFormLayout({
   const isAuthenticated = useAppSelector((state) => state.auth.authenticated);
 
   useEffect(() => {
-    if (isAuthenticated) navigate(location.state?.from?.pathname || "/");
+    if (isAuthenticated) navigate(location.state.from.pathname || "/");
   }, [isAuthenticated, location, navigate]);
 
   return (

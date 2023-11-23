@@ -9,6 +9,8 @@ import {
   Typography,
 } from "@mui/material/";
 
+import { useAppSelector } from "@/app/store";
+
 import AppLink from "../components/Link";
 import NavDrawer from "./NavDrawer";
 import NavLinks from "./NavLinks";
@@ -23,6 +25,7 @@ export default function NavBar() {
     openRightDrawer,
     rightDrawerOpen,
   } = useNavDrawer();
+  const isAuthenticated = useAppSelector((state) => state.auth.authenticated);
 
   return (
     <AppBar sx={{ background: "#ede7f6" }}>
@@ -57,38 +60,32 @@ export default function NavBar() {
             >
               <MenuIcon />
             </IconButton>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "baseline",
-              }}
-            >
+            <AppLink sx={{ display: "flex", alignItems: "baseline" }}>
               <Typography variant="h3">COLAB</Typography>
               <Typography variant="h5">TEAM</Typography>
-            </Box>
+            </AppLink>
           </Box>
         </Box>
         <NavLinks />
 
         {/* If user logged in display <Avatar/> else display login and register <Button/> */}
-        <Box
-          sx={{
-            display: "flex",
-            gap: "10px",
-            alignItems: "center",
-          }}
-        >
-          <AppLink href="/login">
-            <Button variant="contained">Login</Button>
-          </AppLink>
-          <AppLink href="/register">
-            <Button variant="contained">Register</Button>
-          </AppLink>
-          <Avatar
-            onClick={openRightDrawer}
-            sx={{ cursor: "pointer" }}
-            alt="User Logo"
-          />
+        <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          {isAuthenticated ? (
+            <Avatar
+              onClick={openRightDrawer}
+              sx={{ cursor: "pointer" }}
+              alt="User Logo"
+            />
+          ) : (
+            <>
+              <AppLink href="/login">
+                <Button variant="contained">Login</Button>
+              </AppLink>
+              <AppLink href="/register">
+                <Button variant="contained">Register</Button>
+              </AppLink>
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
