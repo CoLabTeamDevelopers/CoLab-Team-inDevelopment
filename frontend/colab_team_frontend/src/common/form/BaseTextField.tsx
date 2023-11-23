@@ -1,6 +1,10 @@
-import { TextField, TextFieldProps } from "@mui/material";
-import { HTMLInputTypeAttribute } from "react";
-import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
+import { TextField, type TextFieldProps } from "@mui/material";
+import {
+  type Control,
+  Controller,
+  type FieldPath,
+  type FieldValues,
+} from "react-hook-form";
 
 export interface BasicFieldProps<T extends FieldValues = FieldValues> {
   name: FieldPath<T>;
@@ -11,7 +15,7 @@ export interface BasicFieldProps<T extends FieldValues = FieldValues> {
 export interface BasicTextFieldProps<T extends FieldValues>
   extends BasicFieldProps<T> {
   fieldProps?: TextFieldProps;
-  type?: HTMLInputTypeAttribute;
+  type?: React.HTMLInputTypeAttribute;
 }
 
 export default function BasicTextField<T extends FieldValues>({

@@ -28,11 +28,14 @@ const reducer = (state = initialState, action: Action) => {
 };
 
 export default function useNavDrawer() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [{ openLeftDrawer, openRightDrawer }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   return {
-    leftDrawerOpen: state.openLeftDrawer,
-    rightDrawerOpen: state.openRightDrawer,
+    leftDrawerOpen: openLeftDrawer,
+    rightDrawerOpen: openRightDrawer,
     openLeftDrawer: () => dispatch({ type: "OPEN_LEFT_DRAWER" }),
     openRightDrawer: () => dispatch({ type: "OPEN_RIGHT_DRAWER" }),
     closeLeftDrawer: () => dispatch({ type: "CLOSE_LEFT_DRAWER" }),

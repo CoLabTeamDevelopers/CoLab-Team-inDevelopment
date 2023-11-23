@@ -1,6 +1,6 @@
 import { LoaderFunction, redirect, RouteObject } from "react-router-dom";
 
-import store from "@/app/store";
+import store from "~/app/store";
 
 const loader: LoaderFunction = ({ request }) => {
   const isAuthenticated = store.getState().auth.authenticated;
@@ -18,7 +18,7 @@ const loader: LoaderFunction = ({ request }) => {
 
 const userRoutes: RouteObject = {
   path: "profile",
-  lazy: () => import("@/common/layouts/AppLayout"),
+  lazy: () => import("~layouts/AppLayout"),
   loader,
   children: [
     { index: true, lazy: () => import("./pages/Profile") },

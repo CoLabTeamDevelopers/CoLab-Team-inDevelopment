@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { AuthToken, User } from "@/common/types/api/models";
+import { AuthToken, User } from "~types/api/models";
 
 import authApi from "./api";
 

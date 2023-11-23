@@ -2,15 +2,15 @@ import "../styles.css";
 
 import { Box, Container, Typography } from "@mui/material";
 
-import ColabAbout from "@/assets/images/Colab About Light.png";
-import ColabSVG from "@/assets/svg/ColabSvg";
-import TeamSVG from "@/assets/svg/TeamSvg";
-import Footer from "@/common/components/Footer";
-import Navbar from "@/common/navbar/Navbar";
+import ColabAbout from "~assets/images/Colab About Light.png";
+import ColabSVG from "~assets/svg/ColabSvg";
+import TeamSVG from "~assets/svg/TeamSvg";
+import Navbar from "~common/navbar/Navbar";
+import Footer from "~components/Footer";
 
 export function Component() {
   return (
-    <>
+    <main>
       <Box component="section" sx={{ height: "100vh" }}>
         <Navbar />
         <Box
@@ -74,6 +74,6 @@ export function Component() {
         </Box>
       </Box>
       <Footer />
-    </>
+    </main>
   );
 }

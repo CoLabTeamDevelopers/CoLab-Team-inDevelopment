@@ -6,7 +6,7 @@ import {
   email,
   password,
   username,
-} from "@/common/schemas";
+} from "~common/schemas";
 
 const uid = Yup.number().required("User id is required");
 const token = Yup.string().required("Token is required");

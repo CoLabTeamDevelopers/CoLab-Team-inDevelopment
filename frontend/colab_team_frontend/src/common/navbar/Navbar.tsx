@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material/";
 
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "~/app/store";
 
 import AppLink from "../components/Link";
 import NavDrawer from "./NavDrawer";

@@ -4,9 +4,9 @@ import { useRef } from "react";
 import { PasswordElement, useForm } from "react-hook-form-mui";
 import { useNavigate, useParams } from "react-router-dom";
 
-import AppLink from "@/common/components/Link";
-import ActionButton from "@/common/form/ActionButton";
-import BasicTextField from "@/common/form/BaseTextField";
+import AppLink from "~components/Link";
+import ActionButton from "~form/ActionButton";
+import BasicTextField from "~form/BaseTextField";
 
 import { useLoginMutation } from "../api";
 import TextFieldContainer from "../components/TextFieldContainer";

@@ -2,7 +2,7 @@ import { Box, Slider } from "@mui/material";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import Cropper, { Area, Point } from "react-easy-crop";
 
-import getCroppedImg from "@/common/utils/cropImage";
+import getCroppedImg from "~utils/cropImage";
 
 import CroppedImagePreview from "./CroppedImagePreview";
 

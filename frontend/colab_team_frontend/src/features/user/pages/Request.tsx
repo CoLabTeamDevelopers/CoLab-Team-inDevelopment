@@ -1,8 +1,8 @@
 import { Box, Card, Divider } from "@mui/material";
 
-import DataChip from "@/common/components/DataChip";
-import AppLink from "@/common/components/Link";
-import ActionButton from "@/common/form/ActionButton";
+import DataChip from "~components/DataChip";
+import AppLink from "~components/Link";
+import ActionButton from "~form/ActionButton";
 
 const SectionStyle = {
   display: "grid",

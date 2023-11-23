@@ -3,9 +3,9 @@ import { ReactEventHandler, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { useToggle } from "usehooks-ts";
 
-import AppDialog from "@/common/components/AppDialog";
-import ActionButton from "@/common/form/ActionButton";
-import EmailField from "@/common/form/EmailField";
+import AppDialog from "~components/AppDialog";
+import ActionButton from "~form/ActionButton";
+import EmailField from "~form/EmailField";
 
 export default function ChangeEmail() {
   const [open, toggle] = useToggle();

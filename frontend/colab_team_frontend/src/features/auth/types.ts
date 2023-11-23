@@ -1,4 +1,4 @@
-import type { AuthToken, User } from "@/common/types/api/models";
+import type { AuthToken, User } from "~types/api/models";
 
 export interface LoginResponse {
   token: Pick<AuthToken, "createdAt" | "expiredAt" | "key">;

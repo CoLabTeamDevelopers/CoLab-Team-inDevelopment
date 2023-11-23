@@ -1,7 +1,7 @@
 import {
-  FieldValues,
+  type FieldValues,
   TextFieldElement,
-  TextFieldElementProps,
+  type TextFieldElementProps,
 } from "react-hook-form-mui";
 
 export default function EmailField<T extends FieldValues>({

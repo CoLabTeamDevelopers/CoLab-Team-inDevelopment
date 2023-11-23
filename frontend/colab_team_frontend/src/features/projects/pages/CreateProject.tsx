@@ -3,10 +3,10 @@ import { DialogActions, FormControl, Slide } from "@mui/material";
 import { useRef } from "react";
 import { TextFieldElement, useForm } from "react-hook-form-mui";
 
-import ActionButton from "@/common/form/ActionButton";
-import NumberField from "@/common/form/NumberField";
-import SelectField from "@/common/form/SelectField";
-import TagsField from "@/common/form/TagsField";
+import ActionButton from "~form/ActionButton";
+import NumberField from "~form/NumberField";
+import SelectField from "~form/SelectField";
+import TagsField from "~form/TagsField";
 
 import { createProject } from "../schema";
 

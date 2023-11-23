@@ -14,10 +14,8 @@ export default function NavLinks() {
         },
       }}
     >
-      {leftNavLinks.map((links, index) => (
-        <Link key={index} href={links.href}>
-          {links.label}
-        </Link>
+      {leftNavLinks.map(({ href, label }, index) => (
+        <Link key={index} href={href} children={label} />
       ))}
     </Box>
   );

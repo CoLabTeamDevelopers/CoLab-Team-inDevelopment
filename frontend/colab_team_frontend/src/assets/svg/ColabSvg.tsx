@@ -1,4 +1,4 @@
-import "@/common/styles/ColabSvg.module.css";
+import "~styles/ColabSvg.module.css";
 
 export default function ColabSVG() {
   return (

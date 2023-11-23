@@ -1,7 +1,7 @@
 import {
-  FieldValues,
+  type FieldValues,
   TextFieldElement,
-  TextFieldElementProps,
+  type TextFieldElementProps,
 } from "react-hook-form-mui";
 
 interface Props<T extends FieldValues> extends TextFieldElementProps<T> {

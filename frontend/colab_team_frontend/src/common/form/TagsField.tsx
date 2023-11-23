@@ -1,9 +1,9 @@
 import { Autocomplete } from "@mui/material";
 import { useState } from "react";
-import { FieldValues } from "react-hook-form";
+import type { FieldValues } from "react-hook-form";
 
 import DataChip from "../components/DataChip";
-import BasicTextField, { BasicFieldProps } from "./BaseTextField";
+import BasicTextField, { type BasicFieldProps } from "./BaseTextField";
 
 interface Props<T extends FieldValues> extends BasicFieldProps<T> {
   options?: string[];

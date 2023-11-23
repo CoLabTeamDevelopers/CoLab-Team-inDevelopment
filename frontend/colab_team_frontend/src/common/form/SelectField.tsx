@@ -5,7 +5,12 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { Controller, FieldValues, Path, PathValue } from "react-hook-form";
+import {
+  Controller,
+  type FieldValues,
+  type Path,
+  type PathValue,
+} from "react-hook-form";
 
 import { BasicFieldProps } from "./BaseTextField";
 

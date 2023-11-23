@@ -8,10 +8,10 @@ import {
   useForm,
 } from "react-hook-form-mui";
 
-import AppLink from "@/common/components/Link";
-import ActionButton from "@/common/form/ActionButton";
-import BasicTextField from "@/common/form/BaseTextField";
-import EmailField from "@/common/form/EmailField";
+import AppLink from "~components/Link";
+import ActionButton from "~form/ActionButton";
+import BasicTextField from "~form/BaseTextField";
+import EmailField from "~form/EmailField";
 
 import { useRegisterMutation } from "../api";
 import TextFieldContainer from "../components/TextFieldContainer";

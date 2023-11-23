@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import { forwardRef, PropsWithChildren, Ref } from "react";
+import { forwardRef } from "react";
 
-const TextFieldContainer = forwardRef<Ref<HTMLDivElement>, PropsWithChildren>(
+const TextFieldContainer = forwardRef<HTMLDivElement, React.PropsWithChildren>(
   ({ children }, ref) => (
     <Box
       ref={ref}

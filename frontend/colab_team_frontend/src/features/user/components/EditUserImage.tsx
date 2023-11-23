@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { ChangeEvent, useRef, useState } from "react";
 import { useToggle } from "usehooks-ts";
 
-import AppDialog from "@/common/components/AppDialog";
+import AppDialog from "~components/AppDialog";
 
 import ImageCropper from "./ImageCropper";
 

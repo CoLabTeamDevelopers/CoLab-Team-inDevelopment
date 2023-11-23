@@ -3,9 +3,9 @@ import { ReactEventHandler, useRef } from "react";
 import { TextFieldElement, useFormContext } from "react-hook-form-mui";
 import { useToggle } from "usehooks-ts";
 
-import AppDialog from "@/common/components/AppDialog";
-import ActionButton from "@/common/form/ActionButton";
-import TagsField from "@/common/form/TagsField";
+import AppDialog from "~components/AppDialog";
+import ActionButton from "~form/ActionButton";
+import TagsField from "~form/TagsField";
 
 export default function EditUserDetails() {
   const [open, toggle] = useToggle();

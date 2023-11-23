@@ -24,6 +24,8 @@ import {
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
+import { useAppSelector } from "~/app/store";
+
 import { leftNavLinks, rightNavLinks } from "./links";
 
 interface DrawerProps {
@@ -70,6 +72,7 @@ const rightDrawerLinks = rightNavLinks.map((links, index) => ({
 
 export default function NavDrawer({ open, onClose, direction }: DrawerProps) {
   const navigate = useNavigate();
+  const isAuthenticated = useAppSelector((state) => state.auth.authenticated);
 
   return (
     <Box
@@ -107,35 +110,29 @@ export default function NavDrawer({ open, onClose, direction }: DrawerProps) {
         </DrawerHeader>
         <Divider />
         <List>
-          {direction === "left" &&
-            leftDrawerLinks.map((item, index) => (
+          {(direction === "left" ? leftDrawerLinks : rightDrawerLinks).map(
+            (item, index) => (
               <ListItem key={index} disablePadding>
                 <ListItemButton onClick={() => navigate(item.href)}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItemButton>
               </ListItem>
-            ))}
-          {direction === "right" &&
-            rightDrawerLinks.map((item, index) => (
-              <ListItem key={index} disablePadding>
-                <ListItemButton onClick={() => navigate(item.href)}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            )
+          )}
         </List>
         <Divider />
         {direction === "left" && (
           <List>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <LogoutIcon sx={{ color: "#9575cd" }} />
-                </ListItemIcon>
-                <ListItemText primary="Logout" />
-              </ListItemButton>
+              {isAuthenticated && (
+                <ListItemButton>
+                  <ListItemIcon>
+                    <LogoutIcon sx={{ color: "#9575cd" }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Logout" />
+                </ListItemButton>
+              )}
             </ListItem>
           </List>
         )}

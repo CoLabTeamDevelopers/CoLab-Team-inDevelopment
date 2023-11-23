@@ -1,10 +1,9 @@
-import { Box, Button, ButtonProps } from "@mui/material";
-import { ReactNode } from "react";
+import { Box, Button, type ButtonProps } from "@mui/material";
 
 interface Props extends ButtonProps {
-  label: string | ReactNode;
-  startIcon?: ReactNode;
-  endIcon?: ReactNode;
+  label: string | React.ReactNode;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 }
 
 export default function ActionButton({

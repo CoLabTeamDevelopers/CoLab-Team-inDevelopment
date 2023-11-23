@@ -3,8 +3,8 @@ import { FormControl, Slide } from "@mui/material";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
-import ActionButton from "@/common/form/ActionButton";
-import EmailField from "@/common/form/EmailField";
+import ActionButton from "~form/ActionButton";
+import EmailField from "~form/EmailField";
 
 import { useForgotPasswordMutation } from "../api";
 import TextFieldContainer from "../components/TextFieldContainer";

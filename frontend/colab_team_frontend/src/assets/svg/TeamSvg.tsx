@@ -1,4 +1,4 @@
-import SvgCss from "@/common/styles/TeamSvg.module.css";
+import SvgCss from "~styles/TeamSvg.module.css";
 
 const svgStyle = {
   stroke: "#311b92",

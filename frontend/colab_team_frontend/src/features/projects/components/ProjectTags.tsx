@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import DataChip from "@/common/components/DataChip";
+import DataChip from "~components/DataChip";
 
 export default function ProjectTags() {
   return (

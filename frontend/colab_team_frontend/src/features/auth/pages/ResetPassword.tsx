@@ -8,7 +8,7 @@ import {
 } from "react-hook-form-mui";
 import { useSearchParams } from "react-router-dom";
 
-import ActionButton from "@/common/form/ActionButton";
+import ActionButton from "~form/ActionButton";
 
 import { useResetPasswordMutation } from "../api";
 import TextFieldContainer from "../components/TextFieldContainer";

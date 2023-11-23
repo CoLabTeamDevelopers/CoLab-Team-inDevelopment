@@ -1,4 +1,4 @@
-import AppLink from "@/common/components/Link";
+import AppLink from "~components/Link";
 
 export function Component() {
   return (

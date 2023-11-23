@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 
-import DataChip from "@/common/components/DataChip";
+import DataChip from "~components/DataChip";
 
 const ProjectDetailsStyle = {
   display: "flex",

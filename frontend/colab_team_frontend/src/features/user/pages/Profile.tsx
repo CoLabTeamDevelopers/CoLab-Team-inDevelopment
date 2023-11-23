@@ -2,8 +2,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Badge, Box, Link, Typography } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form-mui";
 
-import DataChip from "@/common/components/DataChip";
-import Footer from "@/common/components/Footer";
+import DataChip from "~components/DataChip";
+import Footer from "~components/Footer";
 
 import ChangeEmail from "../components/ChangeEmail";
 import EditUserDetails from "../components/EditUserDetails";

@@ -1,6 +1,6 @@
 import { Box, Divider, Typography } from "@mui/material";
 
-import ColabLightLogo from "@/assets/images/Colab About Light.png";
+import ColabLightLogo from "~assets/images/Colab About Light.png";
 
 import ProjectDetails from "../components/ProjectDetails";
 import RolesAndResponsiblities from "../components/RolesAndResponsiblities";

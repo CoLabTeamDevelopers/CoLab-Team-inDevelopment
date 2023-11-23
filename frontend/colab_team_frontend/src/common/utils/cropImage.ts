@@ -1,4 +1,4 @@
-import { Area } from "react-easy-crop";
+import type { Area } from "react-easy-crop";
 
 export function createImage(url?: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
