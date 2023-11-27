@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, FormControl, Slide, Typography } from "@mui/material";
 import { useRef } from "react";
 import { PasswordElement, useForm } from "react-hook-form-mui";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import AppLink from "~components/Link";
 import ActionButton from "~form/ActionButton";
@@ -20,7 +20,7 @@ export function Component() {
     resolver: yupResolver(loginSchema),
   });
   const [login] = useLoginMutation();
-  const { from } = useParams();
+  const from = new URLSearchParams(location.search).get("from") || "/";
 
   async function onSubmit(data: LoginSchema) {
     try {
@@ -30,7 +30,7 @@ export function Component() {
       setValue("ipAddress", ipAddress.ip);
 
       await login(data);
-      if (from) navigate(from);
+      navigate(from);
     } catch (error) {
       console.error(error);
     }

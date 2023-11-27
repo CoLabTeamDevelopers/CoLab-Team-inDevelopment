@@ -1,8 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import { PropsWithChildren, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { PropsWithChildren } from "react";
 
-import { useAppSelector } from "~/app/store";
 import CoLabLightLogo from "~assets/images/CoLab - Logo Light.png";
 import Waves from "~assets/svg/Wave";
 
@@ -10,14 +8,6 @@ export default function AuthFormLayout({
   children,
   title,
 }: PropsWithChildren<{ title: string }>) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isAuthenticated = useAppSelector((state) => state.auth.authenticated);
-
-  useEffect(() => {
-    if (isAuthenticated) navigate(location.state.from.pathname || "/");
-  }, [isAuthenticated, location, navigate]);
-
   return (
     <Box
       sx={{

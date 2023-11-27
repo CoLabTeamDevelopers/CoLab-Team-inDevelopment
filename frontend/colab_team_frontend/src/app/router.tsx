@@ -6,8 +6,8 @@ import projectRoutes from "~/features/projects/routes";
 import userRoutes from "~/features/user/routes";
 
 const router = createBrowserRouter([
-  ...coreRoutes,
-  ...authRoutes,
+  coreRoutes,
+  authRoutes,
   projectRoutes,
   userRoutes,
 ]);
