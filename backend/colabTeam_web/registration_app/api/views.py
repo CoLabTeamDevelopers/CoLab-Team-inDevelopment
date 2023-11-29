@@ -3,9 +3,9 @@ from typing import Any
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
-from rest_framework import decorators, exceptions, permissions, status
-from rest_framework.generics import CreateAPIView
+from rest_framework import exceptions, permissions, status
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .. import emails
 from ..models import AuthToken, Profile, User
@@ -14,7 +14,7 @@ from ..utils import TypedHttpRequest
 from . import serializers
 
 
-class LoginView(CreateAPIView):
+class LoginView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.LoginSerializer
 
@@ -41,16 +41,18 @@ class LoginView(CreateAPIView):
 
         token, _ = AuthToken.objects.get_or_create(
             user=user,
-            ip_address=data["ip_address"],
+            ip_address=(data["ip_address"] or "0.0.0.0"),
         )
 
-        user_data = serializers.UserSerializer(instance=user).data
+        user_data = serializers.UserSerializer(
+            instance=user, context={"request": request}
+        ).data
         token_data = serializers.AuthTokenSerializer(instance=token).data
 
         return Response({"user": user_data, "token": token_data})
 
 
-class LogoutView(CreateAPIView):
+class LogoutView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request: TypedHttpRequest, format=None):
@@ -59,7 +61,7 @@ class LogoutView(CreateAPIView):
         return Response(None)
 
 
-class RegistrationView(CreateAPIView):
+class RegistrationView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.RegisterSerializer
 
@@ -91,7 +93,7 @@ class RegistrationView(CreateAPIView):
             return Response(None)
 
 
-class ResendVerificationEmailView(CreateAPIView):
+class ResendVerificationEmailView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.ResendVerificationEmailSerializer
 
@@ -111,26 +113,27 @@ class ResendVerificationEmailView(CreateAPIView):
         return Response(None)
 
 
-@decorators.api_view(["GET"])
-@decorators.permission_classes([permissions.AllowAny])
-def verify_user(request, uid: int, token: str):
-    user = get_object_or_404(User, pk=uid)
+class EmailVerificationView(APIView):
+    permission_classes = [permissions.AllowAny]
 
-    profile: Profile = user.profile  # type: ignore
-    if profile.is_verified:
-        raise exceptions.PermissionDenied("Email is already verified")
+    def get(self, request, uid: int, token: str):
+        user = get_object_or_404(User, pk=uid)
 
-    token_exists = email_verification_token_generator.check_token(user, token)
-    if not token_exists:
-        return Response(data="Token has expired.", status=status.HTTP_410_GONE)
+        profile: Profile = user.profile  # type: ignore
+        if profile.is_verified:
+            raise exceptions.PermissionDenied("Email is already verified")
 
-    profile.is_verified = True
-    profile.save()
+        token_exists = email_verification_token_generator.check_token(user, token)
+        if not token_exists:
+            return Response(data="Token has expired.", status=status.HTTP_410_GONE)
 
-    return redirect("http://localhost:5173/verify-email-success/")
+        profile.is_verified = True
+        profile.save()
+
+        return redirect("http://localhost:5173/verify-email-success/")
 
 
-class ForgotPasswordView(CreateAPIView):
+class ForgotPasswordView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.ForgotPasswordSerializer
 
@@ -150,7 +153,7 @@ class ForgotPasswordView(CreateAPIView):
         return Response(None)
 
 
-class ResetPasswordView(CreateAPIView):
+class ResetPasswordView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.ResetPasswordSerializer
 
@@ -174,3 +177,12 @@ class ResetPasswordView(CreateAPIView):
         update_session_auth_hash(request, user)
 
         return Response(None)
+
+
+class ProfileView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request: TypedHttpRequest, format=None):
+        serializer = serializers.UserSerializer(request.user)
+
+        return Response(serializer.data)

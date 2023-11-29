@@ -7,9 +7,9 @@ import type {
   RegistrationSchema,
   ResetPasswordSchema,
 } from "./schemas";
-import { LoginResponse } from "./types";
 
 const authApi = createApi({
+  reducerPath: "auth-api",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api/v1/user/" }),
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginSchema>({

@@ -5,6 +5,7 @@ import { FormProvider, useForm } from "react-hook-form-mui";
 import DataChip from "~components/DataChip";
 import Footer from "~components/Footer";
 
+import { useProfileQuery } from "../api";
 import ChangeEmail from "../components/ChangeEmail";
 import EditUserDetails from "../components/EditUserDetails";
 import EditUserImage from "../components/EditUserImage";
@@ -12,6 +13,25 @@ import { userProfileSchema } from "../schemas";
 
 export function Component() {
   const formMethods = useForm({ resolver: yupResolver(userProfileSchema) });
+  const { data, error, isSuccess, isLoading, isError } = useProfileQuery("");
+
+  if (isError) {
+    // TODO: Show the error
+    console.error(error);
+    return <>error</>;
+  }
+  if (isLoading) {
+    // Show a loading indicator or skeleton
+    return <>Loading...</>;
+  }
+  if (!isSuccess) return <>User not found</>;
+
+  const {
+    username,
+    email,
+    name,
+    profile: { bio, profilePic },
+  } = data;
 
   return (
     <>
@@ -49,10 +69,7 @@ export function Component() {
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               badgeContent={<EditUserImage />} // EditUserImage (Camera Icon) only visible to user
             >
-              <Avatar
-                sx={{ width: 200, height: 200 }}
-                src="https://static.vecteezy.com/system/resources/previews/024/212/249/original/ai-generated-sticker-anime-girl-with-blue-hair-png.png"
-              />
+              <Avatar sx={{ width: 200, height: 200 }} src={profilePic} />
             </Badge>
           </Box>
           <FormProvider {...formMethods}>
@@ -72,7 +89,7 @@ export function Component() {
               }}
             >
               <EditUserDetails />
-              <Typography variant="h2">SimpSid</Typography>
+              <Typography variant="h2">{username}</Typography>
               <Box
                 sx={{
                   display: "flex",
@@ -82,15 +99,13 @@ export function Component() {
                   },
                 }}
               >
-                {/* This link is displayed only to the users not to the viewers */}
                 <ChangeEmail />
-                {/* <Link>Change</Link> */}
-                <Typography variant="h2">
-                  siddhanttotade.1994@gmail.com
-                </Typography>
+                <Typography variant="h2">{email}</Typography>
               </Box>
-              <Typography variant="h2">Raipur, Chhattisgarh</Typography>
-              <Typography variant="h3">Siddhant Totade</Typography>
+              <Typography variant="h2">
+                Raipur, Chhattisgarh (Example Address)
+              </Typography>
+              <Typography variant="h3">{name ?? "No name to show"}</Typography>
               <Box sx={{ display: "flex", gap: "5px" }}>
                 <DataChip size="small" label="Django" />
                 <DataChip size="small" label="React" />
@@ -102,11 +117,7 @@ export function Component() {
         </Box>
         <Box sx={{ display: "grid", gap: "5px", marginTop: "10px" }}>
           <Typography variant="h2">About Me</Typography>
-          <Typography>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum
-            aspernatur doloremque, nulla voluptatibus nostrum magni animi! Nam,
-            laudantium. Harum, odit!
-          </Typography>
+          <Typography>{bio ?? "Nothing to show"}</Typography>
         </Box>
         <Box sx={{ display: "grid", marginTop: "10px" }}>
           <Typography variant="h2">Projects</Typography>

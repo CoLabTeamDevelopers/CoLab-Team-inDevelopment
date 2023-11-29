@@ -1,16 +1,17 @@
-export type DateString = Date | string;
+type DateString = Date | string;
 
-export interface User {
+interface User {
+  id: number;
   username: string;
-  firstName?: string;
-  lastName?: string;
+  name?: string;
   email: string;
   isStaff: string;
   isActive: boolean;
   dateJoined: DateString;
 }
 
-export interface Profile {
+interface Profile {
+  id: number;
   user: User;
   profilePic: string;
   bio: string;
@@ -18,7 +19,8 @@ export interface Profile {
   createdOn: DateString;
 }
 
-export interface AuthToken {
+interface AuthToken {
+  id: number;
   key: string;
   hash: string;
   user: User;
@@ -27,7 +29,8 @@ export interface AuthToken {
   expiredAt: DateString;
 }
 
-export interface Post {
+interface Post {
+  id: number;
   title: string;
   description: string;
   user: User;
@@ -39,20 +42,23 @@ export interface Post {
   createdAt: DateString;
 }
 
-export interface Group {
+interface Group {
+  id: number;
   post: Post;
   name: string;
   members: User[];
 }
 
-export interface Membership {
+interface Membership {
+  id: number;
   user: User;
   group?: Group;
   role?: string;
   dateJoined: DateString;
 }
 
-export interface Task {
+interface Task {
+  id: number;
   name: string;
   description?: string;
   createdBy: User;

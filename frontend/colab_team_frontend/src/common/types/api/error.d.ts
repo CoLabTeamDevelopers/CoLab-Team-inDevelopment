@@ -6,7 +6,7 @@ interface Error {
   attr: string;
 }
 
-export interface ErrorResponse {
+interface ErrorResponse {
   type: ApiErrorType;
   errors: Error[];
 }

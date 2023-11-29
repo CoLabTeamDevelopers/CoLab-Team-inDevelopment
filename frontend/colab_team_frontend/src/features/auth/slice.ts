@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { AuthToken, User } from "~types/api/models";
-
 import authApi from "./api";
 
 interface AuthState {
-  user?: Partial<User>;
-  authToken?: Partial<AuthToken>;
+  token?: Pick<AuthToken, "createdAt" | "expiredAt" | "key">;
+  user?: UserResponse;
   authenticated: boolean;
 }
 
@@ -20,7 +18,7 @@ const authSlice = createSlice({
       (state, { payload }) => {
         state.authenticated = true;
         state.user = payload.user;
-        state.authToken = payload.token;
+        state.token = payload.token;
       }
     );
   },

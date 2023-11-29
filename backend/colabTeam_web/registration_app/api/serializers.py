@@ -3,16 +3,19 @@ from rest_framework import serializers
 from ..models import AuthToken, Profile, User
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["username", "email", "first_name", "last_name"]
-
-
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ["auth_token", "is_verified", "created_on"]
+        fields = ["profile_pic", "bio", "is_verified", "created_on"]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source="get_full_name", read_only=True)
+    profile = ProfileSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "name", "profile"]
 
 
 class AuthTokenSerializer(serializers.ModelSerializer):
@@ -24,7 +27,7 @@ class AuthTokenSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(style={"input_type": "password"})
-    ip_address = serializers.CharField()
+    ip_address = serializers.IPAddressField(required=False, allow_null=True)
 
 
 class RegisterSerializer(serializers.Serializer):

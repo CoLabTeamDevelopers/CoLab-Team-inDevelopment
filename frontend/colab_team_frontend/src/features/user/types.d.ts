@@ -1,0 +1,1 @@
+type ProfileResponse = UserResponse;
