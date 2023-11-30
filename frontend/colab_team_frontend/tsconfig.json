@@ -1,40 +1,39 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "checkJs": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    /* Linting */
-    "strict": true,
+    "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "types": [
-      "vite/client"
-    ],
-    "checkJs": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+      "~/*": ["./src/*"],
+      "~app/*": ["./src/app/*"],
+      "~assets/*": ["./src/assets/*"],
+      "~common/*": ["./src/common/*"],
+      "~components/*": ["./src/common/components/*"],
+      "~form/*": ["./src/common/form/*"],
+      "~layouts/*": ["./src/common/layouts/*"],
+      "~styles/*": ["./src/common/styles/*"],
+      "~types/*": ["./src/common/types/*"],
+      "~utils/*": ["./src/common/utils/*"]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    /* Linting */
+    "strict": true,
+    "target": "ES2020",
+    "types": ["vite/client"],
+    "useDefineForClassFields": true
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "./tsconfig.node.json"
