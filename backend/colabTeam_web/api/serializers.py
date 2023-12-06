@@ -4,6 +4,8 @@ from .models import Group, Membership, Post, Task
 
 
 class PostSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="user.username", read_only=True)
+
     class Meta:
         model = Post
         fields = [
