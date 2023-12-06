@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
-# Create your views here.
+from .serializers import PostSerializer
+from .models import Post
+
+
+class PostViewSet(ReadOnlyModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()

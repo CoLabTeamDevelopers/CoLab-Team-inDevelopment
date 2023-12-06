@@ -1,10 +1,8 @@
 [tool.poetry]
 name = "colabteam-web"
-version = "0.0.1"
+version = "dev"
 description = "Colab Team web based on Django framework."
-authors = ["Your Name <you@example.com>"]
-license = "New BSD"
-readme = "README.md"
+authors = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -17,7 +15,6 @@ pillow = "^10.1.0"
 drf-standardized-errors = "^0.12.6"
 six = "^1.16.0"
 cryptography = "^41.0.5"
-
 
 [build-system]
 requires = ["poetry-core"]
