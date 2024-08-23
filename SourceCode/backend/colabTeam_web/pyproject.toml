@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "colabteam-web"
-version = "dev"
+version = "1.0.b"
 description = "Colab Team web based on Django framework."
 authors = []
 

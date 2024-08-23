@@ -78,6 +78,20 @@ EMAIL_HOST_USER = "xyz@gmail.com"  # Your email address
 EMAIL_HOST_PASSWORD = "aaaa bbbb cccc dddd"  # Your less secure app password
 ```
 
+### Setup .env File
+
+Create `.env` file and copy / paste `.env.example` file's content.
+
+```
+# shellcheck disable=all
+
+DEBUG='True'
+SECRET_KEY='django-insecure-bw!@+w%mnt$*muft50=)kuhhdy#f1_6ni5@oma@+*kw-++ujty'
+EMAIL_HOST_USER="Your email"
+EMAIL_HOST_PASSWORD="Your app password"
+
+```
+
 ### Navigate to Project Directory:
 
 ```
